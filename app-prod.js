@@ -17314,7 +17314,7 @@
         }
         ;
         d.gn = function() {
-            return this.g.Sz ? "https://2014ltv.pages.dev/youtubei/v1" : this.g.rq ? "https://www-googleapis-test.sandbox.google.com/youtubei/vi" : this.g.mi ? "https:https://www-googleapis-staging.sandbox.google.com/youtubei/v1" : this.g.nq ? this.g.ni ? "https://youtubei.googleapis.com/youtubei/vi" : "/youtubei/vi" : this.g.oi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1release" : this.g.ni ? "https://youtubei.googleapis.com/youtubei/v1" : "https://2014ltv.pages.dev/youtubei/v1"
+            return this.g.Sz ? "/youtubei/v1" : this.g.rq ? "https://www-googleapis-test.sandbox.google.com/youtubei/vi" : this.g.mi ? "https:https://www-googleapis-staging.sandbox.google.com/youtubei/v1" : this.g.nq ? this.g.ni ? "https://youtubei.googleapis.com/youtubei/vi" : "/youtubei/vi" : this.g.oi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1release" : this.g.ni ? "https://youtubei.googleapis.com/youtubei/v1" : "/youtubei/v1"
         }
         ;
         d.Rf = function(a) {
