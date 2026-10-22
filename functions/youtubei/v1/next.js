@@ -13,7 +13,7 @@ export async function onRequest(context) {
     });
   }
 
-  return Response.json("placeholder, {
+  return Response.json("placeholder", {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
