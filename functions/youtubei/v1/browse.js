@@ -1,22 +1,29 @@
+
 export async function onRequest(context) {
     const url = new URL(context.request.url);
 
-    const body = await context.request.json().catch(() => ({}));
+    let body = {};
+
+    if (context.request.method === "POST") {
+        body = await context.request.json().catch(() => ({}));
+    } else {
+        body.browseId = url.searchParams.get("browseId");
+        body["max-results"] = url.searchParams.get("max-results");
+    }
 
     const browseId = body.browseId || "FEwhat_to_watch";
 
-    const maxResults = Math.min(
-        parseInt(body["max-results"] || 25, 10),
-        25
-    );
+    const requestedMax = parseInt(body["max-results"] || 25, 10);
+    const maxResults = Number.isFinite(requestedMax)
+        ? Math.max(1, Math.min(requestedMax, 25))
+        : 25;
 
     let endpoint;
     let channelUploads = false;
     let playlist = false;
 
     if (browseId === "FEwhat_to_watch") {
-        endpoint =
-            "https://inv.truehosting.net/api/v1/popular";
+        endpoint = "https://inv.truehosting.net/api/v1/popular";
 
     } else if (browseId === "FEuploads") {
         endpoint =
@@ -47,9 +54,43 @@ export async function onRequest(context) {
             "https://inv.truehosting.net/api/v1/search?q=music%20before:2015";
 
     } else {
-        endpoint =
-            "https://inv.truehosting.net/api/v1/popular";
+        endpoint = "https://inv.truehosting.net/api/v1/popular";
     }
+
+    const jsonResponse = (data, status = 200) => {
+        return new Response(JSON.stringify(data), {
+            status,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Access-Control-Allow-Origin": "*",
+                "Cache-Control": "no-store"
+            }
+        });
+    };
+
+    const errorResponse = (message, status = 502) => {
+        return jsonResponse({
+            error: message,
+            contents: {
+                sectionListRenderer: {
+                    contents: [{
+                        shelfRenderer: {
+                            title: {
+                                runs: [{
+                                    text: message
+                                }]
+                            },
+                            content: {
+                                horizontalListRenderer: {
+                                    items: []
+                                }
+                            }
+                        }
+                    }]
+                }
+            }
+        }, status);
+    };
 
     try {
         const response = await fetch(endpoint, {
@@ -59,18 +100,9 @@ export async function onRequest(context) {
         });
 
         if (!response.ok) {
-            return new Response(
-                JSON.stringify({
-                    error: "Invidious request failed",
-                    status: response.status
-                }),
-                {
-                    status: 502,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*"
-                    }
-                }
+            return errorResponse(
+                `Invidious request failed with status ${response.status}`,
+                502
             );
         }
 
@@ -85,9 +117,7 @@ export async function onRequest(context) {
                 [];
 
         } else if (playlist) {
-            source =
-                data.videos ||
-                [];
+            source = data.videos || [];
 
         } else {
             source = data;
@@ -124,14 +154,10 @@ export async function onRequest(context) {
                     ? video.author
                     : "";
 
-            let views = video.viewCount;
-
-            if (
-                views === undefined ||
-                views === null
-            ) {
-                views = video.views;
-            }
+            let views =
+                video.viewCount ??
+                video.views ??
+                0;
 
             if (typeof views === "string") {
                 views = parseInt(
@@ -144,23 +170,16 @@ export async function onRequest(context) {
                 views = 0;
             }
 
-            let published =
-                video.publishedText;
-
-            if (!published) {
-                published =
-                    video.publishedTimeText;
-            }
-
-            if (!published) {
-                published = "";
-            }
+            const published =
+                video.publishedText ||
+                video.publishedTimeText ||
+                "";
 
             const thumbnail =
                 video.videoThumbnails?.find(
-                    thumbnail =>
-                        thumbnail.quality === "medium" ||
-                        thumbnail.quality === "high"
+                    t =>
+                        t.quality === "medium" ||
+                        t.quality === "high"
                 ) ||
                 video.videoThumbnails?.[0];
 
@@ -168,145 +187,115 @@ export async function onRequest(context) {
                 thumbnail?.url ||
                 `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
+            const channelId =
+                video.authorId ||
+                video.ucid ||
+                (channelUploads ? browseId : "");
+
             const channelThumbnail =
-                channelUploads
+                channelUploads || playlist
                     ? (
                         data.authorThumbnails?.find(
-                            thumbnail =>
-                                thumbnail.width >= 88
+                            t => t.width >= 88
                         ) ||
                         data.authorThumbnails?.[0]
                     )
-                    : playlist
-                        ? (
-                            data.authorThumbnails?.find(
-                                thumbnail =>
-                                    thumbnail.width >= 88
-                            ) ||
-                            data.authorThumbnails?.[0]
-                        )
-                        : null;
+                    : null;
 
-            return {
-                gridVideoRenderer: {
-                    videoId: videoId,
+            const renderer = {
+                videoId,
 
-                    thumbnail: {
-                        thumbnails: [
-                            {
-                                url: thumbnailUrl,
-                                width:
-                                    thumbnail?.width ||
-                                    480,
-                                height:
-                                    thumbnail?.height ||
-                                    360
+                thumbnail: {
+                    thumbnails: [{
+                        url: thumbnailUrl,
+                        width: thumbnail?.width || 480,
+                        height: thumbnail?.height || 360
+                    }]
+                },
+
+                title: {
+                    runs: [{
+                        text: title
+                    }],
+                    accessibility: {
+                        accessibilityData: {
+                            label: title
+                        }
+                    }
+                },
+
+                shortBylineText: {
+                    runs: [{
+                        text: author,
+                        ...(channelId ? {
+                            navigationEndpoint: {
+                                browseEndpoint: {
+                                    browseId: channelId
+                                }
                             }
-                        ]
-                    },
+                        } : {})
+                    }]
+                },
 
-                    channelThumbnail: {
-                        thumbnails: [
-                            {
-                                url:
-                                    channelThumbnail?.url ||
-                                    "https://file.garden/aUYIWVAKvQxCBY-_/database/images/profilepuckett.png",
-                                width: 88,
-                                height: 88
-                            }
-                        ]
-                    },
+                publishedTimeText: {
+                    runs: [{
+                        text: published
+                    }]
+                },
 
-                    shortBylineText: {
-                        runs: [
-                            {
-                                text: author
-                            }
-                        ]
-                    },
+                viewCountText: {
+                    runs: [{
+                        text: views.toLocaleString("en-US") + " views"
+                    }]
+                },
 
-                    publishedTimeText:
-                        published,
-
-                    viewCountText:
-                        views.toLocaleString(
-                            "en-US"
-                        ) + " views",
-
-                    title: {
-                        runs: [
-                            {
-                                text: title
-                            }
-                        ]
+                navigationEndpoint: {
+                    watchEndpoint: {
+                        videoId
                     }
                 }
             };
+
+            if (channelThumbnail?.url) {
+                renderer.channelThumbnail = {
+                    thumbnails: [{
+                        url: channelThumbnail.url,
+                        width: channelThumbnail.width || 88,
+                        height: channelThumbnail.height || 88
+                    }]
+                };
+            }
+
+            return {
+                gridVideoRenderer: renderer
+            };
         });
 
-        return new Response(
-            JSON.stringify({
-    "contents": {
-        "sectionListRenderer": {
-            "contents": [
-                {
-                    "shelfRenderer": {
-                        "title": {
-                            "runs": [
-                                {
-                                    "text": "Videos"
+        return jsonResponse({
+            contents: {
+                sectionListRenderer: {
+                    contents: [{
+                        shelfRenderer: {
+                            title: {
+                                runs: [{
+                                    text: "Videos"
+                                }]
+                            },
+                            content: {
+                                horizontalListRenderer: {
+                                    items: contents
                                 }
-                            ]
-                        },
-                        "content": {
-                            "horizontalListRenderer": {
-                                "items": [
-                                    contents
-                                ]}}}}]}}}),
-            {
-                headers: {
-                    "Content-Type":
-                        "application/json",
-
-                    "Access-Control-Allow-Origin":
-                        "*",
-
-                    "Cache-Control":
-                        "no-store"
+                            }
+                        }
+                    }]
                 }
             }
-        );
+        });
 
     } catch (error) {
-        return new Response(
-            JSON.stringify(
-{
-    "contents": {
-        "sectionListRenderer": {
-            "contents": [
-                {
-                    "shelfRenderer": {
-                        "title": {
-                            "runs": [
-                                {
-                                    "text": error
-                                }
-                            ]
-                        },
-                        "content": {
-                            "horizontalListRenderer": {
-                                "items": []}}}}]}}}
-            ),
-            {
-                status: 200,
-                headers: {
-                    "Content-Type":
-                        "application/json",
-
-                    "Access-Control-Allow-Origin":
-                        "*"
-                }
-            }
+        return errorResponse(
+            error?.message || "An unexpected error occurred",
+            502
         );
     }
 }
@@ -314,15 +303,11 @@ export async function onRequest(context) {
 export async function onRequestOptions() {
     return new Response(null, {
         status: 204,
-
         headers: {
-            "Access-Control-Allow-Origin":
-                "*",
-
-            "Access-Control-Allow-Methods":
-                "GET, POST, OPTIONS",
-            "Access-Control-Allow-Headers": "*"
-
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "86400"
         }
     });
 }
