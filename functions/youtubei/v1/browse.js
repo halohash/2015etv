@@ -46,9 +46,6 @@ export async function onRequest(context) {
         endpoint =
             "https://inv.truehosting.net/api/v1/search?q=music%20before:2015";
 
-    } else if (browseId === "FEmeg") {
-        return Response.redirect("https://2014ltv.pages.dev/youtubei/v1/meg", 302);
-
     } else {
         endpoint =
             "https://inv.truehosting.net/api/v1/popular";
@@ -191,7 +188,7 @@ export async function onRequest(context) {
                         : null;
 
             return {
-                videoRenderer: {
+                gridVideoRenderer: {
                     videoId: videoId,
 
                     thumbnail: {
@@ -249,18 +246,23 @@ export async function onRequest(context) {
 
         return new Response(
             JSON.stringify({
-                contents: {
-                    sectionListRenderer: {
-                        contents: [
-                            {
-                                itemSectionRenderer: {
-                                    contents
+    "contents": {
+        "sectionListRenderer": {
+            "contents": [
+                {
+                    "shelfRenderer": {
+                        "title": {
+                            "runs": [
+                                {
+                                    "text": "Videos"
                                 }
-                            }
-                        ]
-                    }
-                }
-            }),
+                            ]
+                        },
+                        "content": {
+                            "horizontalListRenderer": {
+                                "items": [
+                                    contents
+                                ]}}}}]}}}),
             {
                 headers: {
                     "Content-Type":
@@ -277,11 +279,26 @@ export async function onRequest(context) {
 
     } catch (error) {
         return new Response(
-            JSON.stringify({
-                error: error.message
-            }),
+            JSON.stringify(
+{
+    "contents": {
+        "sectionListRenderer": {
+            "contents": [
+                {
+                    "shelfRenderer": {
+                        "title": {
+                            "runs": [
+                                {
+                                    "text": error
+                                }
+                            ]
+                        },
+                        "content": {
+                            "horizontalListRenderer": {
+                                "items": []}}}}]}}}
+            ),
             {
-                status: 500,
+                status: 200,
                 headers: {
                     "Content-Type":
                         "application/json",
