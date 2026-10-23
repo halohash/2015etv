@@ -1,0 +1,83 @@
+{
+    "items": [
+        {
+            "guideSectionRenderer": {
+                "items": [
+                    {
+                        "guideEntryRenderer": {
+                            "title": "Home",
+                            "icon": {
+                                "iconType": "WHAT_TO_WATCH"
+                            },
+                            "trackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcQ==",
+                            "formattedTitle": {
+                                "runs": [
+                                    {
+                                        "text": "Home"
+                                    }
+                                ]
+                            },
+                            "navigationEndpoint": {
+                                "clickTrackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcTIKZy1wZXJzb25hbA==",
+                                "browseEndpoint": {
+                                    "browseId": "FEwhat_to_watch"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "guideEntryRenderer": {
+                            "title": "Music",
+                            "icon": {
+                                "iconType": "MUSIC"
+                            },
+                            "trackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcQ==",
+                            "formattedTitle": {
+                                "runs": [
+                                    {
+                                        "text": "Music"
+                                    }
+                                ]
+                            },
+                            "navigationEndpoint": {
+                                "clickTrackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcTIKZy1wZXJzb25hbA==",
+                                "browseEndpoint": {
+                                    "browseId": "FEtopics_music"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "guideEntryRenderer": {
+                            "title": "Music",
+                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://dingle-accs.pages.dev/user?name=Oh...&profile",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                            "trackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcQ==",
+                            "formattedTitle": {
+                                "runs": [
+                                    {
+                                        "text": "Creator Channel Name"
+                                    }
+                                ]
+                            },
+                            "navigationEndpoint": {
+                                "clickTrackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcTIKZy1wZXJzb25hbA==",
+                                "browseEndpoint": {
+                                    "browseId": "UCcQtSwYASITCIfJxpyureECFJxAodDO4CcQ"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "trackingParams": "CAQQ5isYACITCIfJxpyureECFUKJxAodDO4CcQ=="
+            }
+        }
+    ]
+}
