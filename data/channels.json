@@ -28,26 +28,48 @@
                                             "title": {
                                                 "runs": [
                                                     {
-                                                        "text": "Creator Channel Name"
+                                                        "text": "MusicTuesday"
                                                     }
                                                 ],
                                                 "accessibility": {
                                                     "accessibilityData": {
-                                                        "label": "Creator Channel Name"
+                                                        "label": "Music Tuesday"
                                                     }
                                                 }
                                             },
-                                            "shortBylineText": {
+                                            "viewCountText": {
                                                 "runs": [
                                                     {
-                                                        "text": "Creator Channel Name",
-                                                        "navigationEndpoint": {
-                                                            "browseEndpoint": {
-                                                                "browseId": "UC_5yaaRQYV8EPFq6graLj3g"
-                                                            }
-                                                        }
+                                                        "text": "1,234 views"
                                                     }
                                                 ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 seconds ago"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "UC_5yaaRQYV8EPFq6graLj3g"
+                                                }
+                                            }
+                                        }
+                                    },{
+                                        "gridChannelRenderer": {
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Plainrock124"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Plain Rock one two four"
+                                                    }
+                                                }
                                             },
                                             "viewCountText": {
                                                 "runs": [
@@ -66,7 +88,7 @@
                                             "thumbnail": {
                                                 "thumbnails": [
                                                     {
-                                                        "url": "https://file.garden/aUYIWVAKvQxCBY-_/database/images/profilepuckett.png",
+                                                        "url": "https://yt3.googleusercontent.com/ytc/AIdro_muKaOubC9OXmsFk9vLMBEz6Yxt8M_EXHuZ-cWfFPb9-w=s120-c-k-c0x00ffffff-no-rj",
                                                         "width": 88,
                                                         "height": 88
                                                     }
@@ -74,7 +96,7 @@
                                             },
                                             "navigationEndpoint": {
                                                 "browseEndpoint": {
-                                                    "browseId": "UC_5yaaRQYV8EPFq6graLj3g"
+                                                    "browseId": "UCFUsBdbrNe2a8tnVsxBwoZw"
                                                 }
                                             }
                                         }
