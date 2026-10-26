@@ -36,7 +36,6 @@ export async function onRequest(context) {
                 "contents": [
                   {
                     "videoMetadataRenderer": {
-                      "videoId": "dQw4w9WgXcQ",
                       "title": {
                         "runs": [
                           {
@@ -100,7 +99,7 @@ export async function onRequest(context) {
       }
     }
   }
-}), {
+}, {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
