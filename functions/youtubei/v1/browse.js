@@ -1,4 +1,4 @@
-
+import channels from '../../../data/channels.json";
 export async function onRequest(context) {
     const url = new URL(context.request.url);
 
@@ -25,9 +25,15 @@ export async function onRequest(context) {
     if (browseId === "FEwhat_to_watch") {
         endpoint = "https://inv.truehosting.net/api/v1/popular";
 
-    } else if (browseId === "FEuploads") {
-        endpoint =
-            "https://inv.truehosting.net/api/v1/search?q=google%20nexus%20before:2014";
+    } else if (browseId === "FEchannels") {
+        return new Response(JSON.stringify(channels), {
+            status,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Access-Control-Allow-Origin": "*",
+                "Cache-Control": "no-store"
+            }
+        });
 
     } else if (browseId === "FEtopics") {
         endpoint =
