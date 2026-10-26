@@ -1,0 +1,90 @@
+{
+    "contents": {
+        "sectionListRenderer": {
+            "contents": [
+                {
+                    "shelfRenderer": {
+                        "title": {
+                            "runs": [
+                                {
+                                    "text": "Channels"
+                                }
+                            ]
+                        },
+                        "content": {
+                            "horizontalListRenderer": {
+                                "items": [
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://yt3.googleusercontent.com/ytc/AIdro_muKaOubC9OXmsFk9vLMBEz6Yxt8M_EXHuZ-cWfFPb9-w=s120-c-k-c0x00ffffff-no-rj",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Creator Channel Name"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Creator Channel Name"
+                                                    }
+                                                }
+                                            },
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Creator Channel Name",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UC_5yaaRQYV8EPFq6graLj3g"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "1,234 views"
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 seconds ago"
+                                                    }
+                                                ]
+                                            },
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://file.garden/aUYIWVAKvQxCBY-_/database/images/profilepuckett.png",
+                                                        "width": 88,
+                                                        "height": 88
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "UC_5yaaRQYV8EPFq6graLj3g"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
