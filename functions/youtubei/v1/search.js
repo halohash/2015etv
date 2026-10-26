@@ -205,7 +205,12 @@ export async function onRequest(context) {
                                 text: title
                             }
                         ]
-                    }
+                    },
+                    navigationEndpoint: {
+                                                watchEndpoint: {
+                                                    videoId: videoId
+                                                }
+                                            }
                 }
             };
         });
