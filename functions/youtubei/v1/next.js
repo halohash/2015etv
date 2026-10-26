@@ -12,6 +12,16 @@ export async function onRequest(context) {
     });
   }
 
+  
+  body = {};
+    if (context.request.method === "POST") {
+        body = await context.request.json().catch(() => ({}));
+    } else {
+        body.videoId = url.searchParams.get("browseId");
+    }
+var video = await fetch("https://www.invidious.frantisekfiala.eu/api/v1/videos/" + body.videoId);
+var videojson = await video.json();
+if (!video.ok) {
   return Response.json({
   "currentVideoEndpoint": {},
   "contents": {
@@ -39,7 +49,7 @@ export async function onRequest(context) {
                       "title": {
                         "runs": [
                           {
-                            "text": "merely an example"
+                            "text": videojson.error
                           }
                         ]
                       },
@@ -89,6 +99,82 @@ export async function onRequest(context) {
                           }
                         ]
                       }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "*",
+    }
+  });
+}
+  
+  return Response.json({
+  "currentVideoEndpoint": {},
+  "contents": {
+    "singleColumnWatchNextResults": {
+      "autoplay": {
+        "autoplay": {}
+      },
+      "playlist": {
+        "playlist": {}
+      },
+      "endScreen": {
+        "endScreen": {}
+      },
+      "pivot": {
+        "pivot": {}
+      },
+      "results": {
+        "results": {
+          "contents": [
+            {
+              "itemSectionRenderer": {
+                "contents": [
+                  {
+                    "videoMetadataRenderer": {
+                      "title": {
+                        "runs": [
+                          {
+                            "text": videojson.title
+                          }
+                        ]
+                      },
+                      "description": {
+                        "simpleText": "Sample video description"
+                      },
+                      "dateText": {
+                        "runs": [
+                          {
+                            "text": videojson.publishedText
+                          }
+                        ]
+                      },
+                      "shortViewCountText": {
+                        "runs": [
+                          {
+                            "text": videojson.viewCount + " views"
+                          }
+                        ]
+                      },
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "Creator Channel"
+                          }
+                        ]
+                      },
+                      "badges": [],
+                      "likeStatus": "INDIFFERENT"
                     }
                   }
                 ]
