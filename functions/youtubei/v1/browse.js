@@ -24,6 +24,7 @@ export async function onRequest(context) {
     let playlist = false;
 
     if (browseId === "FEwhat_to_watch") {
+        browseName = "What To Watch"
         endpoint = "https://inv.truehosting.net/api/v1/popular";
 
     } else if (browseId === "FEchannels") {
@@ -37,12 +38,9 @@ export async function onRequest(context) {
         });
 
     } else if (browseId === "FEtopics") {
+        browseName = "Topics"
         endpoint =
             "https://inv.truehosting.net/api/v1/search?q=xbox%20before:2015";
-
-    } else if (browseId === "FEtopics_purchases") {
-        endpoint =
-            "https://inv.truehosting.net/api/v1/search?q=https%3A%2F%2Fyoutube.com%2Fdevicesupport";
 
     } else if (browseId.startsWith("UC")) {
         browseName = "Uploads"
@@ -58,12 +56,8 @@ export async function onRequest(context) {
 
         playlist = true;
 
-    } else if (browseId === "FEmusic") {
-        browseName = "Music"
-        endpoint =
-            "https://inv.truehosting.net/api/v1/search?q=music%20before:2015";
-
     } else {
+        browseName = "Unknown BrowseId"
         endpoint = "https://inv.truehosting.net/api/v1/popular";
     }
 
@@ -112,7 +106,7 @@ export async function onRequest(context) {
         if (!response.ok) {
             return errorResponse(
                 `Invidious request failed with status ${response.status}`,
-                502
+                200
             );
         }
 
@@ -288,7 +282,7 @@ export async function onRequest(context) {
                         shelfRenderer: {
                             title: {
                                 runs: [{
-                                    text: playlist
+                                    text: browseName
                                 }]
                             },
                             content: {
