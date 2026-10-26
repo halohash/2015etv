@@ -26,6 +26,28 @@
                         }
                     },
                     {
+            "guideEntryRenderer": {
+              "title": "Search",
+              "icon": {
+                "iconType": "SEARCH"
+              },
+              "trackingParams": "CAgQtSwYACITCJ6zu4e15-QCFSxATAgdG-0OKg==",
+              "formattedTitle": {
+                "runs": [
+                  {
+                    "text": "Search"
+                  }
+                ]
+              },
+              "navigationEndpoint": {
+                "clickTrackingParams": "CAgQtSwYACITCJ6zu4e15-QCFSxATAgdG-0OKjIKZy1wZXJzb25hbA==",
+                "searchEndpoint": {
+                  "query": ""
+                }
+              }
+            }
+          },
+                    {
                         "guideEntryRenderer": {
                             "title": "Channels",
                             "icon": {
