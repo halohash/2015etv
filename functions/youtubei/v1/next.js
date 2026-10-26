@@ -2,7 +2,6 @@ export async function onRequest(context) {
   const { request } = context;
   const method = request.method;
 
-  // Handle CORS preflight requests if needed
   if (method === "OPTIONS") {
     return new Response(null, {
       headers: {
@@ -13,8 +12,7 @@ export async function onRequest(context) {
     });
   }
 
-  return Response.json(`
-{
+  return Response.json({
   "currentVideoEndpoint": {},
   "contents": {
     "singleColumnWatchNextResults": {
@@ -102,7 +100,7 @@ export async function onRequest(context) {
       }
     }
   }
-}`, {
+}), {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
