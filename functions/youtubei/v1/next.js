@@ -1,7 +1,12 @@
 export async function onRequest(context) {
   const { request } = context;
   const method = request.method;
-
+body = {};
+    if (context.request.method === "POST") {
+        body = await context.request.json().catch(() => ({}));
+    } else {
+        body.videoId = url.searchParams.get("browseId");
+    }
   if (method === "OPTIONS") {
     return new Response(null, {
       headers: {
@@ -11,15 +16,8 @@ export async function onRequest(context) {
       },
     });
   }
-
-  
-  body = {};
-    if (context.request.method === "POST") {
-        body = await context.request.json().catch(() => ({}));
-    } else {
-        body.videoId = url.searchParams.get("browseId");
-    }
-var video = await fetch("https://www.invidious.frantisekfiala.eu/api/v1/videos/" + body.videoId);
+try {
+  var video = await fetch("https://www.invidious.frantisekfiala.eu/api/v1/videos/" + body.videoId);
 var videojson = await video.json();
 if (!video.ok) {
   return Response.json({
@@ -192,4 +190,14 @@ if (!video.ok) {
       "Access-Control-Allow-Headers": "*",
     }
   });
+} catch(e) {
+return new Response(e, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "*",
+    }
+  });
+}
 }
