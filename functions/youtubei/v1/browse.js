@@ -28,7 +28,7 @@ export async function onRequest(context) {
 
     } else if (browseId === "FEchannels") {
         return new Response(JSON.stringify(channels), {
-            200,
+            status: 200,
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
                 "Access-Control-Allow-Origin": "*",
