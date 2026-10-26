@@ -13,7 +13,7 @@ export async function onRequest(context) {
     }
 
     const browseId = body.browseId || "FEwhat_to_watch";
-
+    var browseName = "Popular"
     const requestedMax = parseInt(body["max-results"] || 25, 10);
     const maxResults = Number.isFinite(requestedMax)
         ? Math.max(1, Math.min(requestedMax, 25))
@@ -45,18 +45,21 @@ export async function onRequest(context) {
             "https://inv.truehosting.net/api/v1/search?q=https%3A%2F%2Fyoutube.com%2Fdevicesupport";
 
     } else if (browseId.startsWith("UC")) {
+        browseName = "Uploads"
         endpoint =
             `https://inv.truehosting.net/api/v1/channels/${encodeURIComponent(browseId)}`;
 
         channelUploads = true;
 
     } else if (browseId.startsWith("PL") || browseId.startsWith("FL")) {
+        browseName = "videos in current playlist - Topic"
         endpoint =
             `https://inv.truehosting.net/api/v1/playlists/${encodeURIComponent(browseId)}`;
 
         playlist = true;
 
     } else if (browseId === "FEmusic") {
+        browseName = "Music"
         endpoint =
             "https://inv.truehosting.net/api/v1/search?q=music%20before:2015";
 
@@ -285,7 +288,7 @@ export async function onRequest(context) {
                         shelfRenderer: {
                             title: {
                                 runs: [{
-                                    text: "Videos"
+                                    text: playlist
                                 }]
                             },
                             content: {
