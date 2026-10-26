@@ -1,4 +1,5 @@
-import channels from '../../../data/channels.json";
+import channels from '../../../data/channels.json';
+
 export async function onRequest(context) {
     const url = new URL(context.request.url);
 
