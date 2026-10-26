@@ -47,7 +47,7 @@
                                             "publishedTimeText": {
                                                 "runs": [
                                                     {
-                                                        "text": "0 seconds ago"
+                                                        "text": "Oct 26, 2026"
                                                     }
                                                 ]
                                             },
@@ -57,7 +57,8 @@
                                                 }
                                             }
                                         }
-                                    },{
+                                    },
+                                    {
                                         "gridChannelRenderer": {
                                             "title": {
                                                 "runs": [
@@ -81,7 +82,7 @@
                                             "publishedTimeText": {
                                                 "runs": [
                                                     {
-                                                        "text": "0 seconds ago"
+                                                        "text": "Oct 26, 2026"
                                                     }
                                                 ]
                                             },
@@ -97,6 +98,94 @@
                                             "navigationEndpoint": {
                                                 "browseEndpoint": {
                                                     "browseId": "UCFUsBdbrNe2a8tnVsxBwoZw"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://yt3.googleusercontent.com/ytc/AIdro_mTREBILHZrDg_IE0YDNacNiw-b-707Nh8sIf_EbXuf8Kk=s120-c-k-c0x00ffffff-no-rj",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Google Nexus"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Google Nexus"
+                                                    }
+                                                }
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 26, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "UCUjlPym2cxucUVPdE8kYOOg"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://yt3.googleusercontent.com/bJFry2IjWTvfFjpg3Cg4lY6n-7Qcp-sHUB3zCFZnQ0AzyBN56tW3LMqryA8EAAHH24VZCrWh7xI=s120-c-k-c0x00ffffff-no-rj",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Austin Evans"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Austin Evans"
+                                                    }
+                                                }
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 26, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "UCXGgrKt94gR6lmN4aN3mYTg"
                                                 }
                                             }
                                         }
