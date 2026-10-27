@@ -249,7 +249,7 @@ export async function onRequest(context) {
 
                 viewCountText: {
                     runs: [{
-                        text: views.toLocaleString("en-US") + " views"
+                        text: playlist ? "Playlist" : views.toLocaleString("en-US") + " views";
                     }]
                 },
 
