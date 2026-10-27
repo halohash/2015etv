@@ -383,7 +383,7 @@
                       "thumbnail": {
                         "thumbnails": [
                           {
-                            "url": "http://dingusline.pages.dev/static/le_hits.png",
+                            "url": "https://dingusline.pages.dev/static/le_hits.png",
                             "width": 480,
                             "height": 360
                           }
@@ -420,14 +420,14 @@
                           "browseId": "PLINYjw0uanWw"
                         }
                       },
-                      "videoId": "",
+                      "videoId": "x",
                       "shortBylineText": {
                         "runs": [
                           {
                             "text": "2015ETV",
                             "navigationEndpoint": {
                               "browseEndpoint": {
-                                "browseId": "PLINYjw0uanWw"
+                                "browseId": "s"
                               }
                             }
                           }
