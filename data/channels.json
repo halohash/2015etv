@@ -194,6 +194,155 @@
                             }
                         }
                     }
+                },
+                {
+                    "shelfRenderer": {
+                        "title": {
+                            "runs": [
+                                {
+                                    "text": "Non-Channels"
+                                }
+                            ]
+                        },
+                        "content": {
+                            "horizontalListRenderer": {
+                                "items": [
+                                    {
+                                        "videoRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://i.ytimg.com/vi/BDCV0P6Mrk4/hqdefault.jpg",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Most Hyped in the United States"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Most Hyped in the United States, Playlist."
+                                                    }
+                                                }
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 27, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "OLAK5uy_lSbPjCHn-9LSQeRc6T1LWfz-DN8gOqNdw"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "videoRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://i.ytimg.com/vi/e9CZ7vTCFtw/hqdefault.jpg",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Top hyped in Music"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Top hyped in Music, Playlist."
+                                                    }
+                                                }
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 27, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "OLNUaVf-BhE20xpEEdOmnxF6oyKQwpN1tBQ"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "videoRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://i.ytimg.com/vi/KKBk07LrOro/hq1.jpg",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Top hyped in Gaming"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Top hyped in Gaming, Playlist."
+                                                    }
+                                                }
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 27, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "OLXuPDPDe3URMWBdmS4_jxdqVF08DAlAXWQ"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
                 }
             ]
         }
