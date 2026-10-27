@@ -53,7 +53,7 @@ export async function onRequest(context) {
         }
 
         const isError = !response.ok;
-
+        const isBlocked = videojson.error === "This helps protect our community. Learn more"
         const title = isError
             ? (videojson.error || "Video unavailable")
             : (videojson.title || "Untitled video");
@@ -127,6 +127,27 @@ export async function onRequest(context) {
                     }
                 }
             });
+        }
+
+if (isBlocked) {
+return Response.json({
+  "error": {
+    "code": 503,
+    "message": "Sorry, This video isn't available right now. Please try again later.",
+    "errors": [
+      {
+        "message": "Sorry, This video isn't available right now. Please try again later.",
+        "domain": "global",
+        "reason": "videoFailed"
+      }
+    ],
+    "status": "VIDEO_FAILED"
+  }
+}
+, {
+            status: 503,
+            headers
+        });
         }
 
         return Response.json({
