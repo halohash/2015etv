@@ -208,7 +208,7 @@
                             "horizontalListRenderer": {
                                 "items": [
                                     {
-                                        "videoRenderer": {
+                                        "gridChannelRenderer": {
                                             "thumbnail": {
                                                 "thumbnails": [
                                                     {
@@ -252,7 +252,7 @@
                                         }
                                     },
                                     {
-                                        "videoRenderer": {
+                                        "gridChannelRenderer": {
                                             "thumbnail": {
                                                 "thumbnails": [
                                                     {
@@ -296,7 +296,7 @@
                                         }
                                     },
                                     {
-                                        "videoRenderer": {
+                                        "gridChannelRenderer": {
                                             "thumbnail": {
                                                 "thumbnails": [
                                                     {
