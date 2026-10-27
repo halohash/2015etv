@@ -377,6 +377,63 @@
                         ]
                       }
                     }
+                  },
+                  {
+                    "gridVideoRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "http://dingusline.pages.dev/static/le_hits.png",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Le Hits"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Le Hits, Playlist"
+                          }
+                        }
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 27, 2026"
+                          }
+                        ]
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "Playlist"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "PLINYjw0uanWw"
+                        }
+                      },
+                      "videoId": "",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "PLINYjw0uanWw"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
                   }
                 ]
               }
