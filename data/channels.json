@@ -1,350 +1,389 @@
 {
-    "contents": {
-        "sectionListRenderer": {
-            "contents": [
+  "contents": {
+    "sectionListRenderer": {
+      "contents": [
+        {
+          "shelfRenderer": {
+            "title": {
+              "runs": [
                 {
-                    "shelfRenderer": {
-                        "title": {
-                            "runs": [
-                                {
-                                    "text": "Channels"
-                                }
-                            ]
-                        },
-                        "content": {
-                            "horizontalListRenderer": {
-                                "items": [
-                                    {
-                                        "gridChannelRenderer": {
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://yt3.googleusercontent.com/ytc/AIdro_muKaOubC9OXmsFk9vLMBEz6Yxt8M_EXHuZ-cWfFPb9-w=s120-c-k-c0x00ffffff-no-rj",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
-                                            "title": {
-                                                "runs": [
-                                                    {
-                                                        "text": "MusicTuesday"
-                                                    }
-                                                ],
-                                                "accessibility": {
-                                                    "accessibilityData": {
-                                                        "label": "Music Tuesday"
-                                                    }
-                                                }
-                                            },
-                                            "viewCountText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "1,234 views"
-                                                    }
-                                                ]
-                                            },
-                                            "publishedTimeText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Oct 26, 2026"
-                                                    }
-                                                ]
-                                            },
-                                            "navigationEndpoint": {
-                                                "browseEndpoint": {
-                                                    "browseId": "UC_5yaaRQYV8EPFq6graLj3g"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "gridChannelRenderer": {
-                                            "title": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Plainrock124"
-                                                    }
-                                                ],
-                                                "accessibility": {
-                                                    "accessibilityData": {
-                                                        "label": "Plain Rock one two four"
-                                                    }
-                                                }
-                                            },
-                                            "viewCountText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "1,234 views"
-                                                    }
-                                                ]
-                                            },
-                                            "publishedTimeText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Oct 26, 2026"
-                                                    }
-                                                ]
-                                            },
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://yt3.googleusercontent.com/ytc/AIdro_lyyP41IVawY8PA8cSXcexhAyLtfMelyHuStLY-jQj8AKM=s120-c-k-c0x00ffffff-no-rj",
-                                                        "width": 88,
-                                                        "height": 88
-                                                    }
-                                                ]
-                                            },
-                                            "navigationEndpoint": {
-                                                "browseEndpoint": {
-                                                    "browseId": "UCFUsBdbrNe2a8tnVsxBwoZw"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "gridChannelRenderer": {
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://yt3.googleusercontent.com/ytc/AIdro_mTREBILHZrDg_IE0YDNacNiw-b-707Nh8sIf_EbXuf8Kk=s120-c-k-c0x00ffffff-no-rj",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
-                                            "title": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Google Nexus"
-                                                    }
-                                                ],
-                                                "accessibility": {
-                                                    "accessibilityData": {
-                                                        "label": "Google Nexus"
-                                                    }
-                                                }
-                                            },
-                                            "viewCountText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "0 views"
-                                                    }
-                                                ]
-                                            },
-                                            "publishedTimeText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Oct 26, 2026"
-                                                    }
-                                                ]
-                                            },
-                                            "navigationEndpoint": {
-                                                "browseEndpoint": {
-                                                    "browseId": "UCUjlPym2cxucUVPdE8kYOOg"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "gridChannelRenderer": {
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://yt3.googleusercontent.com/bJFry2IjWTvfFjpg3Cg4lY6n-7Qcp-sHUB3zCFZnQ0AzyBN56tW3LMqryA8EAAHH24VZCrWh7xI=s120-c-k-c0x00ffffff-no-rj",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
-                                            "title": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Austin Evans"
-                                                    }
-                                                ],
-                                                "accessibility": {
-                                                    "accessibilityData": {
-                                                        "label": "Austin Evans"
-                                                    }
-                                                }
-                                            },
-                                            "viewCountText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "0 views"
-                                                    }
-                                                ]
-                                            },
-                                            "publishedTimeText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Oct 26, 2026"
-                                                    }
-                                                ]
-                                            },
-                                            "navigationEndpoint": {
-                                                "browseEndpoint": {
-                                                    "browseId": "UCXGgrKt94gR6lmN4aN3mYTg"
-                                                }
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                {
-                    "shelfRenderer": {
-                        "title": {
-                            "runs": [
-                                {
-                                    "text": "Non-Channels"
-                                }
-                            ]
-                        },
-                        "content": {
-                            "horizontalListRenderer": {
-                                "items": [
-                                    {
-                                        "gridChannelRenderer": {
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://i.ytimg.com/vi/BDCV0P6Mrk4/hqdefault.jpg",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
-                                            "title": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Most Hyped in the United States"
-                                                    }
-                                                ],
-                                                "accessibility": {
-                                                    "accessibilityData": {
-                                                        "label": "Most Hyped in the United States, Playlist."
-                                                    }
-                                                }
-                                            },
-                                            "viewCountText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "0 views"
-                                                    }
-                                                ]
-                                            },
-                                            "publishedTimeText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Oct 27, 2026"
-                                                    }
-                                                ]
-                                            },
-                                            "navigationEndpoint": {
-                                                "browseEndpoint": {
-                                                    "browseId": "OLAK5uy_lSbPjCHn-9LSQeRc6T1LWfz-DN8gOqNdw"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "gridChannelRenderer": {
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://i.ytimg.com/vi/e9CZ7vTCFtw/hqdefault.jpg",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
-                                            "title": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Top hyped in Music"
-                                                    }
-                                                ],
-                                                "accessibility": {
-                                                    "accessibilityData": {
-                                                        "label": "Top hyped in Music, Playlist."
-                                                    }
-                                                }
-                                            },
-                                            "viewCountText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "0 views"
-                                                    }
-                                                ]
-                                            },
-                                            "publishedTimeText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Oct 27, 2026"
-                                                    }
-                                                ]
-                                            },
-                                            "navigationEndpoint": {
-                                                "browseEndpoint": {
-                                                    "browseId": "OLNUaVf-BhE20xpEEdOmnxF6oyKQwpN1tBQ"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "gridChannelRenderer": {
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://i.ytimg.com/vi/KKBk07LrOro/hq1.jpg",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
-                                            "title": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Top hyped in Gaming"
-                                                    }
-                                                ],
-                                                "accessibility": {
-                                                    "accessibilityData": {
-                                                        "label": "Top hyped in Gaming, Playlist."
-                                                    }
-                                                }
-                                            },
-                                            "viewCountText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "0 views"
-                                                    }
-                                                ]
-                                            },
-                                            "publishedTimeText": {
-                                                "runs": [
-                                                    {
-                                                        "text": "Oct 27, 2026"
-                                                    }
-                                                ]
-                                            },
-                                            "navigationEndpoint": {
-                                                "browseEndpoint": {
-                                                    "browseId": "OLXuPDPDe3URMWBdmS4_jxdqVF08DAlAXWQ"
-                                                }
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
+                  "text": "Channels"
                 }
-            ]
+              ]
+            },
+            "content": {
+              "horizontalListRenderer": {
+                "items": [
+                  {
+                    "gridChannelRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://yt3.googleusercontent.com/ytc/AIdro_muKaOubC9OXmsFk9vLMBEz6Yxt8M_EXHuZ-cWfFPb9-w=s120-c-k-c0x00ffffff-no-rj",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "MusicTuesday"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Music Tuesday"
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "1,234 views"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 26, 2026"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "UC_5yaaRQYV8EPFq6graLj3g"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "gridChannelRenderer": {
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Plainrock124"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Plain Rock one two four"
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "1,234 views"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 26, 2026"
+                          }
+                        ]
+                      },
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://yt3.googleusercontent.com/ytc/AIdro_lyyP41IVawY8PA8cSXcexhAyLtfMelyHuStLY-jQj8AKM=s120-c-k-c0x00ffffff-no-rj",
+                            "width": 88,
+                            "height": 88
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "UCFUsBdbrNe2a8tnVsxBwoZw"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "gridChannelRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://yt3.googleusercontent.com/ytc/AIdro_mTREBILHZrDg_IE0YDNacNiw-b-707Nh8sIf_EbXuf8Kk=s120-c-k-c0x00ffffff-no-rj",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Google Nexus"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Google Nexus"
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "0 views"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 26, 2026"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "UCUjlPym2cxucUVPdE8kYOOg"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "gridChannelRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://yt3.googleusercontent.com/bJFry2IjWTvfFjpg3Cg4lY6n-7Qcp-sHUB3zCFZnQ0AzyBN56tW3LMqryA8EAAHH24VZCrWh7xI=s120-c-k-c0x00ffffff-no-rj",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Austin Evans"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Austin Evans"
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "0 views"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 26, 2026"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "UCXGgrKt94gR6lmN4aN3mYTg"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "shelfRenderer": {
+            "title": {
+              "runs": [
+                {
+                  "text": "Non-Channels"
+                }
+              ]
+            },
+            "content": {
+              "horizontalListRenderer": {
+                "items": [
+                  {
+                    "gridVideoRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://i.ytimg.com/vi/BDCV0P6Mrk4/hqdefault.jpg",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Most Hyped in the United States"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Most Hyped in the United States, Playlist."
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "Playlist"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 27, 2026"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "OLAK5uy_lSbPjCHn-9LSQeRc6T1LWfz-DN8gOqNdw"
+                        }
+                      },
+                      "videoId": "most_hyped_usa",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "UC2015ETV"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "gridVideoRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://i.ytimg.com/vi/e9CZ7vTCFtw/hqdefault.jpg",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Top hyped in Music"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Top hyped in Music, Playlist."
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "Playlist"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 27, 2026"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "OLNUaVf-BhE20xpEEdOmnxF6oyKQwpN1tBQ"
+                        }
+                      },
+                      "videoId": "most_hyped_music",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "UC2015ETV"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "gridVideoRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://i.ytimg.com/vi/KKBk07LrOro/hq1.jpg",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Top hyped in Gaming"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Top hyped in Gaming, Playlist."
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "Playlist"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 27, 2026"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "OLXuPDPDe3URMWBdmS4_jxdqVF08DAlAXWQ"
+                        }
+                      },
+                      "videoId": "most_hyped_gaming",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "UC2015ETV"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
         }
+      ]
     }
+  }
 }
