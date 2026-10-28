@@ -22,7 +22,38 @@ export async function onRequest(context) {
     let endpoint;
     let channelUploads = false;
     let playlist = false;
-
+    let hasBanner = false
+getHeader = function (name,profile,banner) {
+const data = {
+      header: {
+        tvChannelHeaderRenderer: {
+          title: "test",
+          avatar: {
+            thumbnails: [
+              {
+                url: "https://dingle-accs.pages.dev/user?name=Oh...&profile",
+                width: 480,
+                height: 360
+              }
+            ]
+          },
+          banner: {
+            thumbnails: [
+              {
+                url: "https://dingle-accs.pages.dev/user?name=Oh...&profile",
+                width: 480,
+                height: 360
+              }
+            ]
+          }
+        }
+      }
+    };
+data.header.tvChannelHeaderRenderer.title = name;
+data.header.tvChannelHeaderRenderer.avatar.thumbnails[0].url = profile;
+data.header.tvChannelHeaderRenderer.banner.thumbnails[0].url = banner;
+if (hasBanner) {return data;}
+}
     if (browseId === "FEwhat_to_watch") {
         browseName = "What To Watch"
         endpoint = "https://inv.truehosting.net/api/v1/popular";
