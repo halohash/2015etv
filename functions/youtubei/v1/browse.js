@@ -138,7 +138,8 @@ export async function onRequest(context) {
         browseId.startsWith("PL") ||
         browseId.startsWith("FL") ||
         browseId.startsWith("OL") ||
-        browseId.startsWith("UU")
+        browseId.startsWith("UU") ||
+        browseId.startsWith("VL")
     ) {
         browseName = "Videos in current playlist - Topic";
         endpoint =
@@ -427,7 +428,7 @@ const playlistItems = playlistData
 
         return {
             gridPlaylistRenderer: {
-                videoId: playlistId,
+                playlistId: playlistId,
 
                 thumbnail: {
                     thumbnails: [{
