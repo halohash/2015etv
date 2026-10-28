@@ -140,7 +140,7 @@ export async function onRequest(context) {
         browseId.startsWith("OL") ||
         browseId.startsWith("UU")
     ) {
-        browseName = "Videos in current playlist - Topic";
+        browseName = "Playlist"
         endpoint =
             `https://inv.truehosting.net/api/v1/playlists/${encodeURIComponent(browseId)}`;
 
@@ -166,6 +166,13 @@ export async function onRequest(context) {
         }
 
         const data = await response.json();
+
+if (playlist) {
+    browseName =
+        (typeof data.title === "string" && data.title) ||
+        (typeof data.playlist?.title === "string" && data.playlist.title) ||
+        "Playlist";
+}
 
         let source;
 
