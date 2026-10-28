@@ -84,8 +84,8 @@ export async function onRequest(context) {
             renderer.banner = {
                 thumbnails: [{
                     url: banner.url,
-                    width: banner.width || 1024,
-                    height: banner.height || 256
+                    width: 480,
+                    height: 360
                 }]
             };
         }
@@ -128,7 +128,7 @@ export async function onRequest(context) {
         playlist = true;
 
     } else {
-        browseName = "Unknown BrowseId";
+        browseName = "Unknown browseId";
         endpoint = "https://inv.truehosting.net/api/v1/popular";
     }
 
