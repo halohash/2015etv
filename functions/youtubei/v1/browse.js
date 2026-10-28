@@ -83,9 +83,9 @@ export async function onRequest(context) {
         if (banner?.url) {
             renderer.banner = {
                 thumbnails: [{
-                    url: banner.url.replace("w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj","w480"),
-                    width: 480,
-                    height: 270
+                    url: banner.url.replace("w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj","w1280"),
+                    width: 1280,
+                    height: 720
                 }]
             };
         }
