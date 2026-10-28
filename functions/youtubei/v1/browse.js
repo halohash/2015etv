@@ -405,10 +405,7 @@ const playlistItems = playlistData
             browseId;
 
         const rawCount =
-            item.videoCount ??
-            item.videosCount ??
-            item.video_count ??
-            -1;
+            item.videoCount === -1 ? item.videoCount : 1
 
         const playlistCount = String(rawCount);
 
