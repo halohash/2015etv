@@ -252,7 +252,7 @@ const seconds = String(lengthSeconds % 60).padStart(2, '0');
 const formattedTime = `${minutes}:${seconds}`; 
 return formattedTime
 }
-const time = video.lengthSeconds || 0;
+const time = item.lengthSeconds || 0;
             return {
                 videoRenderer: {
                     videoId,
