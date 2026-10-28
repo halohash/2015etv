@@ -23,9 +23,11 @@ export async function onRequest(context) {
         let body = {};
 
         if (method === "POST") {
-            body = await request.json();
+            body = await request.json().catch(() => ({}));
         } else {
-            body.videoId = url.searchParams.get("browseId");
+            body.videoId =
+                url.searchParams.get("videoId") ||
+                url.searchParams.get("browseId");
         }
 
         const videoId = body.videoId;
@@ -44,7 +46,7 @@ export async function onRequest(context) {
             encodeURIComponent(videoId)
         );
 
-        let videojson;
+        let videojson = {};
 
         try {
             videojson = await response.json();
@@ -53,7 +55,33 @@ export async function onRequest(context) {
         }
 
         const isError = !response.ok;
-        const isBlocked = videojson.error === "This helps protect our community. Learn more";
+        const isBlocked =
+            videojson.error ===
+            "This helps protect our community. Learn more";
+
+        if (isBlocked) {
+            const message =
+                "Sorry, This video isn't available right now. Please try again later.";
+
+            return Response.json({
+                error: {
+                    code: 503,
+                    message,
+                    errors: [
+                        {
+                            message,
+                            domain: "global",
+                            reason: "videoFailed"
+                        }
+                    ],
+                    status: "VIDEO_FAILED"
+                }
+            }, {
+                status: 503,
+                headers
+            });
+        }
+
         const title = isError
             ? (videojson.error || "Video unavailable")
             : (videojson.title || "Untitled video");
@@ -68,14 +96,22 @@ export async function onRequest(context) {
 
         const viewCount = isError
             ? "0"
-            : videojson.subCountText;
+            : String(videojson.viewCount ?? 0);
 
         const vidAuthor = isError
             ? "System"
-            : videojson.author;
-            
-        const vidProfile = isError ? "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png" : videojson.authorThumbnails[0].url || "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png";
-        
+            : (videojson.author || "Unknown");
+
+        const defaultProfile =
+            "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png";
+
+        const vidProfile = isError
+            ? defaultProfile
+            : (
+                videojson.authorThumbnails?.[0]?.url ||
+                defaultProfile
+            );
+
         const contents = [
             {
                 itemSectionRenderer: {
@@ -108,70 +144,29 @@ export async function onRequest(context) {
                                 badges: [],
                                 likeStatus: "INDIFFERENT"
                             }
-                        },{
-                videoOwnerRenderer: {
-                    title: {
-                        runs: [
-                            { text: vidAuthor }
-                        ]
-                    },
-                    thumbnail: {
-                        thumbnails: [
-                            {
-                                url: vidProfile,
-                                width: 88,
-                                height: 88
+                        },
+                        {
+                            videoOwnerRenderer: {
+                                title: {
+                                    runs: [
+                                        { text: vidAuthor }
+                                    ]
+                                },
+                                thumbnail: {
+                                    thumbnails: [
+                                        {
+                                            url: vidProfile,
+                                            width: 88,
+                                            height: 88
+                                        }
+                                    ]
+                                }
                             }
-                        ]
-                    }
-                }
-            }
+                        }
                     ]
                 }
             }
         ];
-
-        if (isError) {
-            contents[0].itemSectionRenderer.contents[1].videoOwnerRenderer = {
-                videoOwnerRenderer: {
-                    title: {
-                        runs: [
-                            { text: "System" }
-                        ]
-                    },
-                    thumbnail: {
-                        thumbnails: [
-                            {
-                                url: "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png",
-                                width: 250,
-                                height: 250
-                            }
-                        ]
-                    }
-                }
-            }
-        }
-
-if (isBlocked) {
-return Response.json({
-  "error": {
-    "code": 503,
-    "message": "Sorry, This video isn't available right now. Please try again later.",
-    "errors": [
-      {
-        "message": "Sorry, This video isn't available right now. Please try again later.",
-        "domain": "global",
-        "reason": "videoFailed"
-      }
-    ],
-    "status": "VIDEO_FAILED"
-  }
-}
-, {
-            status: 503,
-            headers
-        });
-        }
 
         return Response.json({
             currentVideoEndpoint: {},
