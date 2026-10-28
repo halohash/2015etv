@@ -111,7 +111,7 @@ export async function onRequest(context) {
         return `${minutes}:${seconds}`;
     }
 
-    // "default" is supported for compatibility with older YTTV apps.
+    
     if (browseId === "FEwhat_to_watch" || browseId === "default") {
         browseName = "What To Watch";
         endpoint = "https://inv.truehosting.net/api/v1/popular";
@@ -353,7 +353,7 @@ export async function onRequest(context) {
             }
         };
 
-        // Fetch this channel's playlists dynamically from Invidious.
+        
         if (channelUploads) {
             let playlistData = [];
 
@@ -377,128 +377,124 @@ export async function onRequest(context) {
                     }
                 }
             } catch (playlistError) {
-                // Keep the uploads response working if playlists fail.
+                
                 playlistData = [];
             }
 
-            const playlistItems = playlistData
-                .filter(item =>
-                    item &&
-                    (
-                        item.playlistId ||
-                        item.id
-                    )
-                )
-                .slice(0, maxResults)
-                .map(item => {
-                    const playlistId =
-                        item.playlistId ||
-                        item.id;
+            
+const playlistItems = playlistData
+    .filter(item => item && (item.playlistId || item.id))
+    .slice(0, maxResults)
+    .map(item => {
+        const playlistId = item.playlistId || item.id;
 
-                    const playlistTitle =
-                        typeof item.title === "string"
-                            ? item.title
-                            : "";
+        const playlistTitle =
+            typeof item.title === "string"
+                ? item.title
+                : "";
 
-                    const playlistAuthor =
-                        item.author ||
-                        data.author ||
-                        data.authorName ||
-                        "";
+        const playlistAuthor =
+            item.author ||
+            data.author ||
+            data.authorName ||
+            "";
 
-                    const playlistAuthorId =
-                        item.authorId ||
-                        item.ucid ||
-                        browseId;
+        const playlistAuthorId =
+            item.authorId ||
+            item.ucid ||
+            browseId;
 
-                    const playlistCount =
-                        item.videoCount === -1 ? item.videoCount.toString() : "0"
+        const rawCount =
+            item.videoCount ??
+            item.videosCount ??
+            item.video_count ??
+            -1;
 
-                    const playlistThumbnail =
-                        item.playlistThumbnail ||
-                        item.thumbnail ||
-                        item.thumbnailUrl ||
-                        item.videoThumbnails?.find(t =>
-                            t.quality === "medium" ||
-                            t.quality === "high"
-                        )?.url ||
-                        item.videoThumbnails?.[0]?.url ||
-                        `https://inv.truehosting.net/vi/${encodeURIComponent(playlistId)}/hqdefault.jpg`;
+        const playlistCount = String(rawCount);
 
-                    const playlistThumbnailWidth =
-                        item.videoThumbnails?.[0]?.width || 480;
+        const thumbnail =
+            item.playlistThumbnail ||
+            item.thumbnailUrl ||
+            item.thumbnail?.url ||
+            item.thumbnail ||
+            item.videoThumbnails?.find(t =>
+                t.quality === "high" ||
+                t.quality === "medium"
+            )?.url ||
+            item.videoThumbnails?.[0]?.url ||
+            `http://inv.truehosting.net/vi/${playlistId}/hqdefault.jpg`;
 
-                    const playlistThumbnailHeight =
-                        item.videoThumbnails?.[0]?.height || 360;
+        const avatar =
+            data.authorThumbnails?.find(t => t.width >= 88) ||
+            data.authorThumbnails?.[0];
 
-                    const playlistAvatar =
-                        data.authorThumbnails?.find(t => t.width >= 88) ||
-                        data.authorThumbnails?.[0];
+        const channelThumbnailUrl =
+            avatar?.url ||
+            "";
 
-                    return {
-                        gridPlaylistRenderer: {
-                            videoId: playlistId,
+        return {
+            gridPlaylistRenderer: {
+                videoId: playlistId,
 
-                            thumbnail: {
-                                thumbnails: [{
-                                    url: playlistThumbnail,
-                                    width: playlistThumbnailWidth,
-                                    height: playlistThumbnailHeight
-                                }]
-                            },
+                thumbnail: {
+                    thumbnails: [{
+                        url: thumbnail,
+                        width: 480,
+                        height: 360
+                    }]
+                },
 
-                            title: {
-                                runs: [{
-                                    text: playlistTitle
-                                }],
-                                accessibility: {
-                                    accessibilityData: {
-                                        label: playlistTitle
-                                    }
-                                }
-                            },
+                title: {
+                    runs: [{
+                        text: playlistTitle
+                    }],
+                    accessibility: {
+                        accessibilityData: {
+                            label: playlistTitle
+                        }
+                    }
+                },
 
-                            shortBylineText: {
-                                runs: [{
-                                    text: playlistAuthor,
-                                    navigationEndpoint: {
-                                        browseEndpoint: {
-                                            browseId: playlistAuthorId
-                                        }
-                                    }
-                                }]
-                            },
-
-                            publishedTimeText: {
-                                runs: [{
-                                    text: item.publishedText ||
-                                        item.publishedTimeText ||
-                                        ""
-                                }]
-                            },
-
-                            videoCount: String(playlistCount),
-
-                            navigationEndpoint: {
-                                browseEndpoint: {
-                                    browseId: playlistId
-                                }
-                            },
-
-                            channelThumbnail: {
-                                thumbnails: playlistAvatar?.url
-                                    ? [{
-                                        url: playlistAvatar.url,
-                                        width: playlistAvatar.width || 100,
-                                        height: playlistAvatar.height || 100
-                                    }]
-                                    : []
+                shortBylineText: {
+                    runs: [{
+                        text: playlistAuthor,
+                        navigationEndpoint: {
+                            browseEndpoint: {
+                                browseId: playlistAuthorId
                             }
                         }
-                    };
-                });
+                    }]
+                },
 
-            // Only add the row when the channel has playlists.
+                publishedTimeText: {
+                    runs: [{
+                        text: ""
+                    }]
+                },
+
+                videoCount: playlistCount,
+
+                navigationEndpoint: {
+                    browseEndpoint: {
+                        browseId: playlistId
+                    }
+                },
+
+                channelThumbnail: {
+                    thumbnails: channelThumbnailUrl
+                        ? [{
+                            url: channelThumbnailUrl,
+                            width: 100,
+                            height: 100
+                        }]
+                        : []
+                }
+            }
+        };
+    });
+
+
+            
             if (playlistItems.length > 0) {
                 result.contents.sectionListRenderer.contents.push({
                     shelfRenderer: {
