@@ -275,14 +275,7 @@ export async function onRequest(context) {
 
                 shortBylineText: {
                     runs: [{
-                        text: author,
-                        ...(channelId ? {
-                            navigationEndpoint: {
-                                browseEndpoint: {
-                                    browseId: channelId
-                                }
-                            }
-                        } : {})
+                        text: author
                     }]
                 },
 
@@ -405,12 +398,24 @@ const playlistItems = playlistData
             browseId;
 
         const rawCount =
-            item.videoCount === -1 ? item.videoCount : 1
+            item.videoCount ??
+            item.videosCount ??
+            item.video_count ??
+            -1;
 
         const playlistCount = String(rawCount);
 
         const thumbnail =
-            item.playlistThumbnail
+            item.playlistThumbnail ||
+            item.thumbnailUrl ||
+            item.thumbnail?.url ||
+            item.thumbnail ||
+            item.videoThumbnails?.find(t =>
+                t.quality === "high" ||
+                t.quality === "medium"
+            )?.url ||
+            item.videoThumbnails?.[0]?.url ||
+            `http://inv.truehosting.net/vi/${playlistId}/hqdefault.jpg`;
 
         const avatar =
             data.authorThumbnails?.find(t => t.width >= 88) ||
@@ -422,7 +427,7 @@ const playlistItems = playlistData
 
         return {
             gridPlaylistRenderer: {
-                playlistId: playlistId,
+                videoId: playlistId,
 
                 thumbnail: {
                     thumbnails: [{
@@ -445,12 +450,7 @@ const playlistItems = playlistData
 
                 shortBylineText: {
                     runs: [{
-                        text: playlistAuthor,
-                        navigationEndpoint: {
-                            browseEndpoint: {
-                                browseId: playlistAuthorId
-                            }
-                        }
+                        text: playlistAuthor
                     }]
                 },
 
@@ -463,10 +463,10 @@ const playlistItems = playlistData
                 videoCount: playlistCount,
 
                 navigationEndpoint: {
-                    browseEndpoint: {
-                        browseId: playlistId
-                    }
-                },
+                                                browseEndpoint: {
+                                                    browseId: playlistId
+                                                }
+                                            },
 
                 channelThumbnail: {
                     thumbnails: channelThumbnailUrl
