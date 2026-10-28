@@ -1,5 +1,6 @@
 
 import channels from '../../../data/channels.json';
+import other from '../../../data/other.json';
 
 export async function onRequest(context) {
     const url = new URL(context.request.url);
@@ -103,6 +104,8 @@ export async function onRequest(context) {
 
     } else if (browseId === "FEchannels") {
         return jsonResponse(channels);
+    } else if (browseId === "FEother") {
+        return jsonResponse(other);
     } else if (browseId === "FEtopics") {
         browseName = "Topics";
         endpoint =
@@ -166,9 +169,8 @@ export async function onRequest(context) {
             .filter(item =>
                 item &&
                 (
-                    item.type === "video" ||
                     item.videoId ||
-                    item.id
+                    item.id || item.liveNow === true
                 )
             )
             .slice(0, maxResults);

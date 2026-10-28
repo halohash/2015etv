@@ -87,7 +87,7 @@ export async function onRequest(context) {
                 (
                     item.type === "channel"
                         ? !!(item.authorId || item.channelId || item.id)
-                        : !!(item.videoId || item.id)
+                        : !!(item.videoId || item.id || item.liveNow === false)
                 )
             )
             .slice(0, maxResults);

@@ -70,6 +70,28 @@
                         }
                     },
                     {
+                        "guideEntryRenderer": {
+                            "title": "Other",
+                            "icon": {
+                                "iconType": "SOCIAL"
+                            },
+                            "trackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcQ==",
+                            "formattedTitle": {
+                                "runs": [
+                                    {
+                                        "text": "Other"
+                                    }
+                                ]
+                            },
+                            "navigationEndpoint": {
+                                "clickTrackingParams": "CAcQtSwYASITCIfJxpyureECFUKJxAodDO4CcTIKZy1wZXJzb25hbA==",
+                                "browseEndpoint": {
+                                    "browseId": "FEother"
+                                }
+                            }
+                        }
+                    },
+                    {
           "guideEntryRenderer": {
             "title": "Settings",
             "icon": {

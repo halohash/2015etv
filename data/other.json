@@ -1,0 +1,69 @@
+{
+  "contents": {
+    "sectionListRenderer": {
+      "contents": [
+        {
+          "shelfRenderer": {
+            "title": {
+              "runs": [
+                {
+                  "text": "Topics"
+                }
+              ]
+            },
+            "content": {
+              "horizontalListRenderer": {
+                "items": [
+                  {
+                    "gridChannelRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "GO_TO_CHANNELS_BTN"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Un Defined"
+                          }
+                        }
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "0 views"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 28, 2026"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "FEchannels"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
