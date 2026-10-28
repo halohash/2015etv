@@ -1,3 +1,4 @@
+
 import channels from '../../../data/channels.json';
 
 export async function onRequest(context) {
@@ -13,7 +14,8 @@ export async function onRequest(context) {
     }
 
     const browseId = body.browseId || "FEwhat_to_watch";
-    var browseName = "Popular"
+    let browseName = "Popular";
+
     const requestedMax = parseInt(body["max-results"] || 25, 10);
     const maxResults = Number.isFinite(requestedMax)
         ? Math.max(1, Math.min(requestedMax, 25))
@@ -22,75 +24,6 @@ export async function onRequest(context) {
     let endpoint;
     let channelUploads = false;
     let playlist = false;
-    let hasBanner = false
-var getHeader = function (name,profile,banner) {
-const data = {
-      header: {
-        tvChannelHeaderRenderer: {
-          title: "test",
-          avatar: {
-            thumbnails: [
-              {
-                url: "https://dingle-accs.pages.dev/user?name=Oh...&profile",
-                width: 480,
-                height: 360
-              }
-            ]
-          },
-          banner: {
-            thumbnails: [
-              {
-                url: "https://dingle-accs.pages.dev/user?name=Oh...&profile",
-                width: 480,
-                height: 360
-              }
-            ]
-          }
-        }
-      }
-    };
-data.header.tvChannelHeaderRenderer.title = name;
-data.header.tvChannelHeaderRenderer.avatar.thumbnails[0].url = profile;
-data.header.tvChannelHeaderRenderer.banner.thumbnails[0].url = banner;
-if (hasBanner) {return data;}
-}
-    if (browseId === "FEwhat_to_watch") {
-        browseName = "What To Watch"
-        endpoint = "https://inv.truehosting.net/api/v1/popular";
-
-    } else if (browseId === "FEchannels") {
-        return new Response(JSON.stringify(channels), {
-            status: 200,
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Access-Control-Allow-Origin": "*",
-                "Cache-Control": "no-store"
-            }
-        });
-
-    } else if (browseId === "FEtopics") {
-        browseName = "Topics"
-        endpoint =
-            "https://inv.truehosting.net/api/v1/search?q=xbox%20before:2015";
-
-    } else if (browseId.startsWith("UC")) {
-        browseName = "Uploads"
-        endpoint =
-            `https://inv.truehosting.net/api/v1/channels/${encodeURIComponent(browseId)}`;
-
-        channelUploads = true;
-
-    } else if (browseId.startsWith("PL") || browseId.startsWith("FL") || browseId.startsWith("OL") || browseId.startsWith("UU")) {
-        browseName = "videos in current playlist - Topic"
-        endpoint =
-            `https://inv.truehosting.net/api/v1/playlists/${encodeURIComponent(browseId)}`;
-
-        playlist = true;
-
-    } else {
-        browseName = "Unknown BrowseId"
-        endpoint = "https://inv.truehosting.net/api/v1/popular";
-    }
 
     const jsonResponse = (data, status = 200) => {
         return new Response(JSON.stringify(data), {
@@ -127,6 +60,79 @@ if (hasBanner) {return data;}
         }, status);
     };
 
+    function getHeader(data) {
+        const profile =
+            data.authorThumbnails?.find(t => t.width >= 88) ||
+            data.authorThumbnails?.[0];
+
+        const banner =
+            data.authorBanners?.find(t => t.width >= 1024) ||
+            data.authorBanners?.[0];
+
+        const renderer = {
+            title: data.author || data.authorName || "",
+            avatar: {
+                thumbnails: profile?.url ? [{
+                    url: profile.url,
+                    width: profile.width || 88,
+                    height: profile.height || 88
+                }] : []
+            }
+        };
+
+        if (banner?.url) {
+            renderer.banner = {
+                thumbnails: [{
+                    url: banner.url,
+                    width: banner.width || 1024,
+                    height: banner.height || 256
+                }]
+            };
+        }
+
+        return {
+            header: {
+                tvChannelHeaderRenderer: renderer
+            }
+        };
+    }
+
+    if (browseId === "FEwhat_to_watch") {
+        browseName = "What To Watch";
+        endpoint = "https://inv.truehosting.net/api/v1/popular";
+
+    } else if (browseId === "FEchannels") {
+        return jsonResponse(channels);
+
+    } else if (browseId === "FEtopics") {
+        browseName = "Topics";
+        endpoint =
+            "https://inv.truehosting.net/api/v1/search?q=xbox%20before:2015";
+
+    } else if (browseId.startsWith("UC")) {
+        browseName = "Uploads";
+        endpoint =
+            `https://inv.truehosting.net/api/v1/channels/${encodeURIComponent(browseId)}`;
+
+        channelUploads = true;
+
+    } else if (
+        browseId.startsWith("PL") ||
+        browseId.startsWith("FL") ||
+        browseId.startsWith("OL") ||
+        browseId.startsWith("UU")
+    ) {
+        browseName = "Videos in current playlist - Topic";
+        endpoint =
+            `https://inv.truehosting.net/api/v1/playlists/${encodeURIComponent(browseId)}`;
+
+        playlist = true;
+
+    } else {
+        browseName = "Unknown BrowseId";
+        endpoint = "https://inv.truehosting.net/api/v1/popular";
+    }
+
     try {
         const response = await fetch(endpoint, {
             headers: {
@@ -146,14 +152,9 @@ if (hasBanner) {return data;}
         let source;
 
         if (channelUploads) {
-            source =
-                data.latestVideos ||
-                data.videos ||
-                [];
-
+            source = data.latestVideos || data.videos || [];
         } else if (playlist) {
             source = data.videos || [];
-
         } else {
             source = data;
         }
@@ -211,10 +212,9 @@ if (hasBanner) {return data;}
                 "";
 
             const thumbnail =
-                video.videoThumbnails?.find(
-                    t =>
-                        t.quality === "medium" ||
-                        t.quality === "high"
+                video.videoThumbnails?.find(t =>
+                    t.quality === "medium" ||
+                    t.quality === "high"
                 ) ||
                 video.videoThumbnails?.[0];
 
@@ -230,9 +230,7 @@ if (hasBanner) {return data;}
             const channelThumbnail =
                 channelUploads || playlist
                     ? (
-                        data.authorThumbnails?.find(
-                            t => t.width >= 88
-                        ) ||
+                        data.authorThumbnails?.find(t => t.width >= 88) ||
                         data.authorThumbnails?.[0]
                     )
                     : null;
@@ -280,7 +278,9 @@ if (hasBanner) {return data;}
 
                 viewCountText: {
                     runs: [{
-                        text: playlist ? "Playlist" : views.toLocaleString("en-US") + " views"
+                        text: playlist
+                            ? "Playlist"
+                            : views.toLocaleString("en-US") + " views"
                     }]
                 },
 
@@ -306,7 +306,7 @@ if (hasBanner) {return data;}
             };
         });
 
-        return jsonResponse({
+        const result = {
             contents: {
                 sectionListRenderer: {
                     contents: [{
@@ -325,7 +325,13 @@ if (hasBanner) {return data;}
                     }]
                 }
             }
-        });
+        };
+
+        if (channelUploads) {
+            Object.assign(result, getHeader(data));
+        }
+
+        return jsonResponse(result);
 
     } catch (error) {
         return errorResponse(
