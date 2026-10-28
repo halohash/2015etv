@@ -53,7 +53,7 @@ export async function onRequest(context) {
         }
 
         const isError = !response.ok;
-        const isBlocked = videojson.error === "This helps protect our community. Learn more"
+        const isBlocked = videojson.error === "This helps protect our community. Learn more";
         const title = isError
             ? (videojson.error || "Video unavailable")
             : (videojson.title || "Untitled video");
@@ -73,6 +73,7 @@ export async function onRequest(context) {
         const vidAuthor = isError
             ? "System"
             : videojson.author;
+            
         const vidProfile = isError ? "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png" : videojson.authorThumbnails[0].url || "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png";
         
         const contents = [
@@ -107,35 +108,7 @@ export async function onRequest(context) {
                                 badges: [],
                                 likeStatus: "INDIFFERENT"
                             }
-                        }
-                    ]
-                }
-            }
-        ];
-
-        if (isError) {
-            contents[0].itemSectionRenderer.contents.push({
-                videoOwnerRenderer: {
-                    title: {
-                        runs: [
-                            { text: "System" }
-                        ]
-                    },
-                    thumbnail: {
-                        thumbnails: [
-                            {
-                                url: "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png",
-                                width: 250,
-                                height: 250
-                            }
-                        ]
-                    }
-                }
-            });
-        }
-
-        if (!isError) {
-            contents[0].itemSectionRenderer.contents.push({
+                        },{
                 videoOwnerRenderer: {
                     title: {
                         runs: [
@@ -152,7 +125,31 @@ export async function onRequest(context) {
                         ]
                     }
                 }
-            });
+            }
+                    ]
+                }
+            }
+        ];
+
+        if (isError) {
+            contents[0].itemSectionRenderer.contents[1].videoOwnerRenderer = {
+                videoOwnerRenderer: {
+                    title: {
+                        runs: [
+                            { text: "System" }
+                        ]
+                    },
+                    thumbnail: {
+                        thumbnails: [
+                            {
+                                url: "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png",
+                                width: 250,
+                                height: 250
+                            }
+                        ]
+                    }
+                }
+            }
         }
 
 if (isBlocked) {
