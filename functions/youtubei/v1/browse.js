@@ -96,14 +96,13 @@ export async function onRequest(context) {
             }
         };
     }
-
-    if (browseId === "FEwhat_to_watch") {
+// browseId 'default' is for compatibility for 2016/2017/early 2018 YTTV Apps.
+    if (browseId === "FEwhat_to_watch" || browseId === "default") {
         browseName = "What To Watch";
         endpoint = "https://inv.truehosting.net/api/v1/popular";
 
     } else if (browseId === "FEchannels") {
         return jsonResponse(channels);
-
     } else if (browseId === "FEtopics") {
         browseName = "Topics";
         endpoint =
