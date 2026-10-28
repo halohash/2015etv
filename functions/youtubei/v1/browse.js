@@ -412,10 +412,7 @@ export async function onRequest(context) {
                         browseId;
 
                     const playlistCount =
-                        item.videoCount ??
-                        item.videosCount ??
-                        item.video_count ??
-                        0;
+                        item.videoCount === -1 ? item.videoCount.toString() : "0"
 
                     const playlistThumbnail =
                         item.playlistThumbnail ||
