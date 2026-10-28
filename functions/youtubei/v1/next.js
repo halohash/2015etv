@@ -68,8 +68,13 @@ export async function onRequest(context) {
 
         const viewCount = isError
             ? "0"
-            : String(videojson.viewCount ?? 0);
+            : videojson.subCountText;
 
+        const vidAuthor = isError
+            ? "System"
+            : videojson.author;
+        const vidProfile = isError ? "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png" : videojson.authorThumbnails[0].url || "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png";
+        
         const contents = [
             {
                 itemSectionRenderer: {
@@ -96,7 +101,7 @@ export async function onRequest(context) {
                                 },
                                 shortBylineText: {
                                     runs: [
-                                        { text: "Creator Channel" }
+                                        { text: vidAuthor }
                                     ]
                                 },
                                 badges: [],
@@ -113,13 +118,34 @@ export async function onRequest(context) {
                 videoOwnerRenderer: {
                     title: {
                         runs: [
-                            { text: "Creator Channel" }
+                            { text: "System" }
                         ]
                     },
                     thumbnail: {
                         thumbnails: [
                             {
-                                url: "https://yt3.ggpht.com/example=s88-c-k-c0x00ffffff-no-rj",
+                                url: "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png",
+                                width: 250,
+                                height: 250
+                            }
+                        ]
+                    }
+                }
+            });
+        }
+
+        if (!isError) {
+            contents[0].itemSectionRenderer.contents.push({
+                videoOwnerRenderer: {
+                    title: {
+                        runs: [
+                            { text: vidAuthor }
+                        ]
+                    },
+                    thumbnail: {
+                        thumbnails: [
+                            {
+                                url: vidProfile,
                                 width: 88,
                                 height: 88
                             }
