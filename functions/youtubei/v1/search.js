@@ -243,7 +243,16 @@ export async function onRequest(context) {
                     image => image.width >= 88
                 ) ||
                 item.authorThumbnails?.[0];
+function yttime(secs) {
+const lengthSeconds = secs;
 
+const minutes = Math.floor(lengthSeconds / 60);
+const seconds = String(lengthSeconds % 60).padStart(2, '0');
+
+const formattedTime = `${minutes}:${seconds}`; 
+return formattedTime
+}
+const time = video.lengthSeconds || 0;
             return {
                 videoRenderer: {
                     videoId,
@@ -306,7 +315,13 @@ export async function onRequest(context) {
                             }
                         }
                     },
-
+lengthText:{
+                                                                runs:[
+                                                                   {
+                                                                      text: yttime(time)
+                                                                   }
+                                                                ]
+                                                             },
                     navigationEndpoint: {
                         watchEndpoint: {
                             videoId

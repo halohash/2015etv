@@ -170,7 +170,7 @@ export async function onRequest(context) {
                 item &&
                 (
                     item.videoId ||
-                    item.id || item.liveNow === true
+                    item.id
                 )
             )
             .slice(0, maxResults);
@@ -227,6 +227,16 @@ export async function onRequest(context) {
                 video.authorId ||
                 video.ucid ||
                 (channelUploads ? browseId : "");
+function yttime(secs) {
+const lengthSeconds = secs;
+
+const minutes = Math.floor(lengthSeconds / 60);
+const seconds = String(lengthSeconds % 60).padStart(2, '0');
+
+const formattedTime = `${minutes}:${seconds}`; 
+return formattedTime
+}
+const time = video.lengthSeconds || 0;
 
             const channelThumbnail =
                 channelUploads || playlist
@@ -284,6 +294,13 @@ export async function onRequest(context) {
                             : views.toLocaleString("en-US") + " views"
                     }]
                 },
+                                                             lengthText:{
+                                                                runs:[
+                                                                   {
+                                                                      text: yttime(time)
+                                                                   }
+                                                                ]
+                                                             },
 
                 navigationEndpoint: {
                     watchEndpoint: {
