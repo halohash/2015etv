@@ -410,16 +410,7 @@ const playlistItems = playlistData
         const playlistCount = String(rawCount);
 
         const thumbnail =
-            item.playlistThumbnail ||
-            item.thumbnailUrl ||
-            item.thumbnail?.url ||
-            item.thumbnail ||
-            item.videoThumbnails?.find(t =>
-                t.quality === "high" ||
-                t.quality === "medium"
-            )?.url ||
-            item.videoThumbnails?.[0]?.url ||
-            `http://inv.truehosting.net/vi/${playlistId}/hqdefault.jpg`;
+            item.playlistThumbnail
 
         const avatar =
             data.authorThumbnails?.find(t => t.width >= 88) ||
