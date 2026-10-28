@@ -434,7 +434,7 @@ const playlistItems = playlistData
 
         return {
             gridPlaylistRenderer: {
-                videoId: playlistId,
+                playlistId: playlistId,
 
                 thumbnail: {
                     thumbnails: [{
