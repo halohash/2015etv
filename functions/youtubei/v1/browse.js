@@ -306,32 +306,32 @@ export async function onRequest(context) {
             };
         });
 
-        const result = {
-            contents: {
-                sectionListRenderer: {
-                    contents: [{
-                        shelfRenderer: {
-                            title: {
-                                runs: [{
-                                    text: browseName
-                                }]
-                            },
-                            content: {
-                                horizontalListRenderer: {
-                                    items: contents
-                                }
-                            }
-                        }
+        const result = {};
+
+if (channelUploads) {
+    Object.assign(result, getHeader(data));
+}
+
+result.contents = {
+    sectionListRenderer: {
+        contents: [{
+            shelfRenderer: {
+                title: {
+                    runs: [{
+                        text: browseName
                     }]
+                },
+                content: {
+                    horizontalListRenderer: {
+                        items: contents
+                    }
                 }
             }
-        };
+        }]
+    }
+};
 
-        if (channelUploads) {
-            Object.assign(result, getHeader(data));
-        }
-
-        return jsonResponse(result);
+return jsonResponse(result);
 
     } catch (error) {
         return errorResponse(
