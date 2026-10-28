@@ -1,0 +1,89 @@
+{
+    "contents": {
+        "sectionListRenderer": {
+            "contents": [
+                {
+                    "shelfRenderer": {
+                        "title": {
+                            "runs": [
+                                {
+                                    "text": "What To Watch"
+                                }
+                            ]
+                        },
+                        "content": {
+                            "horizontalListRenderer": {
+                                "items": [
+                                    {
+                                        "gridVideoRenderer": {
+                                            "videoId": "Kl7iVlSSB34",
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "http://inv.truehosting.net/vi/Kl7iVlSSB34/hqdefault.jpg",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "react stream"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "react stream"
+                                                    }
+                                                }
+                                            },
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Ninye",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UCUvw__zQnaI_pcvMy2O0v6g"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "55 minutes ago"
+                                                    }
+                                                ]
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "1,488 views"
+                                                    }
+                                                ]
+                                            },
+                                                             "lengthText":{
+                                                                "runs":[
+                                                                   {
+                                                                      "text":"12:09"
+                                                                   }
+                                                                ]
+                                                             },
+                                            "navigationEndpoint": {
+                                                "watchEndpoint": {
+                                                    "videoId": "Kl7iVlSSB34"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

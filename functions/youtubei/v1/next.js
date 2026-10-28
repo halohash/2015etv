@@ -55,6 +55,7 @@ export async function onRequest(context) {
         }
 
         const isError = !response.ok;
+
         const isBlocked =
             videojson.error ===
             "This helps protect our community. Learn more";
@@ -112,6 +113,25 @@ export async function onRequest(context) {
                 defaultProfile
             );
 
+        const authorId = isError
+            ? ""
+            : (videojson.authorId || "");
+
+        const canonicalBaseUrl = isError
+            ? "/@blank"
+            : (
+                videojson.authorUrl ||
+                (videojson.author ? "/@" + videojson.author : "/@blank")
+            );
+
+        const ownerTitle = isError ? "blank" : vidAuthor;
+
+        const ownerThumbnails = [48, 88, 176].map(size => ({
+            url: vidProfile,
+            width: size,
+            height: size
+        }));
+
         const contents = [
             {
                 itemSectionRenderer: {
@@ -144,22 +164,29 @@ export async function onRequest(context) {
                                 badges: [],
                                 likeStatus: "INDIFFERENT"
                             }
-                        },
+                        }
+                    ]
+                }
+            },
+            {
+                itemSectionRenderer: {
+                    contents: [
                         {
                             videoOwnerRenderer: {
+                                thumbnail: {
+                                    thumbnails: ownerThumbnails
+                                },
                                 title: {
                                     runs: [
-                                        { text: vidAuthor }
+                                        { text: ownerTitle }
                                     ]
                                 },
-                                thumbnail: {
-                                    thumbnails: [
-                                        {
-                                            url: vidProfile,
-                                            width: 88,
-                                            height: 88
-                                        }
-                                    ]
+                                navigationEndpoint: {
+                                    clickTrackingParams: "",
+                                    browseEndpoint: {
+                                        browseId: authorId,
+                                        canonicalBaseUrl
+                                    }
                                 }
                             }
                         }
