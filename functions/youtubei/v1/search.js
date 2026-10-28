@@ -1,23 +1,64 @@
+
 export async function onRequest(context) {
-    const url = new URL(context.request.url);
+    const { request } = context;
+    const url = new URL(request.url);
 
-    const body = await context.request.json().catch(() => ({}));
+    const headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-store"
+    };
 
-    const query = body.query || "gorillaz";
+    let body = {};
 
-    const maxResults = Math.min(
-        parseInt(body["max-results"] || 25, 10),
-        25
-    );
+    if (request.method === "OPTIONS") {
+        return new Response(null, {
+            status: 204,
+            headers: {
+                ...headers,
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "*"
+            }
+        });
+    }
 
-    let endpoint;
-    let channelUploads = false;
-    let playlist = false;
-
-    
-        endpoint = "https://inv.truehosting.net/api/v1/search?q=" + encodeURIComponent(query);
+    if (request.method !== "GET" && request.method !== "POST") {
+        return new Response(JSON.stringify({
+            error: "Method not allowed"
+        }), {
+            status: 405,
+            headers: {
+                ...headers,
+                "Allow": "GET, POST, OPTIONS"
+            }
+        });
+    }
 
     try {
+        if (request.method === "POST") {
+            body = await request.json().catch(() => ({}));
+        }
+
+        const query =
+            body.query ||
+            url.searchParams.get("query") ||
+            "gorillaz";
+
+        const requestedMax =
+            body["max-results"] ||
+            url.searchParams.get("max-results") ||
+            25;
+
+        const parsedMax = parseInt(requestedMax, 10);
+
+        const maxResults = Number.isFinite(parsedMax)
+            ? Math.max(1, Math.min(parsedMax, 25))
+            : 25;
+
+        const endpoint =
+            "https://inv.truehosting.net/api/v1/search?q=" +
+            encodeURIComponent(query);
+
         const response = await fetch(endpoint, {
             headers: {
                 "Accept": "application/json"
@@ -25,148 +66,194 @@ export async function onRequest(context) {
         });
 
         if (!response.ok) {
-            return new Response(
-                JSON.stringify({
-                    error: "Invidious request failed",
-                    status: response.status
-                }),
-                {
-                    status: 502,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*"
-                    }
-                }
-            );
+            return new Response(JSON.stringify({
+                error: "Invidious request failed",
+                status: response.status
+            }), {
+                status: 502,
+                headers
+            });
         }
 
         const data = await response.json();
 
-        let source;
+        const source = Array.isArray(data)
+            ? data
+            : [];
 
-        if (channelUploads) {
-            source =
-                data.latestVideos ||
-                data.videos ||
-                [];
-
-        } else if (playlist) {
-            source =
-                data.videos ||
-                [];
-
-        } else {
-            source = data;
-        }
-
-        if (!Array.isArray(source)) {
-            source = [];
-        }
-
-        const videos = source
+        const results = source
             .filter(item =>
                 item &&
                 (
-                    item.type === "video" ||
-                    item.videoId ||
-                    item.id
+                    item.type === "channel"
+                        ? !!(item.authorId || item.channelId || item.id)
+                        : !!(item.videoId || item.id)
                 )
             )
             .slice(0, maxResults);
 
-        const contents = videos.map(video => {
-            const videoId =
-                video.videoId ||
-                video.id ||
-                "";
-
+        const contents = results.map(item => {
             const title =
-                typeof video.title === "string"
-                    ? video.title
-                    : "";
+                typeof item.title === "string"
+                    ? item.title
+                    : typeof item.author === "string"
+                        ? item.author
+                        : "";
 
-            const author =
-                typeof video.author === "string"
-                    ? video.author
-                    : "";
+            const isChannel = item.type === "channel";
 
-            let views = video.viewCount;
+            if (isChannel) {
+                const channelId =
+                    item.authorId ||
+                    item.channelId ||
+                    item.id ||
+                    "";
 
-            if (
-                views === undefined ||
-                views === null
-            ) {
-                views = video.views;
+                const thumbnail =
+                    item.authorThumbnails?.find(
+                        image => image.width >= 120
+                    ) ||
+                    item.authorThumbnails?.[0] ||
+                    item.thumbnails?.[0];
+
+                const thumbnailUrl =
+                    thumbnail?.url ||
+                    thumbnail?.url?.url ||
+                    "";
+
+                let subscribers =
+                    item.subCount ??
+                    item.subscriberCount ??
+                    item.subscribers;
+
+                let subscriberText = "";
+
+                if (typeof subscribers === "number") {
+                    subscriberText =
+                        subscribers.toLocaleString("en-US") +
+                        " subscribers";
+                } else if (typeof subscribers === "string") {
+                    subscriberText = subscribers;
+                }
+
+                const channelRenderer = {
+                    thumbnail: {
+                        thumbnails: [
+                            {
+                                url: thumbnailUrl,
+                                width: thumbnail?.width || 480,
+                                height: thumbnail?.height || 360
+                            }
+                        ]
+                    },
+
+                    title: {
+                        runs: [
+                            {
+                                text: title
+                            }
+                        ],
+                        accessibility: {
+                            accessibilityData: {
+                                label: title
+                            }
+                        }
+                    },
+
+                    navigationEndpoint: {
+                        browseEndpoint: {
+                            browseId: channelId
+                        }
+                    }
+                };
+
+                if (subscriberText) {
+                    channelRenderer.videoCountText = {
+                        runs: [
+                            {
+                                text: subscriberText
+                            }
+                        ]
+                    };
+                }
+
+                return {
+                    gridChannelRenderer: channelRenderer
+                };
             }
 
+            const videoId =
+                item.videoId ||
+                item.id ||
+                "";
+
+            const author =
+                typeof item.author === "string"
+                    ? item.author
+                    : "";
+
+            let views =
+                item.viewCount ??
+                item.views ??
+                0;
+
             if (typeof views === "string") {
-                views = parseInt(
+                const parsedViews = parseInt(
                     views.replace(/,/g, ""),
                     10
                 );
+
+                views = Number.isFinite(parsedViews)
+                    ? parsedViews
+                    : 0;
             }
 
-            if (!Number.isFinite(views)) {
+            if (typeof views !== "number" || !Number.isFinite(views)) {
                 views = 0;
             }
 
-            let published =
-                video.publishedText;
+            const viewText =
+                typeof item.viewCount === "string" &&
+                /views?/i.test(item.viewCount)
+                    ? item.viewCount
+                    : views.toLocaleString("en-US") + " views";
 
-            if (!published) {
-                published =
-                    video.publishedTimeText;
-            }
-
-            if (!published) {
-                published = "";
-            }
+            const published =
+                item.publishedText ||
+                item.publishedTimeText ||
+                "";
 
             const thumbnail =
-                video.videoThumbnails?.find(
-                    thumbnail =>
-                        thumbnail.quality === "medium" ||
-                        thumbnail.quality === "high"
+                item.videoThumbnails?.find(
+                    image =>
+                        image.quality === "medium" ||
+                        image.quality === "high"
                 ) ||
-                video.videoThumbnails?.[0];
+                item.videoThumbnails?.[0] ||
+                item.thumbnails?.[0];
 
             const thumbnailUrl =
                 thumbnail?.url ||
-                `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+                "https://i.ytimg.com/vi/" +
+                videoId +
+                "/hqdefault.jpg";
 
             const channelThumbnail =
-                channelUploads
-                    ? (
-                        data.authorThumbnails?.find(
-                            thumbnail =>
-                                thumbnail.width >= 88
-                        ) ||
-                        data.authorThumbnails?.[0]
-                    )
-                    : playlist
-                        ? (
-                            data.authorThumbnails?.find(
-                                thumbnail =>
-                                    thumbnail.width >= 88
-                            ) ||
-                            data.authorThumbnails?.[0]
-                        )
-                        : null;
+                item.authorThumbnails?.find(
+                    image => image.width >= 88
+                ) ||
+                item.authorThumbnails?.[0];
 
             return {
                 videoRenderer: {
-                    videoId: videoId,
+                    videoId,
 
                     thumbnail: {
                         thumbnails: [
                             {
                                 url: thumbnailUrl,
-                                width:
-                                    thumbnail?.width ||
-                                    480,
-                                height:
-                                    thumbnail?.height ||
-                                    360
+                                width: thumbnail?.width || 480,
+                                height: thumbnail?.height || 360
                             }
                         ]
                     },
@@ -177,8 +264,8 @@ export async function onRequest(context) {
                                 url:
                                     channelThumbnail?.url ||
                                     "https://file.garden/aUYIWVAKvQxCBY-_/database/images/profilepuckett.png",
-                                width: 88,
-                                height: 88
+                                width: channelThumbnail?.width || 88,
+                                height: channelThumbnail?.height || 88
                             }
                         ]
                     },
@@ -191,90 +278,80 @@ export async function onRequest(context) {
                         ]
                     },
 
-                    publishedTimeText:
-                        published,
+                    publishedTimeText: {
+                        runs: [
+                            {
+                                text: published
+                            }
+                        ]
+                    },
 
-                    viewCountText:
-                        views.toLocaleString(
-                            "en-US"
-                        ) + " views",
+                    viewCountText: {
+                        runs: [
+                            {
+                                text: viewText
+                            }
+                        ]
+                    },
 
                     title: {
                         runs: [
                             {
                                 text: title
                             }
-                        ]
+                        ],
+                        accessibility: {
+                            accessibilityData: {
+                                label: title
+                            }
+                        }
                     },
+
                     navigationEndpoint: {
-                                                watchEndpoint: {
-                                                    videoId: videoId
-                                                }
-                                            }
+                        watchEndpoint: {
+                            videoId
+                        }
+                    }
                 }
             };
         });
 
-        return new Response(
-            JSON.stringify({
-                estimatedResults: data.length,
-                contents: {
-                    sectionListRenderer: {
-                        contents: [
-                            {
-                                itemSectionRenderer: {
-                                    contents
-                                }
+        return new Response(JSON.stringify({
+            estimatedResults: String(source.length),
+            contents: {
+                sectionListRenderer: {
+                    contents: [
+                        {
+                            itemSectionRenderer: {
+                                contents
                             }
-                        ]
-                    }
-                }
-            }),
-            {
-                headers: {
-                    "Content-Type":
-                        "application/json",
-
-                    "Access-Control-Allow-Origin":
-                        "*",
-
-                    "Cache-Control":
-                        "no-store"
+                        }
+                    ]
                 }
             }
-        );
+        }), {
+            status: 200,
+            headers
+        });
 
     } catch (error) {
-        return new Response(
-            JSON.stringify({
-                error: error.message
-            }),
-            {
-                status: 500,
-                headers: {
-                    "Content-Type":
-                        "application/json",
-
-                    "Access-Control-Allow-Origin":
-                        "*"
-                }
-            }
-        );
+        return new Response(JSON.stringify({
+            error: error.message || "Internal server error"
+        }), {
+            status: 500,
+            headers
+        });
     }
 }
 
 export async function onRequestOptions() {
     return new Response(null, {
         status: 204,
-
         headers: {
-            "Access-Control-Allow-Origin":
-                "*",
-
-            "Access-Control-Allow-Methods":
-                "GET, POST, OPTIONS",
-
-            "Access-Control-Allow-Headers": "*"
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+            "Cache-Control": "no-store"
         }
     });
 }
