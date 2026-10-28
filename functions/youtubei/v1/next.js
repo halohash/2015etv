@@ -126,7 +126,7 @@ export async function onRequest(context) {
 
         const ownerTitle = isError ? "blank" : vidAuthor;
 
-        const ownerThumbnails = [48, 88, 176].map(size => ({
+        const ownerThumbnails = [512].map(size => ({
             url: vidProfile,
             width: size,
             height: size
