@@ -65,7 +65,9 @@ export async function onRequest(context) {
             data.authorThumbnails?.find(t => t.width >= 88) ||
             data.authorThumbnails?.[0];
 
-        const banner = data.authorBanners?.[0].url.replace("=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj","=w640");
+        const banner =
+            data.authorBanners?.find(t => t.width >= 1024) ||
+            data.authorBanners?.[0];
 
         const renderer = {
             title: data.author || data.authorName || "",
@@ -81,9 +83,9 @@ export async function onRequest(context) {
         if (banner?.url) {
             renderer.banner = {
                 thumbnails: [{
-                    url: banner,
-                    width: 640,
-                    height: 360
+                    url: banner.url,
+                    width: banner.width || 1024,
+                    height: banner.height || 256
                 }]
             };
         }
