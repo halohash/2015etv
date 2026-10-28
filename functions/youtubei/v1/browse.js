@@ -1,8 +1,7 @@
 import channels from '../../../data/channels.json';
 
 export async function onRequest(context) {
-    try {
-const url = new URL(context.request.url);
+    const url = new URL(context.request.url);
 
     let body = {};
 
@@ -24,7 +23,7 @@ const url = new URL(context.request.url);
     let channelUploads = false;
     let playlist = false;
     let hasBanner = false
-getHeader = function (name,profile,banner) {
+var getHeader = function (name,profile,banner) {
 const data = {
       header: {
         tvChannelHeaderRenderer: {
@@ -333,17 +332,6 @@ if (hasBanner) {return data;}
             error?.message || "An unexpected error occurred",
             502
         );
-    }
-    } catch (error) {
-        return new Response(error, {
-        status: 500,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Max-Age": "86400"
-        }
-    });
     }
 }
 
