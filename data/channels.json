@@ -189,7 +189,51 @@
                         }
                       }
                     }
-                  }
+                  },
+                  {
+                                "gridChannelRenderer": {
+                                    "thumbnail": {
+                                        "thumbnails": [
+                                            {
+                                                "url": "//yt3.ggpht.com/kdoL1SD_4I4GRV5bbbKrwLZ-XOaGDEW0CGKHYgvyTgJM73VPIl54DHuDe9SRvm4z5yG3F2fyRw=s176-c-k-c0x00ffffff-no-rj-mo",
+                                                "width": 176,
+                                                "height": 176
+                                            }
+                                        ]
+                                    },
+                                    "title": {
+                                        "runs": [
+                                            {
+                                                "text": "Nobel Tech"
+                                            }
+                                        ],
+                                        "accessibility": {
+                                            "accessibilityData": {
+                                                "label": "Nobel Tech"
+                                            }
+                                        }
+                                    },
+                                    "navigationEndpoint": {
+                                        "browseEndpoint": {
+                                            "browseId": "UCIfe1juYd-atTo-MmPgmU4g"
+                                        }
+                                    },
+                                    "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "0 views"
+                          }
+                        ]
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 28, 2026"
+                          }
+                        ]
+                      }
+                                }
+                            }
                 ]
               }
             }
