@@ -269,6 +269,116 @@
                                         ]
                                     }
                                 }
+                            },{
+                                "gridChannelRenderer": {
+                                    "thumbnail": {
+                                        "thumbnails": [
+                                            {
+                                                "url": "//yt3.googleusercontent.com/ytc/AIdro_nDJMhbSFpETCCo4uyCvtmHpkz9J2affqvGoSf3pkCjz9o=s176-c-k-c0x00ffffff-no-rj-mo",
+                                                "width": 176,
+                                                "height": 176
+                                            }
+                                        ]
+                                    },
+                                    "title": {
+                                        "runs": [
+                                            {
+                                                "text": "Smosh Pit"
+                                            }
+                                        ],
+                                        "accessibility": {
+                                            "accessibilityData": {
+                                                "label": "Smosh Pit"
+                                            }
+                                        }
+                                    },
+                                    "navigationEndpoint": {
+                                        "browseEndpoint": {
+                                            "browseId": "UCYJPby9DRCteedh5tfxVbrw"
+                                        }
+                                    },
+                                    "videoCountText": {
+                                        "runs": [
+                                            {
+                                                "text": "9,690,000 subscribers"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "gridChannelRenderer": {
+                                    "thumbnail": {
+                                        "thumbnails": [
+                                            {
+                                                "url": "//yt3.googleusercontent.com/ytc/AIdro_noAvfLiftnnGZwsTFt6GD4UKSxhNJRIUWntPUL47rziiXo=s176-c-k-c0x00ffffff-no-rj-mo",
+                                                "width": 176,
+                                                "height": 176
+                                            }
+                                        ]
+                                    },
+                                    "title": {
+                                        "runs": [
+                                            {
+                                                "text": "Smosh Games"
+                                            }
+                                        ],
+                                        "accessibility": {
+                                            "accessibilityData": {
+                                                "label": "Smosh Games"
+                                            }
+                                        }
+                                    },
+                                    "navigationEndpoint": {
+                                        "browseEndpoint": {
+                                            "browseId": "UCJ2ZDzMRgSrxmwphstrm8Ww"
+                                        }
+                                    },
+                                    "videoCountText": {
+                                        "runs": [
+                                            {
+                                                "text": "8,640,000 subscribers"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "gridChannelRenderer": {
+                                    "thumbnail": {
+                                        "thumbnails": [
+                                            {
+                                                "url": "//yt3.ggpht.com/7WiYNRhekvu81d3UeA1LUmuUmpkienqw-Kfsh7tvCEqWARB6ozpqs4XhZ5w-RdPGcaopLK7KYw=s176-c-k-c0x00ffffff-no-rj-mo",
+                                                "width": 176,
+                                                "height": 176
+                                            }
+                                        ]
+                                    },
+                                    "title": {
+                                        "runs": [
+                                            {
+                                                "text": "Smosh"
+                                            }
+                                        ],
+                                        "accessibility": {
+                                            "accessibilityData": {
+                                                "label": "Smosh"
+                                            }
+                                        }
+                                    },
+                                    "navigationEndpoint": {
+                                        "browseEndpoint": {
+                                            "browseId": "UCY30JRSgfhYXA6i6xX1erWg"
+                                        }
+                                    },
+                                    "videoCountText": {
+                                        "runs": [
+                                            {
+                                                "text": "27,200,000 subscribers"
+                                            }
+                                        ]
+                                    }
+                                }
                             }
                 ]
               }
