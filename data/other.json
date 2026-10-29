@@ -76,7 +76,7 @@
                       "thumbnail": {
                         "thumbnails": [
                           {
-                            "url": "https://dingusline.pages.dev/owol/cursor.png",
+                            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png",
                             "width": 480,
                             "height": 360
                           }
@@ -97,7 +97,7 @@
                       "publishedTimeText": {
                         "runs": [
                           {
-                            "text": "Recently"
+                            "text": "Oct 28, 2026"
                           }
                         ]
                       },
@@ -114,6 +114,120 @@
                         }
                       },
                       "videoId": "USA_HYPED",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "UC2015ETV"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "gridChannelRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Flag_of_Estonia.svg/960px-Flag_of_Estonia.svg.png",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Estonia's top hyped videos"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "Estonia's top hyped videos"
+                          }
+                        }
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 28, 2026"
+                          }
+                        ]
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "0 views"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "OLAyzBTLp_eVYsxN2k2rISLXixWKyx-tG0w"
+                        }
+                      },
+                      "videoId": "ESTONIA_HYPED",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "UC2015ETV"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "gridChannelRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Flag_of_the_Netherlands.svg/960px-Flag_of_the_Netherlands.svg.png",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "Netherland's top hyped videos"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "New Channel"
+                          }
+                        }
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Oct 28, 2026"
+                          }
+                        ]
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "0 views"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "OLWdhhGFc8JLI6v42XekF9PBOQS0twULl4g"
+                        }
+                      },
+                      "videoId": "NL_HYPED",
                       "shortBylineText": {
                         "runs": [
                           {
