@@ -233,6 +233,42 @@
                         ]
                       }
                                 }
+                            },{
+                                "gridChannelRenderer": {
+                                    "thumbnail": {
+                                        "thumbnails": [
+                                            {
+                                                "url": "//yt3.googleusercontent.com/ytc/AIdro_lBDbSREnbLJdEpxrfTWuqfCWhi4M80_TOalqpDL9gn2G5J=s176-c-k-c0x00ffffff-no-rj-mo",
+                                                "width": 176,
+                                                "height": 176
+                                            }
+                                        ]
+                                    },
+                                    "title": {
+                                        "runs": [
+                                            {
+                                                "text": "Jimmy Here"
+                                            }
+                                        ],
+                                        "accessibility": {
+                                            "accessibilityData": {
+                                                "label": "Jimmy Here"
+                                            }
+                                        }
+                                    },
+                                    "navigationEndpoint": {
+                                        "browseEndpoint": {
+                                            "browseId": "UCfcc8OORrouV1lO_qeIZVNQ"
+                                        }
+                                    },
+                                    "videoCountText": {
+                                        "runs": [
+                                            {
+                                                "text": "1,790,000 subscribers"
+                                            }
+                                        ]
+                                    }
+                                }
                             }
                 ]
               }
