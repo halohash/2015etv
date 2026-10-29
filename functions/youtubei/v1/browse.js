@@ -7,6 +7,7 @@ var separateRows = true;
 
 // ADD CHANNEL IDS TO THIS LIST
 const HOME_CHANNELS = [
+    "UCDVYQ4Zhbm3S2dlz7P1GBDg",
     "UCUjlPym2cxucUVPdE8kYOOg",
     "UCS-WzPVpAAli-1IfEG2lN8A"
 ];
