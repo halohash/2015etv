@@ -44,7 +44,7 @@
         }
         window.initializeOrRedirect = function(c) {
             window.jstiming.load.tick("js_r");
-            yt && yt.tv && yt.tv.initializer ? yt.tv.initializer(c) : alert("fail")
+            if (yt && yt.tv && yt.tv.initializer) {yt.tv.initializer(c)} else {alert("fail")}
         }
         ;
         e && (window.environment.player_url = d || b ? "/video/youtube/src/web/javascript/debug-tv-player-en_US.js" : "/video/youtube/src/web/javascript/tv-player-en_US.js");

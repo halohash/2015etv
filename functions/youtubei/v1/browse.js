@@ -9,7 +9,8 @@ var separateRows = true;
 const HOME_CHANNELS = [
     "UCDVYQ4Zhbm3S2dlz7P1GBDg",
     "UCUjlPym2cxucUVPdE8kYOOg",
-    "UCS-WzPVpAAli-1IfEG2lN8A"
+    "UCS-WzPVpAAli-1IfEG2lN8A",
+    "UC-2Y8dQb0S6DtpxNgAKoJKA"
 ];
 
 export async function onRequest(context) {
