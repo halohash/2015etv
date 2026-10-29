@@ -56,33 +56,6 @@ export async function onRequest(context) {
 
         const isError = !response.ok;
 
-        const isBlocked =
-            videojson.error ===
-            "This helps protect our community. Learn more";
-
-        if (isBlocked) {
-            const message =
-                "Sorry, This video isn't available right now. Please try again later.";
-
-            return Response.json({
-                error: {
-                    code: 503,
-                    message,
-                    errors: [
-                        {
-                            message,
-                            domain: "global",
-                            reason: "videoFailed"
-                        }
-                    ],
-                    status: "VIDEO_FAILED"
-                }
-            }, {
-                status: 503,
-                headers
-            });
-        }
-
         const title = isError
             ? (videojson.error || "Video unavailable")
             : (videojson.title || "Untitled video");
