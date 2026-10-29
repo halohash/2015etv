@@ -2,6 +2,15 @@
 import channels from '../../../data/channels.json';
 import other from '../../../data/other.json';
 
+
+var separateRows = false;
+
+// ADD CHANNEL IDS TO THIS LIST
+const HOME_CHANNELS = [
+    "UCUjlPym2cxucUVPdE8kYOOg",
+    "UCS-WzPVpAAli-1IfEG2lN8A"
+];
+
 export async function onRequest(context) {
     const url = new URL(context.request.url);
 
@@ -15,102 +24,74 @@ export async function onRequest(context) {
     }
 
     const browseId = body.browseId || "FEwhat_to_watch";
+    const isHomeFeed =
+        browseId === "FEwhat_to_watch" ||
+        browseId === "FE_what_to_watch" ||
+        browseId === "default";
+
     let browseName = "Popular";
+    let endpoint;
+    let channelUploads = false;
+    let playlist = false;
 
     const requestedMax = parseInt(body["max-results"] || 25, 10);
     const maxResults = Number.isFinite(requestedMax)
         ? Math.max(1, Math.min(requestedMax, 25))
         : 25;
 
-    let endpoint;
-    let channelUploads = false;
-    let playlist = false;
-
-    const jsonResponse = (data, status = 200) => {
-        return new Response(JSON.stringify(data), {
-            status,
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-                "Access-Control-Allow-Headers": "*",
-                "Cache-Control": "no-store"
-            }
-        });
+    const headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "*",
+        "Cache-Control": "no-store"
     };
 
-    const errorResponse = (message, status = 502) => {
-        return jsonResponse({
+    const jsonResponse = (data, status = 200) =>
+        new Response(JSON.stringify(data), { status, headers });
+
+    const errorResponse = (message, status = 502) =>
+        jsonResponse({
             error: message,
             contents: {
                 sectionListRenderer: {
                     contents: [{
                         shelfRenderer: {
                             title: {
-                                runs: [{
-                                    text: message
-                                }]
+                                runs: [{ text: message }]
                             },
                             content: {
                                 horizontalListRenderer: {
-                                    items: [
-                                        {
-                    gridChannelRenderer: {
-                      thumbnail: {
-                        thumbnails: [
-                          {
-                            url: "https://dingusline.pages.dev/static/home_border.svg",
-                            width: 480,
-                            height: 360
-                          }
-                        ]
-                      },
-                      title: {
-                        runs: [
-                          {
-                            text: "Home"
-                          }
-                        ],
-                        accessibility: {
-                          accessibilityData: {
-                            label: "Home"
-                          }
-                        }
-                      },
-                      publishedTimeText: {
-                        runs: [
-                          {
-                            text: "ass"
-                          }
-                        ]
-                      },
-                      viewCountText: {
-                        runs: [
-                          {
-                            text: "0 views"
-                          }
-                        ]
-                      },
-                      navigationEndpoint: {
-                        browseEndpoint: {
-                          browseId: "FEwhat_to_watch"
-                        }
-                      },
-                      shortBylineText: {
-                        runs: [
-                          {
-                            text: "ass",
-                            navigationEndpoint: {
-                              browseEndpoint: {
-                                browseId: "UCass"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                                    ]
+                                    items: [{
+                                        gridChannelRenderer: {
+                                            thumbnail: {
+                                                thumbnails: [{
+                                                    url: "https://dingusline.pages.dev/static/home_border.svg",
+                                                    width: 480,
+                                                    height: 360
+                                                }]
+                                            },
+                                            title: {
+                                                runs: [{ text: "Home" }],
+                                                accessibility: {
+                                                    accessibilityData: {
+                                                        label: "Home"
+                                                    }
+                                                }
+                                            },
+                                            publishedTimeText: {
+                                                runs: [{ text: "0 seconds ago" }]
+                                            },
+                                            viewCountText: {
+                                                runs: [{ text: "0 views" }]
+                                            },
+                                            navigationEndpoint: {
+                                                browseEndpoint: {
+                                                    browseId: "FEwhat_to_watch"
+                                                }
+                                            }
+                                        }
+                                    }]
                                 }
                             }
                         }
@@ -118,7 +99,29 @@ export async function onRequest(context) {
                 }
             }
         }, status);
-    };
+
+    function createShelf(title, items) {
+        return {
+            shelfRenderer: {
+                title: {
+                    runs: [{ text: title }]
+                },
+                content: {
+                    horizontalListRenderer: {
+                        items
+                    }
+                }
+            }
+        };
+    }
+
+    function yttime(secs) {
+        const lengthSeconds = Number(secs) || 0;
+        const minutes = Math.floor(lengthSeconds / 60);
+        const seconds = String(lengthSeconds % 60).padStart(2, "0");
+
+        return `${minutes}:${seconds}`;
+    }
 
     function getHeader(data) {
         const profile =
@@ -160,37 +163,120 @@ export async function onRequest(context) {
         };
     }
 
-    function yttime(secs) {
-        const lengthSeconds = Number(secs) || 0;
-        const minutes = Math.floor(lengthSeconds / 60);
-        const seconds = String(lengthSeconds % 60).padStart(2, "0");
+    function makeVideoRenderer(video, channelId = "") {
+        const videoId = video.videoId || video.id || "";
+        const title = typeof video.title === "string"
+            ? video.title
+            : "";
 
-        return `${minutes}:${seconds}`;
+        const author = video.author || "";
+        const authorId = video.authorId || video.ucid || channelId;
+
+        let views = video.viewCount ?? video.views ?? 0;
+
+        if (typeof views === "string") {
+            views = parseInt(views.replace(/,/g, ""), 10);
+        }
+
+        if (!Number.isFinite(views)) {
+            views = 0;
+        }
+
+        const thumbnail =
+            video.videoThumbnails?.find(t =>
+                t.quality === "medium" || t.quality === "high"
+            ) ||
+            video.videoThumbnails?.[0];
+
+        const renderer = {
+            videoId,
+
+            thumbnail: {
+                thumbnails: [{
+                    url: thumbnail?.url ||
+                        `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+                    width: thumbnail?.width || 480,
+                    height: thumbnail?.height || 360
+                }]
+            },
+
+            title: {
+                runs: [{ text: title }],
+                accessibility: {
+                    accessibilityData: {
+                        label: title
+                    }
+                }
+            },
+
+            shortBylineText: {
+                runs: [{
+                    text: author,
+                    ...(authorId ? {
+                        navigationEndpoint: {
+                            browseEndpoint: {
+                                browseId: authorId
+                            }
+                        }
+                    } : {})
+                }]
+            },
+
+            publishedTimeText: {
+                runs: [{
+                    text: video.publishedText ||
+                        video.publishedTimeText ||
+                        ""
+                }]
+            },
+
+            viewCountText: {
+                runs: [{
+                    text: views.toLocaleString("en-US") + " views"
+                }]
+            },
+
+            lengthText: {
+                runs: [{
+                    text: yttime(video.lengthSeconds || 0)
+                }]
+            },
+
+            navigationEndpoint: {
+                watchEndpoint: { videoId }
+            }
+        };
+
+        return { gridVideoRenderer: renderer };
     }
 
-    // Support older YTTV apps.
-    if (browseId === "FEwhat_to_watch" || browseId === "default") {
+    function getChannelVideos(data) {
+        const videos = data.latestVideos || data.videos || [];
+
+        return Array.isArray(videos) ? videos : [];
+    }
+
+    
+    if (browseId === "FEchannels") {
+        return jsonResponse(channels);
+    }
+
+    if (browseId === "FEother") {
+        return jsonResponse(other);
+    }
+
+    if (isHomeFeed) {
         browseName = "What To Watch";
         endpoint = "https://inv.truehosting.net/api/v1/popular";
-
-    } else if (browseId === "FEchannels") {
-        return jsonResponse(channels);
-
-    } else if (browseId === "FEother") {
-        return jsonResponse(other);
-
     } else if (browseId === "FEtopics") {
         browseName = "Topics";
         endpoint =
             "https://inv.truehosting.net/api/v1/search?q=xbox%20before:2015";
-
     } else if (browseId.startsWith("UC")) {
         browseName = "Uploads";
         endpoint =
             `https://inv.truehosting.net/api/v1/channels/${encodeURIComponent(browseId)}`;
-
         channelUploads = true;
-
     } else if (
         browseId.startsWith("PL") ||
         browseId.startsWith("FL") ||
@@ -198,44 +284,123 @@ export async function onRequest(context) {
         browseId.startsWith("UU") ||
         browseId.startsWith("RD")
     ) {
-        browseName = "Playlist"
+        browseName = "Playlist";
         endpoint =
             `https://inv.truehosting.net/api/v1/playlists/${encodeURIComponent(browseId)}`;
-
         playlist = true;
-
     } else {
         browseName = "Unknown browseId";
         endpoint = "https://inv.truehosting.net/api/v1/popular";
     }
 
     try {
+        const result = {};
+        const shelves = [];
+
+        
+        if (isHomeFeed) {
+            const channelResults = await Promise.all(
+                HOME_CHANNELS.map(async channelId => {
+                    try {
+                        const response = await fetch(
+                            `https://inv.truehosting.net/api/v1/channels/${encodeURIComponent(channelId)}`,
+                            {
+                                headers: {
+                                    "Accept": "application/json"
+                                }
+                            }
+                        );
+
+                        if (!response.ok) {
+                            return {
+                                channelId,
+                                name: channelId,
+                                videos: []
+                            };
+                        }
+
+                        const data = await response.json();
+
+                        return {
+                            channelId,
+                            name: data.author || data.authorName || channelId,
+                            videos: getChannelVideos(data)
+                                .filter(video => video && (video.videoId || video.id))
+                                .slice(0, maxResults)
+                        };
+                    } catch (error) {
+                        return {
+                            channelId,
+                            name: channelId,
+                            videos: []
+                        };
+                    }
+                })
+            );
+
+            for (const channel of channelResults) {
+                channel.items = channel.videos.map(video =>
+                    makeVideoRenderer(video, channel.channelId)
+                );
+            }
+
+            if (separateRows) {
+                for (const channel of channelResults) {
+                    if (channel.items.length > 0) {
+                        shelves.push(
+                            createShelf(channel.name, channel.items)
+                        );
+                    }
+                }
+            } else {
+                const allItems = channelResults.flatMap(channel =>
+                    channel.items
+                );
+
+                if (allItems.length > 0) {
+                    shelves.push(
+                        createShelf(browseName, allItems)
+                    );
+                }
+            }
+
+            result.contents = {
+                sectionListRenderer: {
+                    contents: shelves
+                }
+            };
+
+            return jsonResponse(result);
+        }
+
+        
         const response = await fetch(endpoint, {
             headers: {
                 "Accept": "application/json"
             }
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
             return errorResponse(
-                `Invidious request failed with status ${response.status}`,
+                `Invidious request failed: ${data.error || response.statusText}`,
                 200
             );
         }
 
-        const data = await response.json();
-
-if (playlist) {
-    browseName =
-        (typeof data.title === "string" && data.title) ||
-        (typeof data.playlist?.title === "string" && data.playlist.title) ||
-        "Playlist";
-}
+        if (playlist) {
+            browseName =
+                (typeof data.title === "string" && data.title) ||
+                (typeof data.playlist?.title === "string" &&
+                    data.playlist.title) ||
+                "Playlist";
+        }
 
         let source;
 
         if (channelUploads) {
-            source = data.latestVideos || data.videos || [];
+            source = getChannelVideos(data);
         } else if (playlist) {
             source = data.videos || [];
         } else {
@@ -247,173 +412,20 @@ if (playlist) {
         }
 
         const videos = source
-            .filter(item =>
-                item &&
-                (item.videoId || item.id)
-            )
+            .filter(item => item && (item.videoId || item.id))
             .slice(0, maxResults);
 
-        const contents = videos.map(video => {
-            const videoId =
-                video.videoId ||
-                video.id ||
-                "";
-
-            const title =
-                typeof video.title === "string"
-                    ? video.title
-                    : "";
-
-            const author =
-                typeof video.author === "string"
-                    ? video.author
-                    : "";
-
-            let views =
-                video.viewCount ??
-                video.views ??
-                0;
-
-            if (typeof views === "string") {
-                views = parseInt(views.replace(/,/g, ""), 10);
-            }
-
-            if (!Number.isFinite(views)) {
-                views = 0;
-            }
-
-            const published =
-                video.publishedText ||
-                video.publishedTimeText ||
-                "";
-
-            const thumbnail =
-                video.videoThumbnails?.find(t =>
-                    t.quality === "medium" ||
-                    t.quality === "high"
-                ) ||
-                video.videoThumbnails?.[0];
-
-            const thumbnailUrl =
-                thumbnail?.url ||
-                `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-
-            const channelId =
-                video.authorId ||
-                video.ucid ||
-                (channelUploads ? browseId : "");
-
-            const channelThumbnail =
-                channelUploads || playlist
-                    ? (
-                        data.authorThumbnails?.find(t => t.width >= 88) ||
-                        data.authorThumbnails?.[0]
-                    )
-                    : null;
-
-            const renderer = {
-                videoId,
-
-                thumbnail: {
-                    thumbnails: [{
-                        url: thumbnailUrl,
-                        width: thumbnail?.width || 480,
-                        height: thumbnail?.height || 360
-                    }]
-                },
-
-                title: {
-                    runs: [{
-                        text: title
-                    }],
-                    accessibility: {
-                        accessibilityData: {
-                            label: title
-                        }
-                    }
-                },
-
-                shortBylineText: {
-                    runs: [{
-                        text: author,
-                        ...(channelId ? {
-                            navigationEndpoint: {
-                                browseEndpoint: {
-                                    browseId: channelId
-                                }
-                            }
-                        } : {})
-                    }]
-                },
-
-                publishedTimeText: {
-                    runs: [{
-                        text: published
-                    }]
-                },
-
-                viewCountText: {
-                    runs: [{
-                        text: playlist
-                            ? "Playlist"
-                            : views.toLocaleString("en-US") + " views"
-                    }]
-                },
-
-                lengthText: {
-                    runs: [{
-                        text: yttime(video.lengthSeconds || 0)
-                    }]
-                },
-
-                navigationEndpoint: {
-                    watchEndpoint: {
-                        videoId
-                    }
-                }
-            };
-
-            if (channelThumbnail?.url) {
-                renderer.channelThumbnail = {
-                    thumbnails: [{
-                        url: channelThumbnail.url,
-                        width: channelThumbnail.width || 88,
-                        height: channelThumbnail.height || 88
-                    }]
-                };
-            }
-
-            return {
-                gridVideoRenderer: renderer
-            };
-        });
-
-        const result = {};
+        const videoItems = videos.map(video =>
+            makeVideoRenderer(video, channelUploads ? browseId : "")
+        );
 
         if (channelUploads) {
             Object.assign(result, getHeader(data));
         }
 
-        result.contents = {
-            sectionListRenderer: {
-                contents: [{
-                    shelfRenderer: {
-                        title: {
-                            runs: [{
-                                text: browseName
-                            }]
-                        },
-                        content: {
-                            horizontalListRenderer: {
-                                items: contents
-                            }
-                        }
-                    }
-                }]
-            }
-        };
+        shelves.push(createShelf(browseName, videoItems));
 
-        // Fetch playlists belonging to this channel.
+        
         if (channelUploads) {
             let playlistData = [];
 
@@ -438,33 +450,27 @@ if (playlist) {
                         playlistData = fetchedPlaylists.playlists.items;
                     }
                 }
-            } catch (playlistError) {
+            } catch (error) {
                 playlistData = [];
             }
+
+            const avatar =
+                data.authorThumbnails?.find(t => t.width >= 88) ||
+                data.authorThumbnails?.[0];
 
             const playlistItems = playlistData
                 .filter(item => item && (item.playlistId || item.id))
                 .slice(0, maxResults)
                 .map(item => {
-                    const playlistId =
-                        item.playlistId ||
-                        item.id;
-
+                    const playlistId = item.playlistId || item.id;
                     const playlistTitle =
-                        typeof item.title === "string"
-                            ? item.title
-                            : "";
+                        typeof item.title === "string" ? item.title : "";
 
                     const playlistAuthor =
-                        item.author ||
-                        data.author ||
-                        data.authorName ||
-                        "";
+                        item.author || data.author || data.authorName || "";
 
                     const playlistAuthorId =
-                        item.authorId ||
-                        item.ucid ||
-                        browseId;
+                        item.authorId || item.ucid || browseId;
 
                     const rawCount =
                         item.videoCount ??
@@ -472,7 +478,7 @@ if (playlist) {
                         item.video_count ??
                         -1;
 
-                    const playlistThumbnail =
+                    const thumbnail =
                         item.playlistThumbnail ||
                         item.thumbnailUrl ||
                         item.thumbnail?.url ||
@@ -480,31 +486,24 @@ if (playlist) {
                             ? item.thumbnail
                             : null) ||
                         item.videoThumbnails?.find(t =>
-                            t.quality === "high" ||
-                            t.quality === "medium"
+                            t.quality === "high" || t.quality === "medium"
                         )?.url ||
                         item.videoThumbnails?.[0]?.url ||
-                        `http://inv.truehosting.net/vi/${playlistId}/hqdefault.jpg`;
+                        `https://inv.truehosting.net/vi/${playlistId}/hqdefault.jpg`;
 
-                    const avatar =
-                        data.authorThumbnails?.find(t => t.width >= 88) ||
-                        data.authorThumbnails?.[0];
-
-                    const playlistRenderer = {
+                    const renderer = {
                         videoId: playlistId,
 
                         thumbnail: {
                             thumbnails: [{
-                                url: playlistThumbnail,
+                                url: thumbnail,
                                 width: 480,
                                 height: 360
                             }]
                         },
 
                         title: {
-                            runs: [{
-                                text: playlistTitle
-                            }],
+                            runs: [{ text: playlistTitle }],
                             accessibility: {
                                 accessibilityData: {
                                     label: playlistTitle
@@ -538,9 +537,7 @@ if (playlist) {
                         },
 
                         lengthText: {
-                            runs: [{
-                                text: "Playlist"
-                            }]
+                            runs: [{ text: "Playlist" }]
                         },
 
                         navigationEndpoint: {
@@ -551,37 +548,28 @@ if (playlist) {
                     };
 
                     if (avatar?.url) {
-                        playlistRenderer.channelThumbnail = {
+                        renderer.channelThumbnail = {
                             thumbnails: [{
                                 url: avatar.url,
-                                width: 100,
-                                height: 100
+                                width: avatar.width || 100,
+                                height: avatar.height || 100
                             }]
                         };
                     }
 
-                    return {
-                        gridVideoRenderer: playlistRenderer
-                    };
+                    return { gridVideoRenderer: renderer };
                 });
 
             if (playlistItems.length > 0) {
-                result.contents.sectionListRenderer.contents.push({
-                    shelfRenderer: {
-                        title: {
-                            runs: [{
-                                text: "Playlists"
-                            }]
-                        },
-                        content: {
-                            horizontalListRenderer: {
-                                items: playlistItems
-                            }
-                        }
-                    }
-                });
+                shelves.push(createShelf("Playlists", playlistItems));
             }
         }
+
+        result.contents = {
+            sectionListRenderer: {
+                contents: shelves
+            }
+        };
 
         return jsonResponse(result);
 

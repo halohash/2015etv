@@ -6,6 +6,8 @@ open dash.cloudflare.com/login or dash.cloudflare.com/sign-up, learn more at clo
 fork this repository to your github repo, connect your github account to cloudflare, and make a new page by going to https://dash.cloudflare.com/your_id_here/pages/new/provider/github.<br>
 # Attention
 invidious instances might stop getting videos and might send an error message like: "Sign in to confirm you are not a bot - This helps protect our community". Learn more at https://docs.invidious.io/youtube-errors-explained/#sign-in-to-confirm-you-are-not-a-bot-this-helps-protect-our-community
+# Home Feeds
+Change home channel feeds by opening /functions/youtubei/v1/browse.js and change HOME_CHANNELS to a channel id
 # Conclusion
 The name and logo of YouTube are registered trademarks owned by Google LLC.<br>
 Invidious is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).<br>
