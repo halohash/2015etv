@@ -195,7 +195,8 @@ export async function onRequest(context) {
         browseId.startsWith("PL") ||
         browseId.startsWith("FL") ||
         browseId.startsWith("OL") ||
-        browseId.startsWith("UU")
+        browseId.startsWith("UU") ||
+        browseId.startsWith("RD")
     ) {
         browseName = "Playlist"
         endpoint =
