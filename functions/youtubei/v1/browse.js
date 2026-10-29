@@ -3,7 +3,7 @@ import channels from '../../../data/channels.json';
 import other from '../../../data/other.json';
 
 
-var separateRows = false;
+var separateRows = true;
 
 // ADD CHANNEL IDS TO THIS LIST
 const HOME_CHANNELS = [
