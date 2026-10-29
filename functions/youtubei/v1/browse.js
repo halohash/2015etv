@@ -59,7 +59,7 @@ export async function onRequest(context) {
                       thumbnail: {
                         thumbnails: [
                           {
-                            url: "https://dingusline.pages.dev/static/home.svg",
+                            url: "https://dingusline.pages.dev/static/home_border.svg",
                             width: 480,
                             height: 360
                           }
