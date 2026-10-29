@@ -44,10 +44,8 @@ export async function onRequest(context) {
             url.searchParams.get("query") ||
             "gorillaz";
 
-        const requestedMax =
-            body["max-results"] ||
-            url.searchParams.get("max-results") ||
-            25;
+       // const requestedMax = body["max-results"] || url.searchParams.get("max-results") || 25;
+const requestedMax = 100;
 
         const parsedMax = parseInt(requestedMax, 10);
 
