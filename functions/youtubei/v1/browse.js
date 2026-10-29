@@ -53,7 +53,64 @@ export async function onRequest(context) {
                             },
                             content: {
                                 horizontalListRenderer: {
-                                    items: []
+                                    items: [
+                                        {
+                    gridChannelRenderer: {
+                      thumbnail: {
+                        thumbnails: [
+                          {
+                            url: "https://dingusline.pages.dev/static/home.svg",
+                            width: 480,
+                            height: 360
+                          }
+                        ]
+                      },
+                      title: {
+                        runs: [
+                          {
+                            text: "Home"
+                          }
+                        ],
+                        accessibility: {
+                          accessibilityData: {
+                            label: "Home"
+                          }
+                        }
+                      },
+                      publishedTimeText: {
+                        runs: [
+                          {
+                            text: "ass"
+                          }
+                        ]
+                      },
+                      viewCountText: {
+                        runs: [
+                          {
+                            text: "0 views"
+                          }
+                        ]
+                      },
+                      navigationEndpoint: {
+                        browseEndpoint: {
+                          browseId: "FEwhat_to_watch"
+                        }
+                      },
+                      shortBylineText: {
+                        runs: [
+                          {
+                            text: "ass",
+                            navigationEndpoint: {
+                              browseEndpoint: {
+                                browseId: "UCass"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                                    ]
                                 }
                             }
                         }
