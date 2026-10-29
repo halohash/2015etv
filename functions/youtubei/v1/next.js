@@ -126,12 +126,6 @@ export async function onRequest(context) {
 
         const ownerTitle = isError ? "blank" : vidAuthor;
 
-        const ownerThumbnails = [512].map(size => ({
-            url: vidProfile,
-            width: size,
-            height: size
-        }));
-
         const contents = [
             {
                 itemSectionRenderer: {
@@ -174,7 +168,11 @@ export async function onRequest(context) {
                         {
                             videoOwnerRenderer: {
                                 thumbnail: {
-                                    thumbnails: ownerThumbnails
+                                    thumbnails: {
+            url: vidProfile,
+            width: 512,
+            height: 512
+}
                                 },
                                 title: {
                                     runs: [

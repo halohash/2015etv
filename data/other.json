@@ -19,7 +19,7 @@
                       "thumbnail": {
                         "thumbnails": [
                           {
-                            "url": "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png",
+                            "url": "https://yt3.googleusercontent.com/49LhJxzpOENrJsrdocPNv_sD6VceN87PMOYz_Rkp84nXb-M1kP6DoI86AZEGi7lBk0ioxWWfUsI=s512",
                             "width": 480,
                             "height": 360
                           }
@@ -28,12 +28,12 @@
                       "title": {
                         "runs": [
                           {
-                            "text": "GO_TO_CHANNELS_BTN"
+                            "text": "Top 100 Music Videos Global"
                           }
                         ],
                         "accessibility": {
                           "accessibilityData": {
-                            "label": "Un Defined"
+                            "label": "Top 100 Music Videos Global"
                           }
                         }
                       },
@@ -53,8 +53,78 @@
                       },
                       "navigationEndpoint": {
                         "browseEndpoint": {
-                          "browseId": "FEchannels"
+                          "browseId": "PL4fGSI1pDJn69On1f-8NAvX_CYlx7QyZc"
                         }
+                      },
+                      "videoId": "MUSIC_WEEKLY_PLAYLIST",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "UC2015ETV"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "gridChannelRenderer": {
+                      "thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://dingusline.pages.dev/owol/cursor.png",
+                            "width": 480,
+                            "height": 360
+                          }
+                        ]
+                      },
+                      "title": {
+                        "runs": [
+                          {
+                            "text": "United States's top hyped videos"
+                          }
+                        ],
+                        "accessibility": {
+                          "accessibilityData": {
+                            "label": "United States's top hyped videos"
+                          }
+                        }
+                      },
+                      "publishedTimeText": {
+                        "runs": [
+                          {
+                            "text": "Recently"
+                          }
+                        ]
+                      },
+                      "viewCountText": {
+                        "runs": [
+                          {
+                            "text": "0 views"
+                          }
+                        ]
+                      },
+                      "navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "OLAK5uy_lSbPjCHn-9LSQeRc6T1LWfz-DN8gOqNdw"
+                        }
+                      },
+                      "videoId": "USA_HYPED",
+                      "shortBylineText": {
+                        "runs": [
+                          {
+                            "text": "2015ETV",
+                            "navigationEndpoint": {
+                              "browseEndpoint": {
+                                "browseId": "UC2015ETV"
+                              }
+                            }
+                          }
+                        ]
                       }
                     }
                   }
