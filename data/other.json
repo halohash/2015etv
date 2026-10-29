@@ -1,253 +1,367 @@
 {
-  "contents": {
-    "sectionListRenderer": {
-      "contents": [
-        {
-          "shelfRenderer": {
-            "title": {
-              "runs": [
+    "contents": {
+        "sectionListRenderer": {
+            "contents": [
                 {
-                  "text": "Topics"
+                    "shelfRenderer": {
+                        "title": {
+                            "runs": [
+                                {
+                                    "text": "Topics"
+                                }
+                            ]
+                        },
+                        "content": {
+                            "horizontalListRenderer": {
+                                "items": [
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://yt3.googleusercontent.com/49LhJxzpOENrJsrdocPNv_sD6VceN87PMOYz_Rkp84nXb-M1kP6DoI86AZEGi7lBk0ioxWWfUsI=s512",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Top 100 Music Videos Global"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Top 100 Music Videos Global"
+                                                    }
+                                                }
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 28, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "PL4fGSI1pDJn6puJdseH2Rt9sMvt9E2M4i"
+                                                }
+                                            },
+                                            "videoId": "MUSIC_WEEKLY_PLAYLIST",
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "2015ETV",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UC2015ETV"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "United States's top hyped videos"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "United States's top hyped videos"
+                                                    }
+                                                }
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 28, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "OLAK5uy_lSbPjCHn-9LSQeRc6T1LWfz-DN8gOqNdw"
+                                                }
+                                            },
+                                            "videoId": "USA_HYPED",
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "2015ETV",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UC2015ETV"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Flag_of_Estonia.svg/960px-Flag_of_Estonia.svg.png",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Estonia's top hyped videos"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Estonia's top hyped videos"
+                                                    }
+                                                }
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 28, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "OLAyzBTLp_eVYsxN2k2rISLXixWKyx-tG0w"
+                                                }
+                                            },
+                                            "videoId": "ESTONIA_HYPED",
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "2015ETV",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UC2015ETV"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Flag_of_the_Netherlands.svg/960px-Flag_of_the_Netherlands.svg.png",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Netherland's top hyped videos"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "New Channel"
+                                                    }
+                                                }
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 28, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "OLWdhhGFc8JLI6v42XekF9PBOQS0twULl4g"
+                                                }
+                                            },
+                                            "videoId": "NL_HYPED",
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "2015ETV",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UC2015ETV"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://yt3.googleusercontent.com/BX8jcPBKEi4xdxM4VIstNv0QtGFlhgHUbCMwca-MYfULNDLVfOD-6a61pG_WQRzxP_mK34-_630=s512",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Daily Top Music Videos - Global"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Daily Top Music Videos Global"
+                                                    }
+                                                }
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Oct 29, 2026"
+                                                    }
+                                                ]
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "PL4fGSI1pDJn6t3TXLGiiJdD-sZbrG3tG0"
+                                                }
+                                            },
+                                            "videoId": "PL4fGSI1pDJn6t3TXLGiiJdD-sZbrG3tG0",
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "2015ETV",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UC2015ETV"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "gridChannelRenderer": {
+                                            "thumbnail": {
+                                                "thumbnails": [
+                                                    {
+                                                        "url": "https://i.ytimg.com/pl_c/PLcL9r1K3TSwpOVyQKP1MruSuY-NS99iQY/studio_square_thumbnail.jpg?sqp=CMaUjdcG-oaymwEICPABEPABSFqi85f_AwYI7qnCpQY=&rs=AOn4CLCOIqWYN5u2LrykytJ7nOKSmMKUoQ",
+                                                        "width": 480,
+                                                        "height": 360
+                                                    }
+                                                ]
+                                            },
+                                            "title": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Smosh Reads Reddit Stories"
+                                                    }
+                                                ],
+                                                "accessibility": {
+                                                    "accessibilityData": {
+                                                        "label": "Smosh Reads Reddit Stories"
+                                                    }
+                                                }
+                                            },
+                                            "publishedTimeText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "Recently"
+                                                    }
+                                                ]
+                                            },
+                                            "viewCountText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "0 views"
+                                                    }
+                                                ]
+                                            },
+                                            "navigationEndpoint": {
+                                                "browseEndpoint": {
+                                                    "browseId": "PLcL9r1K3TSwpOVyQKP1MruSuY-NS99iQY"
+                                                }
+                                            },
+                                            "videoId": "PLcL9r1K3TSwpOVyQKP1MruSuY-NS99iQY",
+                                            "shortBylineText": {
+                                                "runs": [
+                                                    {
+                                                        "text": "2015ETV",
+                                                        "navigationEndpoint": {
+                                                            "browseEndpoint": {
+                                                                "browseId": "UC2015ETV"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
                 }
-              ]
-            },
-            "content": {
-              "horizontalListRenderer": {
-                "items": [
-                  {
-                    "gridChannelRenderer": {
-                      "thumbnail": {
-                        "thumbnails": [
-                          {
-                            "url": "https://yt3.googleusercontent.com/49LhJxzpOENrJsrdocPNv_sD6VceN87PMOYz_Rkp84nXb-M1kP6DoI86AZEGi7lBk0ioxWWfUsI=s512",
-                            "width": 480,
-                            "height": 360
-                          }
-                        ]
-                      },
-                      "title": {
-                        "runs": [
-                          {
-                            "text": "Top 100 Music Videos Global"
-                          }
-                        ],
-                        "accessibility": {
-                          "accessibilityData": {
-                            "label": "Top 100 Music Videos Global"
-                          }
-                        }
-                      },
-                      "viewCountText": {
-                        "runs": [
-                          {
-                            "text": "0 views"
-                          }
-                        ]
-                      },
-                      "publishedTimeText": {
-                        "runs": [
-                          {
-                            "text": "Oct 28, 2026"
-                          }
-                        ]
-                      },
-                      "navigationEndpoint": {
-                        "browseEndpoint": {
-                          "browseId": "PL4fGSI1pDJn6puJdseH2Rt9sMvt9E2M4i"
-                        }
-                      },
-                      "videoId": "MUSIC_WEEKLY_PLAYLIST",
-                      "shortBylineText": {
-                        "runs": [
-                          {
-                            "text": "2015ETV",
-                            "navigationEndpoint": {
-                              "browseEndpoint": {
-                                "browseId": "UC2015ETV"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "gridChannelRenderer": {
-                      "thumbnail": {
-                        "thumbnails": [
-                          {
-                            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/960px-Flag_of_the_United_States.svg.png",
-                            "width": 480,
-                            "height": 360
-                          }
-                        ]
-                      },
-                      "title": {
-                        "runs": [
-                          {
-                            "text": "United States's top hyped videos"
-                          }
-                        ],
-                        "accessibility": {
-                          "accessibilityData": {
-                            "label": "United States's top hyped videos"
-                          }
-                        }
-                      },
-                      "publishedTimeText": {
-                        "runs": [
-                          {
-                            "text": "Oct 28, 2026"
-                          }
-                        ]
-                      },
-                      "viewCountText": {
-                        "runs": [
-                          {
-                            "text": "0 views"
-                          }
-                        ]
-                      },
-                      "navigationEndpoint": {
-                        "browseEndpoint": {
-                          "browseId": "OLAK5uy_lSbPjCHn-9LSQeRc6T1LWfz-DN8gOqNdw"
-                        }
-                      },
-                      "videoId": "USA_HYPED",
-                      "shortBylineText": {
-                        "runs": [
-                          {
-                            "text": "2015ETV",
-                            "navigationEndpoint": {
-                              "browseEndpoint": {
-                                "browseId": "UC2015ETV"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "gridChannelRenderer": {
-                      "thumbnail": {
-                        "thumbnails": [
-                          {
-                            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Flag_of_Estonia.svg/960px-Flag_of_Estonia.svg.png",
-                            "width": 480,
-                            "height": 360
-                          }
-                        ]
-                      },
-                      "title": {
-                        "runs": [
-                          {
-                            "text": "Estonia's top hyped videos"
-                          }
-                        ],
-                        "accessibility": {
-                          "accessibilityData": {
-                            "label": "Estonia's top hyped videos"
-                          }
-                        }
-                      },
-                      "publishedTimeText": {
-                        "runs": [
-                          {
-                            "text": "Oct 28, 2026"
-                          }
-                        ]
-                      },
-                      "viewCountText": {
-                        "runs": [
-                          {
-                            "text": "0 views"
-                          }
-                        ]
-                      },
-                      "navigationEndpoint": {
-                        "browseEndpoint": {
-                          "browseId": "OLAyzBTLp_eVYsxN2k2rISLXixWKyx-tG0w"
-                        }
-                      },
-                      "videoId": "ESTONIA_HYPED",
-                      "shortBylineText": {
-                        "runs": [
-                          {
-                            "text": "2015ETV",
-                            "navigationEndpoint": {
-                              "browseEndpoint": {
-                                "browseId": "UC2015ETV"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "gridChannelRenderer": {
-                      "thumbnail": {
-                        "thumbnails": [
-                          {
-                            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Flag_of_the_Netherlands.svg/960px-Flag_of_the_Netherlands.svg.png",
-                            "width": 480,
-                            "height": 360
-                          }
-                        ]
-                      },
-                      "title": {
-                        "runs": [
-                          {
-                            "text": "Netherland's top hyped videos"
-                          }
-                        ],
-                        "accessibility": {
-                          "accessibilityData": {
-                            "label": "New Channel"
-                          }
-                        }
-                      },
-                      "publishedTimeText": {
-                        "runs": [
-                          {
-                            "text": "Oct 28, 2026"
-                          }
-                        ]
-                      },
-                      "viewCountText": {
-                        "runs": [
-                          {
-                            "text": "0 views"
-                          }
-                        ]
-                      },
-                      "navigationEndpoint": {
-                        "browseEndpoint": {
-                          "browseId": "OLWdhhGFc8JLI6v42XekF9PBOQS0twULl4g"
-                        }
-                      },
-                      "videoId": "NL_HYPED",
-                      "shortBylineText": {
-                        "runs": [
-                          {
-                            "text": "2015ETV",
-                            "navigationEndpoint": {
-                              "browseEndpoint": {
-                                "browseId": "UC2015ETV"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
+            ]
         }
-      ]
     }
-  }
 }
