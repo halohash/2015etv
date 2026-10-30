@@ -46,7 +46,8 @@ export async function onRequest(context) {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "*",
-        "Cache-Control": "no-store"
+"Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
+      
     };
 
     const jsonResponse = (data, status = 200) =>

@@ -6,7 +6,7 @@ export async function onRequest(context) {
     const headers = {
         "Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-store"
+"Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
     };
 
     let body = {};
@@ -357,7 +357,7 @@ export async function onRequestOptions() {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
             "Access-Control-Allow-Headers": "*",
-            "Cache-Control": "no-store"
+"Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
         }
     });
 }

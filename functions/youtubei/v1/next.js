@@ -9,7 +9,7 @@ export async function onRequest(context) {
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "*",
         "Content-Type": "application/json; charset=utf-8",
-        "Cache-Control": "no-store"
+"Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
     };
 
     if (method === "OPTIONS") {

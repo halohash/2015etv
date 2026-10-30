@@ -14,6 +14,7 @@ for (let channel of guidechannels) {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "*",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
       },
     });
   }
@@ -23,6 +24,7 @@ for (let channel of guidechannels) {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Access-Control-Allow-Headers": "*",
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
     }
   });
 }
