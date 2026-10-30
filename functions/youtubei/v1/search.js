@@ -127,9 +127,7 @@ const requestedMax = 100;
                 let subscriberText = "";
 
                 if (typeof subscribers === "number") {
-                    subscriberText =
-                        subscribers.toLocaleString("en-US") +
-                        " subscribers";
+                    subscriberText = subscribers
                 } else if (typeof subscribers === "string") {
                     subscriberText = subscribers;
                 }
@@ -166,13 +164,8 @@ const requestedMax = 100;
                 };
 
                 if (subscriberText) {
-                    channelRenderer.videoCountText = {
-                        runs: [
-                            {
-                                text: subscriberText
-                            }
-                        ]
-                    };
+                    channelRenderer.subscribers = subscriberText;
+                    channelRenderer.subscriberCount = subscriberText;
                 }
 
                 return {

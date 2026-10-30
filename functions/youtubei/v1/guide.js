@@ -8,7 +8,6 @@ export async function onRequest(context) {
 for (let channel of guidechannels) {
     guide.items[1].guideSectionRenderer.items.push(channel)
 }
-  // Handle CORS preflight requests if needed
   if (method === "OPTIONS") {
     return new Response(null, {
       headers: {

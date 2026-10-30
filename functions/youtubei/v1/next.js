@@ -137,33 +137,37 @@ export async function onRequest(context) {
             },
             {
                 itemSectionRenderer: {
-                    contents: [
-                        {
-                            videoOwnerRenderer: {
-                                thumbnail: {
-                                    thumbnails: {
-            url: vidProfile,
-            width: 512,
-            height: 512
-}
-                                },
-                                title: {
-                                    runs: [
-                                        { text: ownerTitle }
-                                    ]
-                                },
-                                navigationEndpoint: {
-                                    clickTrackingParams: "",
-                                    browseEndpoint: {
-                                        browseId: authorId,
-                                        canonicalBaseUrl
-                                    }
-                                }
+                  contents: [
+                    {
+                      videoOwnerRenderer: {
+                        thumbnail: {
+                          thumbnails: [
+                            {
+                              url: vidProfile,
+                              width: 48,
+                              height: 48
+                            }
+                          ]
+                        },
+                        title: {
+                          runs: [
+                            {
+                              text: ownerTitle
+                            }
+                          ]
+                        },
+                        navigationEndpoint: {
+                            clickTrackingParams: "",
+                            browseEndpoint: {
+                                browseId: authorId,
+                                canonicalBaseUrl
                             }
                         }
-                    ]
+                      }
+                    }
+                  ]
                 }
-            }
+              }
         ];
 
         return Response.json({

@@ -26,7 +26,9 @@ window.addEventListener("gamepaddisconnected", (e) => {
   gamepads = navigator.getGamepads();
 });
 
-
+if (window.location.hash === "#/post-play") {
+    window.location.hash = "#/browse-sets?c=FEwhat_to_watch"
+} // required to fix an issue when using the app as a pwa
 
 
             (function() {
