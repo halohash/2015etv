@@ -3,8 +3,26 @@
     <head>
         <script>
 window.etvconfig = {};
+window.etvgamepad = {}
 window.etvconfig.appname = "2015ETV"; // defaults to '2015ETV'
+window.etvgamepad.index = null;
+window.etvgamepad.id = null;
+window.etvgamepad.list = null;
+window.addEventListener("gamepadconnected", (e) => {
+  console.log(`Controller Connected. (${e.gamepad.id})`);
+  window.etvgamepad.index = e.gamepad.index;
+  window.etvgamepad.id = e.gamepad.id;
+  console.log('[DEBUG]: ' + e);
+  gamepads = navigator.getGamepads();
+});
 
+window.addEventListener("gamepaddisconnected", (e) => {
+  console.log("Controller disconnected");
+  window.etvgamepad.index = null;
+  window.etvgamepad.id = null;
+  console.log('[DEBUG]: ' + e);
+  gamepads = navigator.getGamepads();
+});
 
 
 
