@@ -175,13 +175,14 @@ export async function onRequest(context) {
         const author = video.author || "";
         const authorId = video.authorId || video.ucid || channelId;
 
-        let views = video.subCountText ?? video.viewCount ?? video.views ?? 0;
+        let viewslegacy = video.subCountText ?? video.viewCount ?? video.views ?? 0;
+        let views = video.viewCountText ?? 0;
 
-        if (typeof views === "string") {
+        if (typeof viewslegacy === "string") {
             views = parseInt(views.replace(/,/g, ""), 10);
         }
 
-        if (!Number.isFinite(views)) {
+        if (!Number.isFinite(viewslegacy)) {
             views = 0;
         }
 
@@ -235,7 +236,7 @@ export async function onRequest(context) {
 
             viewCountText: {
                 runs: [{
-                    text: views.toLocaleString("en-US") + " views"
+                    text: views
                 }]
             },
 
