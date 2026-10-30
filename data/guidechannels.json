@@ -26,7 +26,7 @@
             }
           },{
     "guideEntryRenderer": {
-      "title": "World of OSes [test]",
+      "title": "World of OSes",
       "thumbnail": {
         "thumbnails": [
           {
@@ -45,7 +45,7 @@
       },
       "navigationEndpoint": {
         "browseEndpoint": {
-          "browseId": "FEwhat_to_watch"
+          "browseId": "UCXBrLU1A-J51eVtTOEsIbAw"
         }
       }
     }
