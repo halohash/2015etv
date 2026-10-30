@@ -1,3 +1,10 @@
+function errorshow() {
+document.body.innerHTML = `<h1>Error while loading this instance.</h1><div>Contact the owner of this instance if this persists.</div>`;
+document.body.style.color = "black";
+document.body.style.backgroundColor = "white";
+document.body.style.background = "white";
+document.body.style.fontFamily = "sans-serif";
+}
     window.labels = {
         'default': ''
     };
@@ -44,7 +51,14 @@
         }
         window.initializeOrRedirect = function(c) {
             window.jstiming.load.tick("js_r");
-            if (yt && yt.tv && yt.tv.initializer) {yt.tv.initializer(c)} else {alert("fail")}
+            if (yt && yt.tv && yt.tv.initializer) {
+                yt.tv.initializer(c);
+                window.document.title = window.etvconfig.appname || "2015ETV";
+            } else {
+                console.error("Error Occured while loading, Contact the owner of this instance if this persists.");
+                errorshow();
+                window.document.title = window.etvconfig.appname || "2015ETV";
+            }
         }
         ;
         e && (window.environment.player_url = d || b ? "/video/youtube/src/web/javascript/debug-tv-player-en_US.js" : "/video/youtube/src/web/javascript/tv-player-en_US.js");
