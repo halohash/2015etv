@@ -1,3 +1,6 @@
+if (window.location.hash === "#/post-play") {
+    window.location.hash = "#/browse-sets?c=FEwhat_to_watch"
+} // required to fix an issue when using the app as a pwa
 function errorshow() {
 document.body.innerHTML = `<h1>Error while loading this instance.</h1><div>Contact the owner of this instance if this persists.</div>`;
 document.body.style.color = "black";
