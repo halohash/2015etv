@@ -6,7 +6,7 @@ export async function onRequest(context) {
   const { request } = context;
   const method = request.method;
 for (let channel of guidechannels) {
-    guide.items[0].guideSectionRenderer.items.push(channel)
+    guide.items[1].guideSectionRenderer.items.push(channel)
 }
   // Handle CORS preflight requests if needed
   if (method === "OPTIONS") {
