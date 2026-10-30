@@ -1,0 +1,52 @@
+[{
+            "guideEntryRenderer": {
+              "title": "Plainrock124",
+"thumbnail": {
+                        "thumbnails": [
+                          {
+                            "url": "https://yt3.googleusercontent.com/ytc/AIdro_lyyP41IVawY8PA8cSXcexhAyLtfMelyHuStLY-jQj8AKM=s120-c-k-c0x00ffffff-no-rj",
+                            "width": 88,
+                            "height": 88
+                          }
+                        ]
+                      },
+              "trackingParams": "CAgQtSwYACITCJ6zu4e15-QCFSxATAgdG-0OKg==",
+              "formattedTitle": {
+                "runs": [
+                  {
+                    "text": "Plainrock124"
+                  }
+                ]
+              },
+"navigationEndpoint": {
+                        "browseEndpoint": {
+                          "browseId": "UCFUsBdbrNe2a8tnVsxBwoZw"
+                        }
+                      }
+            }
+          },{
+    "guideEntryRenderer": {
+      "title": "World of OSes [test]",
+      "thumbnail": {
+        "thumbnails": [
+          {
+            "url": "https://yt3.googleusercontent.com/dsGYR1UKaOBXlC3va2GqQtEXoXqoK2ZM5ljjSZzxYE0rYHMTs14erJF4HILHB_rIo7P67jrJiA=s120-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          }
+        ]
+      },
+      "formattedTitle": {
+        "runs": [
+          {
+            "text": "World of OSes"
+          }
+        ]
+      },
+      "navigationEndpoint": {
+        "browseEndpoint": {
+          "browseId": "FEwhat_to_watch"
+        }
+      }
+    }
+  }]
