@@ -2,6 +2,15 @@
 <html xmlns:yt="http://youtube.com">
     <head>
         <script>
+try {
+    var etvconfig = [
+    model: "ps3",
+    network: "2015ETV"
+]
+} catch{
+    
+}
+
             (function() {
                 (function() {
                     function d(a) {
@@ -159,6 +168,8 @@
                     "qualityStatusBars": false,
                     "hisenseSetsUi": false
                 },
+                "model": etvconfig.model || "desktop",
+                "network": etvconfig.network || "2015ETV",
                 "visitor_data": "CgtsdnNjN3BDV2FLMA%3D%3D",
                 "country": "US",
                 "tv_binary": "app-prod.js",
