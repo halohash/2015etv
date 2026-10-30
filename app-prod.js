@@ -17314,7 +17314,7 @@
         }
         ;
         d.gn = function() {
-            return this.g.Sz ? "/youtubei/v1" : this.g.rq ? "https://www-googleapis-test.sandbox.google.com/youtubei/vi" : this.g.mi ? "https:https://www-googleapis-staging.sandbox.google.com/youtubei/v1" : this.g.nq ? this.g.ni ? "https://youtubei.googleapis.com/youtubei/vi" : "/youtubei/vi" : this.g.oi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1release" : this.g.ni ? "https://youtubei.googleapis.com/youtubei/v1" : "/youtubei/v1"
+            return this.g.Sz ? "/youtubei/v1" : this.g.rq ? "https://www-googleapis-test.sandbox.google.com/youtubei/vi" : this.g.mi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1" : this.g.nq ? this.g.ni ? "https://youtubei.googleapis.com/youtubei/vi" : "/youtubei/vi" : this.g.oi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1release" : this.g.ni ? "https://youtubei.googleapis.com/youtubei/v1" : "/youtubei/v1"
         }
         ;
         d.Rf = function(a) {
@@ -27019,7 +27019,7 @@
         }
         ;
         d.ZL = function() {
-            this.Hh("https:https://kcdsfrdvcs.appspot.com");
+            this.Hh("https://kcdsfrdvcs.appspot.com");
             return !0
         }
         ;
@@ -28082,11 +28082,11 @@
         d = Xp.prototype;
         d.nw = function(a) {
             this.j.jf && (this.l ? a() : (this.h.push(a),
-            1 < this.h.length || (this.j.ba ? p("cast.receiver") ? this.Gw() : jo("https:https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js", {
+            1 < this.h.length || (this.j.ba ? p("cast.receiver") ? this.Gw() : jo("https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js", {
                 timeout: 3E4
             }).Yd(z(this.Gw, this)).Qg(function() {
                 console.log("Failed to load cast v2 SDK")
-            }) : jo("https:https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js", {
+            }) : jo("https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js", {
                 timeout: 3E4
             }).Yd(z(this.gN, this)).Qg(function() {
                 console.log("Failed to load cast SDK")
@@ -29591,7 +29591,7 @@
                     metadataType: 0,
                     title: P(a.title),
                     images: [{
-                        url: "https:https://i.ytimg.com/vi/" + a.videoId + "/hqdefault.jpg"
+                        url: "https://i.ytimg.com/vi/" + a.videoId + "/hqdefault.jpg"
                     }]
                 },
                 duration: this.g.lB()
@@ -30479,7 +30479,7 @@
         }
         C(Mq, Kp);
         var Nq = {
-            "X-STS-RelyingPartyId": "https:https://www.youtube.com/"
+            "X-STS-RelyingPartyId": "https://www.youtube.com/"
         };
         d = Mq.prototype;
         d.qg = function(a) {
