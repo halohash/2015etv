@@ -166,9 +166,9 @@ var etvconfig = {
                     "qualityStatusBars": false,
                     "hisenseSetsUi": false
                 },
-                "model": etvconfig.model || "desktop",
-                "brand": etvconfig.brand || "pingas",
-                "network": etvconfig.network || "2015ETV",
+                "model": localStorage.getItem("model") || etvconfig.model || "desktop",
+                "brand": localStorage.getItem("brand") || etvconfig.brand || "pingas",
+                "network": localStorage.getItem("network") || etvconfig.network || "2015ETV",
                 "visitor_data": "CgtsdnNjN3BDV2FLMA%3D%3D",
                 "country": "US",
                 "tv_binary": "app-prod.js",
