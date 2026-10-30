@@ -70,7 +70,7 @@ export async function onRequest(context) {
 
         const viewCount = isError
             ? "0"
-            : String(videojson.viewCount ?? 0);
+            : videojson.subCountText ?? 0;
 
         const vidAuthor = isError
             ? "System"
@@ -84,7 +84,7 @@ export async function onRequest(context) {
             : (
                 videojson.authorThumbnails?.[0]?.url ||
                 defaultProfile
-            );
+            ).replace("=s32-c-k-c0x00ffffff-no-rj","=s512");
 
         const authorId = isError
             ? ""
