@@ -1100,7 +1100,9 @@
             VIEW_ALL: "icon-wii-plus",
             WATCH_HISTORY: "icon-guide-history",
             WATCH_LATER: "icon-watch-later",
-            WHAT_TO_WATCH: "icon-guide-what-to-watch"
+            WHAT_TO_WATCH: "icon-guide-what-to-watch",
+            GAMING: "icon-gaming",
+            MOVIES: "icon-entertainment"
         }
           , ic = {
             settings: "Sign In & Settings"

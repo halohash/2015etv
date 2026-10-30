@@ -270,10 +270,14 @@ export async function onRequest(context) {
     if (isHomeFeed) {
         browseName = "What To Watch";
         endpoint = "https://inv.truehosting.net/api/v1/popular";
-    } else if (browseId === "FEtopics") {
-        browseName = "Topics";
+    } else if (browseId === "FEtopics_gaming") {
+        browseName = "Gaming";
         endpoint =
-            "https://inv.truehosting.net/api/v1/search?q=xbox%20before:2015";
+            "https://inv.truehosting.net/api/v1/trending?type=gaming";
+    } else if (browseId === "FEtopics_movies") {
+        browseName = "Movies & TV";
+        endpoint =
+            "https://inv.truehosting.net/api/v1/trending?type=movies&region=GB";
     } else if (browseId.startsWith("UC")) {
         browseName = "Uploads";
         endpoint =

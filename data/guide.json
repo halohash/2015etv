@@ -92,6 +92,46 @@
                         }
                     },
                     {
+              "guideEntryRenderer": {
+                "navigationEndpoint": {
+                  "clickTrackingParams": "CAkQtSwYAiITCOibgZaGi4sDFTfNFgkdxGoCAQ==",
+                  "browseEndpoint": {
+                    "browseId": "FEtopics_gaming"
+                  }
+                },
+                "icon": {
+                    "iconType": "GAMING"
+                },
+                "formattedTitle": {
+                  "runs": [
+                    {
+                      "text": "Gaming"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "guideEntryRenderer": {
+                "navigationEndpoint": {
+                  "clickTrackingParams": "CAgQnOQDGAMiEwjom4GWhouLAxU3zRYJHcRqAgE=",
+                  "browseEndpoint": {
+                    "browseId": "FEtopics_movies"
+                  }
+                },
+                "icon": {
+                    "iconType": "MOVIES"
+                },
+                "formattedTitle": {
+                  "runs": [
+                    {
+                      "text": "Movies & TV"
+                    }
+                  ]
+                }
+              }
+            },
+                    {
           "guideEntryRenderer": {
             "title": "Settings",
             "icon": {
