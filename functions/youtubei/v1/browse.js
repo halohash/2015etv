@@ -137,6 +137,19 @@ export async function onRequest(context) {
 
         const renderer = {
             title: data.author || data.authorName || "",
+subscribeButton: {
+      subscribeButtonRenderer: {
+        enabled: true,
+        subscribed: false,
+        subscribedButtonText: {
+          runs: [
+            {
+              text: "Subscribe"
+            }
+          ]
+        }
+      }
+    },
             avatar: {
                 thumbnails: profile?.url ? [{
                     url: profile.url,
