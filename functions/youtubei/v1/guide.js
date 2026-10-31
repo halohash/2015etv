@@ -17,6 +17,10 @@ for (let channel of guidechannels) {
     guide.items[2].guideSectionRenderer.items.push(channel);
 }
 
+for (let playlist of guideplaylist) {
+    guide.items[3].guideSectionRenderer.items.push(playlist);
+}
+
 if (isLoginFake) {
 guidelogin.guideAccountEntryRenderer.title.runs[0].text = fakeLoginName;
 guidelogin.guideAccountEntryRenderer.thumbnail.thumbnails[0].url = fakeLoginProfile;
