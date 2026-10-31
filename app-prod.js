@@ -27168,7 +27168,7 @@
                 refresh_token: a,
                 grant_type: "refresh_token"
             };
-            a = new Fj("POST","/o/oauth2/token",null,a);
+            a = new Fj("POST","https://accounts.google.com/o/oauth2/token",null,a);
             var b = this.u();
             b.Xd(z(this.Ng, this));
             b.Jg(z(this.Ii, this));
@@ -27227,7 +27227,7 @@
                 b(!!a);
                 this.fm()
             }, this)
-              , e = new Fj("POST","/o/oauth2/device/code",null,e)
+              , e = new Fj("POST","https://accounts.google.com/o/oauth2/device/code",null,e)
               , g = this.u();
             g.Xd(z(this.cD, this, a, f));
             g.Jg(z(this.fm, this, c));
@@ -27264,7 +27264,7 @@
                 code: a,
                 grant_type: "https:http://oauth.net/grant_type/device/1.0"
             }
-              , e = new Fj("POST","/o/oauth2/token",null,e)
+              , e = new Fj("POST","https://accounts.google.com/o/oauth2/token",null,e)
               , f = this.u();
             f.Xd(z(this.LP, this, a, b, c));
             f.send(e)
@@ -27298,7 +27298,7 @@
         ;
         d.$x = function() {
             var a = this.jh();
-            a && (a = new Fj("POST","/o/oauth2/revoke",null,{
+            a && (a = new Fj("POST","https://accounts.google.com/o/oauth2/revoke",null,{
                 token: a
             }),
             this.u().send(a))
