@@ -333,7 +333,7 @@ export async function onRequest(context) {
                             channelId,
                             name: data.author || data.authorName || channelId,
                             videos: getChannelVideos(data)
-                                .filter(video => video && (video.videoId || video.id))
+                                .filter(video => video && (video.videoId || video.id) && video.lengthSeconds === 0)
                                 .slice(0, maxResults)
                         };
                     } catch (error) {
@@ -420,7 +420,7 @@ export async function onRequest(context) {
         }
 
         const videos = source
-            .filter(item => item && (item.videoId || item.id))
+            .filter(item => item && (item.videoId || item.id) && item.lengthSeconds === 0)
             .slice(0, maxResults);
 
         const videoItems = videos.map(video =>
@@ -467,7 +467,7 @@ export async function onRequest(context) {
                 data.authorThumbnails?.[0];
 
             const playlistItems = playlistData
-                .filter(item => item && (item.playlistId || item.id))
+                .filter(item => item && (item.playlistId || item.id) && item.lengthSeconds === 0)
                 .slice(0, maxResults)
                 .map(item => {
                     const playlistId = item.playlistId || item.id;
