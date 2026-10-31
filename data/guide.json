@@ -166,7 +166,20 @@
 "formattedTitle": {
         "runs": [
           {
-            "text": "Channels"
+            "text": "instance Channels"
+          }
+        ]
+      },
+                "items": [
+                ],
+                "trackingParams": "CAQQ5isYACITCIfJxpyureECFUKJxAodDO4CcQ=="
+            }
+        },{
+            "guideSectionRenderer": {
+"formattedTitle": {
+        "runs": [
+          {
+            "text": "instance playlists"
           }
         ]
       },

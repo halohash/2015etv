@@ -1,13 +1,15 @@
 import guide from '../../../data/guide.json';
 import guidechannels from '../../../data/guidechannels.json';
 import guidelogin from '../../../data/guidelogin.json';
+import guideplaylists from '../../../data/guideplaylists.json';
+
 
 
 export async function onRequest(context) {
   const { request } = context;
   const method = request.method;
 
-const isLoginFake = true;
+const isLoginFake = false;
 var fakeLoginName = "2015ETV"
 var fakeLoginProfile = "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png"
 

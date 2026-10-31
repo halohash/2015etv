@@ -1,0 +1,23 @@
+[
+  {
+    "guideEntryRenderer": {
+      "title": "Gorillaz - Official Videos",
+      "icon": {
+        "iconType": "PLAYLIST"
+      },
+      "trackingParams": "plankto",
+      "formattedTitle": {
+        "runs": [
+          {
+            "text": "Gorillaz - Official Videos"
+          }
+        ]
+      },
+      "navigationEndpoint": {
+        "browseEndpoint": {
+          "browseId": "PLLuc6klD2cz2wOVHzc63M5C9r9TUiVM9I"
+        }
+      }
+    }
+  }
+]

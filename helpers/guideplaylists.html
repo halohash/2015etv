@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide Playlists Editor</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg:#101114; --panel:#191b20; --border:#30333b;
+  --text:#f2f3f5; --muted:#9da3ae; --accent:#7c83ff;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font:14px system-ui,sans-serif; }
+header { padding:24px 5%; border-bottom:1px solid var(--border); background:#15161b; }
+h1 { margin:0 0 7px; font-size:25px; }
+p,.muted { color:var(--muted); }
+main { max-width:1100px; margin:auto; padding:22px; }
+.toolbar,.actions { display:flex; flex-wrap:wrap; gap:9px; margin:12px 0; }
+input,textarea,select {
+  width:100%; padding:10px; background:#101116;
+  border:1px solid var(--border); border-radius:7px;
+  color:var(--text); font:inherit;
+}
+button {
+  padding:10px 14px; border:1px solid var(--border);
+  border-radius:7px; background:#252832; color:white;
+  cursor:pointer; font:inherit;
+}
+button:hover { filter:brightness(1.2); }
+button:disabled { opacity:.4; cursor:not-allowed; }
+.primary { background:var(--accent); border-color:var(--accent); }
+.danger { color:#ff8888; }
+#status { margin:12px 0; color:#9de6b1; }
+#entries { display:grid; gap:14px; margin-top:20px; }
+.entry {
+  display:grid; grid-template-columns:minmax(0,1fr);
+  gap:16px; padding:16px; border:1px solid var(--border);
+  background:var(--panel); border-radius:12px;
+}
+.entry-content { min-width:0; }
+.entry-head {
+  display:flex; justify-content:space-between;
+  align-items:center; gap:10px;
+}
+.entry-head h2 { margin:0; font-size:16px; }
+.field { margin:10px 0; }
+.field label {
+  display:block; color:var(--muted);
+  margin-bottom:5px; font-size:12px;
+}
+.entry-actions { display:flex; flex-wrap:wrap; gap:8px; }
+#raw { min-height:360px; font:13px/1.5 monospace; tab-size:2; }
+.section { margin-top:28px; }
+[hidden] { display:none!important; }
+@media(max-width:600px) {
+  main { padding:14px; }
+  header { padding:20px 14px; }
+  .entry-head { align-items:flex-start; flex-direction:column; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Guide Playlists Editor</h1>
+  <p>This utility lets you edit your current guideplaylists.json</p>
+</header>
+
+<main>
+  <label for="source">JSON source URL</label>
+  <input id="source" value="/data/guideplaylists.json">
+
+  <div class="toolbar">
+    <button class="primary" id="load">Load URL</button>
+    <button id="fileBtn">Import file</button>
+    <input id="file" type="file" accept=".json,application/json" hidden>
+    <button id="new">New JSON</button>
+  </div>
+
+  <div id="status" role="status">Load a JSON URL or import a local JSON file.</div>
+
+  <div class="toolbar">
+    <button class="primary" id="add">+ Add guide entry</button>
+    <button id="download">Download JSON</button>
+    <button id="copy">Copy JSON</button>
+  </div>
+
+  <div id="entries"></div>
+
+  <div class="section">
+    <h2>Raw JSON</h2>
+    <p>Advanced editing. Apply your JSON changes to the visual editor before downloading.</p>
+    <textarea id="raw" spellcheck="false"></textarea>
+    <div class="toolbar">
+      <button class="primary" id="apply">Apply raw JSON</button>
+      <button id="refresh">Refresh raw JSON</button>
+    </div>
+  </div>
+</main>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+let data = [];
+
+function status(message, error = false) {
+  $("status").textContent = message;
+  $("status").style.color = error ? "#ff8888" : "#9de6b1";
+}
+
+function makeEntry() {
+  return {
+    guideEntryRenderer: {
+      title: "Playlist",
+      icon: {
+        iconType: "playlists"
+      },
+      trackingParams: "",
+      formattedTitle: {
+        runs: [{ text: "Playlist" }]
+      },
+      navigationEndpoint: {
+        browseEndpoint: {
+          browseId: "PLxyz"
+        }
+      }
+    }
+  };
+}
+
+function rendererOf(item) {
+  return item && item.guideEntryRenderer &&
+    typeof item.guideEntryRenderer === "object"
+    ? item.guideEntryRenderer
+    : null;
+}
+
+function ensureData(value) {
+  if (!Array.isArray(value)) {
+    throw new Error("The JSON root must be an array.");
+  }
+
+  value.forEach((item, index) => {
+    if (!rendererOf(item)) {
+      throw new Error(
+        "Entry " + (index + 1) +
+        " must contain guideEntryRenderer."
+      );
+    }
+  });
+
+  return value;
+}
+
+function getBrowseId(r) {
+  return r.navigationEndpoint?.browseEndpoint?.browseId || "";
+}
+
+function setBrowseId(r, value) {
+  if (!r.navigationEndpoint ||
+      typeof r.navigationEndpoint !== "object") {
+    r.navigationEndpoint = {};
+  }
+
+  if (!r.navigationEndpoint.browseEndpoint ||
+      typeof r.navigationEndpoint.browseEndpoint !== "object") {
+    r.navigationEndpoint.browseEndpoint = {};
+  }
+
+  r.navigationEndpoint.browseEndpoint.browseId = value;
+}
+
+function getFormattedTitle(r) {
+  return r.formattedTitle?.runs?.[0]?.text ?? "";
+}
+
+function setFormattedTitle(r, value) {
+  if (!r.formattedTitle ||
+      typeof r.formattedTitle !== "object") {
+    r.formattedTitle = {};
+  }
+
+  if (!Array.isArray(r.formattedTitle.runs)) {
+    r.formattedTitle.runs = [{}];
+  }
+
+  if (!r.formattedTitle.runs.length) {
+    r.formattedTitle.runs.push({});
+  }
+
+  r.formattedTitle.runs[0].text = value;
+}
+
+function getIconType(r) {
+  if (!r.icon || typeof r.icon !== "object") {
+    r.icon = {};
+  }
+
+  return r.icon.iconType ?? "";
+}
+
+function setIconType(r, value) {
+  if (!r.icon || typeof r.icon !== "object") {
+    r.icon = {};
+  }
+
+  r.icon.iconType = value;
+}
+
+function field(parent, label, value, onChange, placeholder = "", type = "text") {
+  const wrap = document.createElement("div");
+  wrap.className = "field";
+
+  const lab = document.createElement("label");
+  lab.textContent = label;
+
+  const input = document.createElement("input");
+  input.type = type;
+  input.value = value ?? "";
+  input.placeholder = placeholder;
+
+  input.addEventListener("input", () => {
+    onChange(type === "number" ? Number(input.value) : input.value);
+    updateRaw();
+  });
+
+  wrap.append(lab, input);
+  parent.append(wrap);
+
+  return input;
+}
+
+function render() {
+  const root = $("entries");
+  root.replaceChildren();
+
+  data.forEach((item, index) => {
+    const r = rendererOf(item);
+
+    const card = document.createElement("article");
+    card.className = "entry";
+
+    const content = document.createElement("div");
+    content.className = "entry-content";
+
+    const head = document.createElement("div");
+    head.className = "entry-head";
+
+    const heading = document.createElement("h2");
+    heading.textContent = "Guide entry " + (index + 1);
+
+    const actions = document.createElement("div");
+    actions.className = "entry-actions";
+
+    const up = document.createElement("button");
+    up.textContent = "↑";
+    up.title = "Move entry up";
+    up.disabled = index === 0;
+
+    up.addEventListener("click", () => {
+      [data[index - 1], data[index]] =
+        [data[index], data[index - 1]];
+      render();
+    });
+
+    const down = document.createElement("button");
+    down.textContent = "↓";
+    down.title = "Move entry down";
+    down.disabled = index === data.length - 1;
+
+    down.addEventListener("click", () => {
+      [data[index + 1], data[index]] =
+        [data[index], data[index + 1]];
+      render();
+    });
+
+    const del = document.createElement("button");
+    del.className = "danger";
+    del.textContent = "Delete";
+
+    del.addEventListener("click", () => {
+      if (confirm("Delete this guide entry?")) {
+        data.splice(index, 1);
+        render();
+      }
+    });
+
+    actions.append(up, down, del);
+    head.append(heading, actions);
+    content.append(head);
+
+    field(
+      content,
+      "Title",
+      r.title,
+      value => { r.title = value; },
+      "Plainrock124"
+    );
+
+    field(
+      content,
+      "Formatted title text",
+      getFormattedTitle(r),
+      value => setFormattedTitle(r, value),
+      "Plainrock124"
+    );
+
+    field(
+      content,
+      "Icon Type",
+      getIconType(r),
+      value => setIconType(r, value),
+      "playlists"
+    );
+
+    field(
+      content,
+      "Tracking params",
+      r.trackingParams,
+      value => { r.trackingParams = value; },
+      "CAgQtSwY..."
+    );
+
+    field(
+      content,
+      "Browse ID",
+      getBrowseId(r),
+      value => setBrowseId(r, value),
+      "UCFUsBdbrNe2a8tnVsxBwoZw"
+    );
+
+    card.append(content);
+    root.append(card);
+  });
+
+  updateRaw();
+}
+
+function updateRaw() {
+  $("raw").value = JSON.stringify(data, null, 2);
+}
+
+function loadObject(value) {
+  data = ensureData(value);
+  render();
+  status("JSON loaded successfully.");
+}
+
+$("load").addEventListener("click", async () => {
+  const url = $("source").value.trim();
+
+  if (!url) {
+    return status("Enter a JSON URL.", true);
+  }
+
+  try {
+    status("Loading JSON...");
+
+    const response = await fetch(url, {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
+
+    loadObject(await response.json());
+  } catch (error) {
+    status(
+      "Could not load URL: " + error.message +
+      ". The server may block cross-origin requests (CORS). " +
+      "Import the JSON file instead.",
+      true
+    );
+  }
+});
+
+$("fileBtn").addEventListener("click", () => {
+  $("file").click();
+});
+
+$("file").addEventListener("change", async event => {
+  const file = event.target.files[0];
+
+  if (!file) return;
+
+  try {
+    loadObject(JSON.parse(await file.text()));
+  } catch (error) {
+    status("Invalid JSON: " + error.message, true);
+  }
+
+  event.target.value = "";
+});
+
+$("new").addEventListener("click", () => {
+  if (!confirm("Start a new JSON document? Unsaved edits will be lost.")) {
+    return;
+  }
+
+  loadObject([]);
+});
+
+$("add").addEventListener("click", () => {
+  data.push(makeEntry());
+  render();
+});
+
+$("download").addEventListener("click", () => {
+  const blob = new Blob(
+    [JSON.stringify(data, null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "guideplaylists.json";
+  a.click();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+  status("Download started: guideplaylists.json");
+});
+
+$("copy").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(
+      JSON.stringify(data, null, 2)
+    );
+
+    status("JSON copied to clipboard.");
+  } catch {
+    $("raw").focus();
+    $("raw").select();
+
+    status(
+      "Clipboard unavailable. JSON selected; copy it manually.",
+      true
+    );
+  }
+});
+
+$("apply").addEventListener("click", () => {
+  try {
+    loadObject(JSON.parse($("raw").value));
+    status("Raw JSON applied successfully.");
+  } catch (error) {
+    status("Invalid JSON: " + error.message, true);
+  }
+});
+
+$("refresh").addEventListener("click", () => {
+  updateRaw();
+  status("Raw JSON refreshed.");
+});
+
+loadObject([]);
+</script>
+</body>
+</html>

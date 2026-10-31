@@ -74,15 +74,6 @@
                                     {
                                         "gridVideoRenderer": {
                                             "videoId": "dQw4w9WgXcQ",
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://dingle-accs.pages.dev/user?name=default&profile",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
                                             "title": {
                                                 "runs": [
                                                     {
@@ -213,15 +204,6 @@
                                     },
                                     {
                                         "gridChannelRenderer": {
-                                            "thumbnail": {
-                                                "thumbnails": [
-                                                    {
-                                                        "url": "https://dingle-accs.pages.dev/user?name=default&profile",
-                                                        "width": 480,
-                                                        "height": 360
-                                                    }
-                                                ]
-                                            },
                                             "title": {
                                                 "runs": [
                                                     {
