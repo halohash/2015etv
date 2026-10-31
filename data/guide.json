@@ -2,11 +2,6 @@
     "items": [
       {
             "guideSectionRenderer": {
-                "items": []
-            }
-        },
-        {
-            "guideSectionRenderer": {
                 "items": [
                     {
                         "guideEntryRenderer": {
