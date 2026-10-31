@@ -17,7 +17,7 @@ for (let channel of guidechannels) {
     guide.items[2].guideSectionRenderer.items.push(channel);
 }
 
-for (let playlist of guideplaylist) {
+for (let playlist of guideplaylists) {
     guide.items[3].guideSectionRenderer.items.push(playlist);
 }
 
