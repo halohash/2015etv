@@ -3,7 +3,7 @@
     "guideEntryRenderer": {
       "title": "Gorillaz - Official Videos",
       "icon": {
-        "iconType": "PLAYLIST"
+        "iconType": "PLAYLISTS"
       },
       "trackingParams": "plankto",
       "formattedTitle": {
