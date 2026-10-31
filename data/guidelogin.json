@@ -1,0 +1,25 @@
+{
+            "guideAccountEntryRenderer": {
+              "title": {
+                "runs": [
+                  {
+                    "text": "ETV_FAKE_ACCOUNT_NAME"
+                  }
+                ],
+                "accessibility": {
+                  "accessibilityData": {
+                    "label": "Account"
+                  }
+                }
+              },
+              "thumbnail": {
+                "thumbnails": [
+                  {
+                    "url": "ETV_FAKE_ACCOUNT_PROFILE",
+                    "width": 88,
+                    "height": 88
+                  }
+                ]
+              }
+            }
+          }

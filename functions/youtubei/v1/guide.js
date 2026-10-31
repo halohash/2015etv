@@ -1,13 +1,26 @@
 import guide from '../../../data/guide.json';
 import guidechannels from '../../../data/guidechannels.json';
+import guidelogin from '../../../data/guidelogin.json';
 
 
 export async function onRequest(context) {
   const { request } = context;
   const method = request.method;
+
+const isLoginFake = true;
+var fakeLoginName = "2015ETV"
+var fakeLoginProfile = "https://s.ytimg.com/yts/img/silhouette250-vflEqxKg9.png"
+
 for (let channel of guidechannels) {
-    guide.items[1].guideSectionRenderer.items.push(channel)
+    guide.items[2].guideSectionRenderer.items.push(channel);
 }
+
+if (isLoginFake) {
+guidelogin.guideAccountEntryRenderer.title.runs[0].text = fakeLoginName;
+guidelogin.guideAccountEntryRenderer.thumbnail.thumbnails[0].url = fakeLoginProfile;
+  guide.items[0].guideSectionRenderer.items.push(guidelogin);
+}
+
   if (method === "OPTIONS") {
     return new Response(null, {
       headers: {

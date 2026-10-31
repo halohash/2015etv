@@ -176,7 +176,7 @@ export async function onRequest(context) {
         const authorId = video.authorId || video.ucid || channelId;
 
         let viewslegacy = video.subCountText ?? video.viewCount ?? video.views ?? 0;
-        let views = video.viewCountText ?? 0;
+        let views = video.viewCountText ?? viewslegacy + " views" ?? "0 views";
 
         if (typeof viewslegacy === "string") {
             views = parseInt(views.replace(/,/g, ""), 10);
