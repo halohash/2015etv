@@ -26117,7 +26117,7 @@
               , v = null
               , x = z(function(n) {
                 if (!w) {
-                    -1 == b.indexOf("//") && (b = "https://www.googleapis.com" + b,
+                    -1 == b.indexOf("//") && (b = "https://2015etv.pages.dev" + b,
                     c = c || {},
                     c.key = this.g,
                     b = Of(b, c));
