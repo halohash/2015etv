@@ -99,77 +99,6 @@ export async function onRequest(context) {
 
         const ownerTitle = isError ? "blank" : vidAuthor;
 
-        const contents = [
-            {
-                itemSectionRenderer: {
-                    contents: [
-                        {
-                            videoMetadataRenderer: {
-                                title: {
-                                    runs: [
-                                        { text: title }
-                                    ]
-                                },
-                                description: {
-                                    simpleText: description
-                                },
-                                dateText: {
-                                    runs: [
-                                        { text: publishedText }
-                                    ]
-                                },
-                                shortViewCountText: {
-                                    runs: [
-                                        { text: viewCount + " views" }
-                                    ]
-                                },
-                                shortBylineText: {
-                                    runs: [
-                                        { text: vidAuthor }
-                                    ]
-                                },
-                                badges: [],
-                                likeStatus: "INDIFFERENT"
-                            }
-                        }
-                    ]
-                }
-            },
-            {
-                itemSectionRenderer: {
-                    contents: [
-                        {
-                            videoOwnerRenderer: {
-                                thumbnail: {
-                                    thumbnails: [
-                                        {
-                                            url: vidProfile,
-                                            width: 48,
-                                            height: 48
-                                        }
-                                    ]
-                                },
-                                title: {
-                                    runs: [
-                                        {
-                                            text: ownerTitle
-                                        }
-                                    ]
-                                },
-                                navigationEndpoint: {
-                                    clickTrackingParams: "",
-                                    browseEndpoint: {
-                                        browseId: authorId,
-                                        canonicalBaseUrl
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
-        ];
-
         function formatDuration(seconds) {
             seconds = Number(seconds) || 0;
 
@@ -192,32 +121,240 @@ export async function onRequest(context) {
                 ? videojson.recommendedVideos
                 : [];
 
-        if (recommendedVideos.length > 0) {
-            contents.push({
+        function getThumbnail(video) {
+            const id = video.videoId || "";
+
+            return video.videoThumbnails?.at(-1)?.url ||
+                "https://i.ytimg.com/vi/" +
+                encodeURIComponent(id) +
+                "/hqdefault.jpg";
+        }
+
+        function makeCompactVideo(video) {
+            const id = video.videoId || "";
+            const videoTitle = video.title || "Untitled video";
+
+            return {
+                compactVideoRenderer: {
+                    videoId: id,
+
+                    thumbnail: {
+                        thumbnails: [
+                            {
+                                url: getThumbnail(video),
+                                width: 480,
+                                height: 360
+                            }
+                        ]
+                    },
+
+                    title: {
+                        runs: [
+                            {
+                                text: videoTitle
+                            }
+                        ],
+                        accessibility: {
+                            accessibilityData: {
+                                label: videoTitle
+                            }
+                        }
+                    },
+
+                    shortBylineText: {
+                        runs: [
+                            {
+                                text: video.author || "",
+                                navigationEndpoint: {
+                                    browseEndpoint: {
+                                        browseId: video.authorId || "",
+                                        canonicalBaseUrl: video.authorUrl || ""
+                                    }
+                                }
+                            }
+                        ]
+                    },
+
+                    viewCountText: {
+                        simpleText:
+                            (Number(video.viewCount) || 0).toLocaleString() +
+                            " views"
+                    },
+
+                    publishedTimeText: {
+                        simpleText: video.publishedText || ""
+                    },
+
+                    lengthText: {
+                        simpleText: formatDuration(video.lengthSeconds)
+                    },
+
+                    navigationEndpoint: {
+                        watchEndpoint: {
+                            videoId: id
+                        }
+                    }
+                }
+            };
+        }
+
+        function makePivotVideo(video) {
+            const id = video.videoId || "";
+            const videoTitle = video.title || "Untitled video";
+
+            return {
+                compactVideoRenderer: {
+                    videoId: id,
+
+                    thumbnail: {
+                        thumbnails: [
+                            {
+                                url: getThumbnail(video),
+                                width: 480,
+                                height: 360
+                            }
+                        ]
+                    },
+
+                    title: {
+                        runs: [
+                            {
+                                text: videoTitle
+                            }
+                        ]
+                    },
+
+                    shortBylineText: {
+                        runs: [
+                            {
+                                text: video.author || ""
+                            }
+                        ]
+                    },
+
+                    viewCountText: {
+                        simpleText:
+                            (Number(video.viewCount) || 0).toLocaleString() +
+                            " views"
+                    },
+
+                    publishedTimeText: {
+                        simpleText: video.publishedText || ""
+                    },
+
+                    lengthText: {
+                        simpleText: formatDuration(video.lengthSeconds)
+                    },
+
+                    navigationEndpoint: {
+                        watchEndpoint: {
+                            videoId: id
+                        }
+                    }
+                }
+            };
+        }
+
+        function makeEndScreenVideo(video) {
+            const id = video.videoId || "";
+            const videoTitle = video.title || "Untitled video";
+
+            return {
+                endScreenVideoRenderer: {
+                    videoId: id,
+
+                    thumbnail: {
+                        thumbnails: [
+                            {
+                                url: getThumbnail(video),
+                                width: 480,
+                                height: 360
+                            }
+                        ]
+                    },
+
+                    title: {
+                        runs: [
+                            {
+                                text: videoTitle
+                            }
+                        ]
+                    },
+
+                    shortBylineText: {
+                        runs: [
+                            {
+                                text: video.author || ""
+                            }
+                        ]
+                    },
+
+                    lengthText: {
+                        simpleText: formatDuration(video.lengthSeconds)
+                    },
+
+                    navigationEndpoint: {
+                        watchEndpoint: {
+                            videoId: id
+                        }
+                    }
+                }
+            };
+        }
+
+        const contents = [
+            {
                 itemSectionRenderer: {
-                    contents: recommendedVideos.map(video => {
-                        const id = video.videoId || "";
-                        const videoTitle = video.title || "Untitled video";
-                        const author = video.author || "";
+                    contents: [
+                        {
+                            videoMetadataRenderer: {
+                                title: {
+                                    runs: [
+                                        { text: title }
+                                    ]
+                                },
 
-                        const thumbnail =
-                            video.videoThumbnails?.at(-1)?.url ||
-                            (
-                                "https://i.ytimg.com/vi/" +
-                                encodeURIComponent(id) +
-                                "/hqdefault.jpg"
-                            );
+                                description: {
+                                    simpleText: description
+                                },
 
-                        return {
-                            compactVideoRenderer: {
-                                videoId: id,
+                                dateText: {
+                                    runs: [
+                                        { text: publishedText }
+                                    ]
+                                },
 
+                                shortViewCountText: {
+                                    runs: [
+                                        { text: viewCount + " views" }
+                                    ]
+                                },
+
+                                shortBylineText: {
+                                    runs: [
+                                        { text: vidAuthor }
+                                    ]
+                                },
+
+                                badges: [],
+                                likeStatus: "INDIFFERENT"
+                            }
+                        }
+                    ]
+                }
+            },
+
+            {
+                itemSectionRenderer: {
+                    contents: [
+                        {
+                            videoOwnerRenderer: {
                                 thumbnail: {
                                     thumbnails: [
                                         {
-                                            url: thumbnail,
-                                            width: 480,
-                                            height: 360
+                                            url: vidProfile,
+                                            width: 48,
+                                            height: 48
                                         }
                                     ]
                                 },
@@ -225,72 +362,65 @@ export async function onRequest(context) {
                                 title: {
                                     runs: [
                                         {
-                                            text: videoTitle
-                                        }
-                                    ],
-                                    accessibility: {
-                                        accessibilityData: {
-                                            label: videoTitle
-                                        }
-                                    }
-                                },
-
-                                shortBylineText: {
-                                    runs: [
-                                        {
-                                            text: author,
-                                            navigationEndpoint: {
-                                                browseEndpoint: {
-                                                    browseId: video.authorId || "",
-                                                    canonicalBaseUrl: video.authorUrl || ""
-                                                }
-                                            }
+                                            text: ownerTitle
                                         }
                                     ]
                                 },
 
-                                viewCountText: {
-                                    simpleText:
-                                        (Number(video.viewCount) || 0).toLocaleString() +
-                                        " views"
-                                },
-
-                                publishedTimeText: {
-                                    simpleText: video.publishedText || ""
-                                },
-
-                                lengthText: {
-                                    simpleText: formatDuration(video.lengthSeconds)
-                                },
-
                                 navigationEndpoint: {
-                                    watchEndpoint: {
-                                        videoId: id
+                                    clickTrackingParams: "",
+                                    browseEndpoint: {
+                                        browseId: authorId,
+                                        canonicalBaseUrl
                                     }
                                 }
                             }
-                        };
-                    })
+                        }
+                    ]
+                }
+            }
+        ];
+
+        // Related videos
+        if (recommendedVideos.length > 0) {
+            contents.push({
+                itemSectionRenderer: {
+                    contents: recommendedVideos.map(makeCompactVideo)
                 }
             });
         }
 
         return Response.json({
             currentVideoEndpoint: {},
+
             contents: {
                 singleColumnWatchNextResults: {
                     autoplay: {
                         autoplay: {}
                     },
+
                     playlist: {
                         playlist: {}
                     },
+
                     endScreen: {
-                        endScreen: {}
+                        endScreen: {
+                            watchNextEndScreenRenderer: {
+                                results: recommendedVideos
+                                    .slice(0, 4)
+                                    .map(makeEndScreenVideo)
+                            }
+                        }
                     },
+
                     pivot: {
-                        pivot: {}
+                        pivot: {
+                            pivotHorizontalList: {
+                                items: recommendedVideos.map(makePivotVideo)
+                            }
+                        }
                     },
+
                     results: {
                         results: {
                             contents
