@@ -9,7 +9,7 @@ export async function onRequest(context) {
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "*",
         "Content-Type": "application/json; charset=utf-8",
-"Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
     };
 
     if (method === "OPTIONS") {
@@ -70,7 +70,7 @@ export async function onRequest(context) {
 
         const viewCount = isError
             ? "0"
-            : videojson.subCountText ?? 0;
+            : String(videojson.viewCount ?? 0);
 
         const vidAuthor = isError
             ? "System"
@@ -84,7 +84,7 @@ export async function onRequest(context) {
             : (
                 videojson.authorThumbnails?.[0]?.url ||
                 defaultProfile
-            ).replace("=s32-c-k-c0x00ffffff-no-rj","=s512");
+            ).replace("=s32-c-k-c0x00ffffff-no-rj", "=s512");
 
         const authorId = isError
             ? ""
@@ -137,38 +137,143 @@ export async function onRequest(context) {
             },
             {
                 itemSectionRenderer: {
-                  contents: [
-                    {
-                      videoOwnerRenderer: {
-                        thumbnail: {
-                          thumbnails: [
-                            {
-                              url: vidProfile,
-                              width: 48,
-                              height: 48
-                            }
-                          ]
-                        },
-                        title: {
-                          runs: [
-                            {
-                              text: ownerTitle
-                            }
-                          ]
-                        },
-                        navigationEndpoint: {
-                            clickTrackingParams: "",
-                            browseEndpoint: {
-                                browseId: authorId,
-                                canonicalBaseUrl
+                    contents: [
+                        {
+                            videoOwnerRenderer: {
+                                thumbnail: {
+                                    thumbnails: [
+                                        {
+                                            url: vidProfile,
+                                            width: 48,
+                                            height: 48
+                                        }
+                                    ]
+                                },
+                                title: {
+                                    runs: [
+                                        {
+                                            text: ownerTitle
+                                        }
+                                    ]
+                                },
+                                navigationEndpoint: {
+                                    clickTrackingParams: "",
+                                    browseEndpoint: {
+                                        browseId: authorId,
+                                        canonicalBaseUrl
+                                    }
+                                }
                             }
                         }
-                      }
-                    }
-                  ]
+                    ]
                 }
-              }
+            }
         ];
+
+        function formatDuration(seconds) {
+            seconds = Number(seconds) || 0;
+
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+
+            if (hours > 0) {
+                return hours + ":" +
+                    String(minutes).padStart(2, "0") + ":" +
+                    String(secs).padStart(2, "0");
+            }
+
+            return minutes + ":" +
+                String(secs).padStart(2, "0");
+        }
+
+        const recommendedVideos =
+            !isError && Array.isArray(videojson.recommendedVideos)
+                ? videojson.recommendedVideos
+                : [];
+
+        if (recommendedVideos.length > 0) {
+            contents.push({
+                itemSectionRenderer: {
+                    contents: recommendedVideos.map(video => {
+                        const id = video.videoId || "";
+                        const videoTitle = video.title || "Untitled video";
+                        const author = video.author || "";
+
+                        const thumbnail =
+                            video.videoThumbnails?.at(-1)?.url ||
+                            (
+                                "https://i.ytimg.com/vi/" +
+                                encodeURIComponent(id) +
+                                "/hqdefault.jpg"
+                            );
+
+                        return {
+                            compactVideoRenderer: {
+                                videoId: id,
+
+                                thumbnail: {
+                                    thumbnails: [
+                                        {
+                                            url: thumbnail,
+                                            width: 480,
+                                            height: 360
+                                        }
+                                    ]
+                                },
+
+                                title: {
+                                    runs: [
+                                        {
+                                            text: videoTitle
+                                        }
+                                    ],
+                                    accessibility: {
+                                        accessibilityData: {
+                                            label: videoTitle
+                                        }
+                                    }
+                                },
+
+                                shortBylineText: {
+                                    runs: [
+                                        {
+                                            text: author,
+                                            navigationEndpoint: {
+                                                browseEndpoint: {
+                                                    browseId: video.authorId || "",
+                                                    canonicalBaseUrl: video.authorUrl || ""
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+
+                                viewCountText: {
+                                    simpleText:
+                                        (Number(video.viewCount) || 0).toLocaleString() +
+                                        " views"
+                                },
+
+                                publishedTimeText: {
+                                    simpleText: video.publishedText || ""
+                                },
+
+                                lengthText: {
+                                    simpleText: formatDuration(video.lengthSeconds)
+                                },
+
+                                navigationEndpoint: {
+                                    watchEndpoint: {
+                                        videoId: id
+                                    }
+                                }
+                            }
+                        };
+                    })
+                }
+            });
+        }
 
         return Response.json({
             currentVideoEndpoint: {},
