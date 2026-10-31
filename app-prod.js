@@ -17316,7 +17316,7 @@
         }
         ;
         d.gn = function() {
-            return this.g.Sz ? "/youtubei/v1" : this.g.rq ? "https://www-googleapis-test.sandbox.google.com/youtubei/vi" : this.g.mi ? "https:https://www-googleapis-staging.sandbox.google.com/youtubei/v1" : this.g.nq ? this.g.ni ? "https://youtubei.googleapis.com/youtubei/vi" : "/youtubei/vi" : this.g.oi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1release" : this.g.ni ? "https://youtubei.googleapis.com/youtubei/v1" : "/youtubei/v1"
+            return this.g.Sz ? "/youtubei/v1" : this.g.rq ? "https://www-googleapis-test.sandbox.google.com/youtubei/vi" : this.g.mi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1" : this.g.nq ? this.g.ni ? "https://youtubei.googleapis.com/youtubei/vi" : "/youtubei/vi" : this.g.oi ? "https://www-googleapis-staging.sandbox.google.com/youtubei/v1release" : this.g.ni ? "https://youtubei.googleapis.com/youtubei/v1" : "/youtubei/v1"
         }
         ;
         d.Rf = function(a) {
@@ -27016,12 +27016,12 @@
         }
         ;
         d.QP = function() {
-            this.Hh("https:http://www.youtube.com/tv");
+            this.Hh("http://www.youtube.com/tv");
             return !0
         }
         ;
         d.ZL = function() {
-            this.Hh("https:https://kcdsfrdvcs.appspot.com");
+            this.Hh("https://kcdsfrdvcs.appspot.com");
             return !0
         }
         ;
@@ -27221,7 +27221,7 @@
             this.qm();
             var e = {
                 client_id: this.rj(),
-                scope: "https:http://gdata.youtube.com https://www.googleapis.com/auth/youtube-paid-content"
+                scope: "http://gdata.youtube.com https://www.googleapis.com/auth/youtube-paid-content"
             }
               , f = z(function(a) {
                 b(!!a);
@@ -27262,7 +27262,7 @@
                 client_id: this.rj(),
                 client_secret: this.mn(),
                 code: a,
-                grant_type: "https:http://oauth.net/grant_type/device/1.0"
+                grant_type: "http://oauth.net/grant_type/device/1.0"
             }
               , e = new Fj("POST","https://accounts.google.com/o/oauth2/token",null,e)
               , f = this.u();
@@ -28084,11 +28084,11 @@
         d = Xp.prototype;
         d.nw = function(a) {
             this.j.jf && (this.l ? a() : (this.h.push(a),
-            1 < this.h.length || (this.j.ba ? p("cast.receiver") ? this.Gw() : jo("https:https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js", {
+            1 < this.h.length || (this.j.ba ? p("cast.receiver") ? this.Gw() : jo("https://www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js", {
                 timeout: 3E4
             }).Yd(z(this.Gw, this)).Qg(function() {
                 console.log("Failed to load cast v2 SDK")
-            }) : jo("https:https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js", {
+            }) : jo("https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js", {
                 timeout: 3E4
             }).Yd(z(this.gN, this)).Qg(function() {
                 console.log("Failed to load cast SDK")
@@ -29246,7 +29246,7 @@
         }
         ;
         d.al = function() {
-            this.i.vV() && (this.j ? this.i.gA('<additionalData xmlns="https:http://www.youtube.com/dial"><screenId>' + this.j + "</screenId></additionalData>") : this.i.gA(""))
+            this.i.vV() && (this.j ? this.i.gA('<additionalData xmlns="http://www.youtube.com/dial"><screenId>' + this.j + "</screenId></additionalData>") : this.i.gA(""))
         }
         ;
         d.jN = function(a) {
@@ -30481,7 +30481,7 @@
         }
         C(Mq, Kp);
         var Nq = {
-            "X-STS-RelyingPartyId": "https:https://www.youtube.com/"
+            "X-STS-RelyingPartyId": "https://www.youtube.com/"
         };
         d = Mq.prototype;
         d.qg = function(a) {
@@ -30676,7 +30676,7 @@
             var c = this.j.Di()
               , e = '<?xml version="1.0" encoding="UTF-8"?><service xmlns="urn:dial-multiscreen-org:schemas:dial"><name>YouTube</name><options allowStop="false" /><state>' + (null != c || this.l ? "running" : "stopped") + "</state>";
             this.l && (e += '<link rel="run" href="' + this.wu(a) + '" />');
-            null == c || this.i.fd || (e += '<additionalData xmlns="https:http://www.youtube.com/dial"><screenId>' + c + "</screenId></additionalData>");
+            null == c || this.i.fd || (e += '<additionalData xmlns="http://www.youtube.com/dial"><screenId>' + c + "</screenId></additionalData>");
             b.mimeType = 'text/xml; charset="utf-8"';
             b.responseCode = 200;
             b.body = e + "</service>";
