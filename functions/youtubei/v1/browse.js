@@ -314,7 +314,7 @@ subscribeButton: {
     ) {
         browseName = "PRE-2016 Videos: " + (browseId.substring(3) || "gorillaz");
         endpoint =
-            `https://inv.truehosting.net/api/v1/search?q=${encodeURIComponent((browseId.substring(3) || "gorillaz") + " before:2016-01-01")}`;
+            `https://inv.truehosting.net/api/v1/search?q=${encodeURIComponent((browseId.substring(3,browseId.length) || "gorillaz") + " before:2016-01-01")}`;
     } else {
         browseName = "Unknown browseId";
         endpoint = "https://inv.truehosting.net/api/v1/popular";
