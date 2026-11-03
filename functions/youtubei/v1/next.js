@@ -273,7 +273,62 @@ function makePivotChannel(channel) {
         }
     };
 }
-
+const contents = [
+    {
+        itemSectionRenderer: {
+            contents: [
+                {
+                    videoMetadataRenderer: {
+                        title: {
+                            simpleText: title
+                        },
+                        description: {
+                            simpleText: description
+                        },
+                        publishedTimeText: {
+                            simpleText: publishedText
+                        },
+                        viewCount: {
+                            simpleText: viewCount
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        itemSectionRenderer: {
+            contents: [
+                {
+                    videoOwnerRenderer: {
+                        thumbnail: {
+                            thumbnails: [
+                                {
+                                    url: vidProfile,
+                                    width: 512,
+                                    height: 512
+                                }
+                            ]
+                        },
+                        title: {
+                            runs: [
+                                {
+                                    text: ownerTitle
+                                }
+                            ]
+                        },
+                        navigationEndpoint: {
+                            browseEndpoint: {
+                                browseId: authorId,
+                                canonicalBaseUrl
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+];
 
         // Related videos
         if (recommendedVideos.length > 0) {
