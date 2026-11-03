@@ -198,7 +198,43 @@ export async function onRequest(context) {
             };
         }
 
+function makeEndScreenVideo(video) {
+    const id = video.videoId || "";
+    const videoTitle = video.title || "Untitled video";
 
+    return {
+        endScreenVideoRenderer: {
+            videoId: id,
+            thumbnail: {
+                thumbnails: [
+                    {
+                        url: getThumbnail(video),
+                        width: 480,
+                        height: 360
+                    }
+                ]
+            },
+            title: {
+                runs: [
+                    { text: videoTitle }
+                ]
+            },
+            shortBylineText: {
+                runs: [
+                    { text: video.author || "" }
+                ]
+            },
+            lengthText: {
+                simpleText: formatDuration(video.lengthSeconds)
+            },
+            navigationEndpoint: {
+                watchEndpoint: {
+                    videoId: id
+                }
+            }
+        }
+    };
+}
 function makePivotVideo(video) {
     const id = video.videoId || "";
     const videoTitle = video.title || "Untitled video";
