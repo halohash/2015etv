@@ -198,188 +198,82 @@ export async function onRequest(context) {
             };
         }
 
-        function makePivotVideo(video) {
-            const id = video.videoId || "";
-            const videoTitle = video.title || "Untitled video";
 
-            return {
-                compactVideoRenderer: {
-                    videoId: id,
+function makePivotVideo(video) {
+    const id = video.videoId || "";
+    const videoTitle = video.title || "Untitled video";
 
-                    thumbnail: {
-                        thumbnails: [
-                            {
-                                url: getThumbnail(video),
-                                width: 480,
-                                height: 360
-                            }
-                        ]
-                    },
-
-                    title: {
-                        runs: [
-                            {
-                                text: videoTitle
-                            }
-                        ]
-                    },
-
-                    shortBylineText: {
-                        runs: [
-                            {
-                                text: video.author || ""
-                            }
-                        ]
-                    },
-
-                    viewCountText: {
-                        simpleText:
-                            (Number(video.viewCount) || 0).toLocaleString() +
-                            " views"
-                    },
-
-                    publishedTimeText: {
-                        simpleText: video.publishedText || ""
-                    },
-
-                    lengthText: {
-                        simpleText: formatDuration(video.lengthSeconds)
-                    },
-
-                    navigationEndpoint: {
-                        watchEndpoint: {
-                            videoId: id
-                        }
+    return {
+        pivotVideoRenderer: {
+            videoId: id,
+            thumbnail: {
+                thumbnails: [
+                    {
+                        url: getThumbnail(video),
+                        width: 480,
+                        height: 360
                     }
-                }
-            };
-        }
-
-        function makeEndScreenVideo(video) {
-            const id = video.videoId || "";
-            const videoTitle = video.title || "Untitled video";
-
-            return {
-                endScreenVideoRenderer: {
-                    videoId: id,
-
-                    thumbnail: {
-                        thumbnails: [
-                            {
-                                url: getThumbnail(video),
-                                width: 480,
-                                height: 360
-                            }
-                        ]
-                    },
-
-                    title: {
-                        runs: [
-                            {
-                                text: videoTitle
-                            }
-                        ]
-                    },
-
-                    shortBylineText: {
-                        runs: [
-                            {
-                                text: video.author || ""
-                            }
-                        ]
-                    },
-
-                    lengthText: {
-                        simpleText: formatDuration(video.lengthSeconds)
-                    },
-
-                    navigationEndpoint: {
-                        watchEndpoint: {
-                            videoId: id
-                        }
-                    }
-                }
-            };
-        }
-
-        const contents = [
-            {
-                itemSectionRenderer: {
-                    contents: [
-                        {
-                            videoMetadataRenderer: {
-                                title: {
-                                    runs: [
-                                        { text: title }
-                                    ]
-                                },
-
-                                description: {
-                                    simpleText: description
-                                },
-
-                                dateText: {
-                                    runs: [
-                                        { text: publishedText }
-                                    ]
-                                },
-
-                                shortViewCountText: {
-                                    runs: [
-                                        { text: viewCount + " views" }
-                                    ]
-                                },
-
-                                shortBylineText: {
-                                    runs: [
-                                        { text: vidAuthor }
-                                    ]
-                                },
-
-                                badges: [],
-                                likeStatus: "INDIFFERENT"
-                            }
-                        }
-                    ]
-                }
+                ]
             },
-
-            {
-                itemSectionRenderer: {
-                    contents: [
-                        {
-                            videoOwnerRenderer: {
-                                thumbnail: {
-                                    thumbnails: [
-                                        {
-                                            url: vidProfile,
-                                            width: 48,
-                                            height: 48
-                                        }
-                                    ]
-                                },
-
-                                title: {
-                                    runs: [
-                                        {
-                                            text: ownerTitle
-                                        }
-                                    ]
-                                },
-
-                                navigationEndpoint: {
-                                    clickTrackingParams: "",
-                                    browseEndpoint: {
-                                        browseId: authorId,
-                                        canonicalBaseUrl
-                                    }
-                                }
-                            }
-                        }
-                    ]
+            title: {
+                runs: [
+                    { text: videoTitle }
+                ]
+            },
+            shortBylineText: {
+                runs: [
+                    { text: video.author || "" }
+                ]
+            },
+            viewCountText: {
+                simpleText:
+                    (Number(video.viewCount) || 0).toLocaleString() + " views"
+            },
+            publishedTimeText: {
+                simpleText: video.publishedText || ""
+            },
+            lengthText: {
+                simpleText: formatDuration(video.lengthSeconds)
+            },
+            navigationEndpoint: {
+                watchEndpoint: {
+                    videoId: id
                 }
             }
-        ];
+        }
+    };
+}
+
+function makePivotChannel(channel) {
+    return {
+        pivotChannelRenderer: {
+            channelId: channel.authorId || channel.channelId || "",
+            title: {
+                runs: [
+                    { text: channel.author || channel.title || "Unknown channel" }
+                ]
+            },
+            thumbnail: {
+                thumbnails: [
+                    {
+                        url:
+                            channel.authorThumbnails?.at(-1)?.url ||
+                            channel.thumbnail ||
+                            "",
+                        width: 88,
+                        height: 88
+                    }
+                ]
+            },
+            navigationEndpoint: {
+                browseEndpoint: {
+                    browseId: channel.authorId || channel.channelId || ""
+                }
+            }
+        }
+    };
+}
+
 
         // Related videos
         if (recommendedVideos.length > 0) {
@@ -414,12 +308,14 @@ export async function onRequest(context) {
                     },
 
                     pivot: {
-                        pivot: {
-                            pivotHorizontalList: {
-                                items: recommendedVideos.map(makePivotVideo)
-                            }
-                        }
-                    },
+    pivot: {
+        pivotHorizontalList: {
+            items: [
+                ...recommendedVideos.map(makePivotVideo)
+            ]
+        }
+    }
+},
 
                     results: {
                         results: {
